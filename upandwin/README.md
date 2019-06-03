@@ -1,3 +1,35 @@
+### UpAndWin project
+
+date de debut: 23 mai 2019
+
+repo github:https://github.com/MarcGregoireBalme/UpAndWin.git
+
+branches: NumUserStory_features
+
+## team:
+
+Balme Marc-Gregoire<br>
+Briastre Benoit<br>
+Mongoin Yann<br>
+Cessieux Nicolas<br>
+Crey Romain<br>
+
+## Dependences:
+
+BluePrint<br>
+Express<br>
+mongodb<br>
+Router<br>
+Axios<br>
+ReactStap<br>
+
+## version:
+
+npm 6.9.0<br>
+node 11.11.0<br>
+
+EsLint AIRBNB
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
