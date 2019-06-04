@@ -7,7 +7,7 @@ class ModalSuccess extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      show: true,
+      show: false,
     };
     this.handleClose = this.handleClose.bind(this);
   }
@@ -31,7 +31,10 @@ class ModalSuccess extends React.Component {
           </Modal.Body>
           <Modal.Footer id="modalFoot">
             <NavLink to="./">
-              <Button className="buttonModalScore" onClick={this.handleClose}>
+              <Button onClick={this.handleClose}>
+                <NavLink to="/Profil">Mon Profil</NavLink>
+              </Button>
+              <Button onClick={this.handleClose}>
               Retour
               </Button>
             </NavLink>
