@@ -9,7 +9,7 @@ import Lol from './pages/Lol';
 import Wow from './pages/Wow';
 import Search from './pages/Search';
 import Profil from './pages/Profil';
-import ModalSuccess from './components/ModalSuccess';
+import ModalSuccess from './Components/ModalSuccess';
 
 function App() {
   return (
