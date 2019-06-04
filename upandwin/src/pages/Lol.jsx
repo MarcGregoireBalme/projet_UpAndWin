@@ -6,9 +6,9 @@ import Nav from 'react-bootstrap/Nav';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
-import LogoJeu from '../Images/League_of_Legends_Logo.png';
+import Topnav from '../Components/Topnav';
+import Addvertising from '../Components/Addvertising';
 import DisplayVideo from '../Components/DisplayVideo';
-import 'bootstrap/dist/css/bootstrap.css';
 
 class Home extends Component {
   constructor(props) {
@@ -19,6 +19,11 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <Topnav />
+        <h1>League of Legends</h1>
+        <h1>League of Legends</h1>
+        <Addvertising />
+        <DisplayVideo />
         <Nav className="justify-content-around">
           <Button variant="dark">
             <NavLink to="/" activeClassName="selected">
@@ -36,30 +41,6 @@ class Home extends Component {
             <NavLink to="/Profil">Profil</NavLink>
           </Button>
         </Nav>
-
-        <div className="Addvertising-img">
-          <div className="Addvertising">
-            <img src={LogoJeu} className="Logo-jeu" alt="" />
-            <h1>
-              <span className="Text-background">
-                Les tutos
-                {' '}
-                <span className="Semi-bold-Italic">League of Legends</span>
-                {' '}
-sont
-                maintenant disponibles sur Up&Win !
-              </span>
-            </h1>
-            <button type="button" className="Button">
-              Go !
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <DisplayVideo />
-        </div>
-
       </div>
     );
   }
