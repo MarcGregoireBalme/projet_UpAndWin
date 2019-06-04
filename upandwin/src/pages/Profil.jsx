@@ -16,7 +16,7 @@ class Profil extends Component {
       <div className="profil">
         <Topnav />
         <div>
-          <h1>Profil</h1>
+          <h1 style={{ paddingTop: '10vh' }}>Profil</h1>
         </div>
         <div>
           Profil here

@@ -15,9 +15,11 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <Topnav />
-        <h1>Search</h1>
         <div>
+          <Topnav />
+        </div>
+        <div>
+          <h1 style={{ paddingTop: '10vh' }}>Search</h1>
           <DisplayVideo />
         </div>
         <BottomNav />

@@ -15,9 +15,11 @@ class Fav extends Component {
   render() {
     return (
       <div>
-        <Topnav />
-        <h1>Fav video</h1>
         <div>
+          <Topnav />
+        </div>
+        <div>
+          <h1 style={{ paddingTop: '10vh' }}>Fav video</h1>
           <DisplayVideo />
         </div>
         <BottomNav />
