@@ -2,13 +2,13 @@ import React from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import Home from './Pages/Home';
+import Home from './pages/Home';
 import Store from './Redux/Store';
 import Form from './Components/Form';
-import Lol from './Pages/Lol';
-import Wow from './Pages/Wow';
-import Search from './Pages/Search';
-import Profil from './Pages/Profil';
+import Lol from './pages/Lol';
+import Wow from './pages/Wow';
+import Search from './pages/Search';
+import Profil from './pages/Profil';
 
 function App() {
   return (
