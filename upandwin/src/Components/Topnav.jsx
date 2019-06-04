@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import './Topnav.css';
+import { NavLink } from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
+
 
 class Topnav extends Component {
   constructor(props) {
@@ -38,6 +44,10 @@ class Topnav extends Component {
           <div className="Logo" />
           <div className="Game-selection">Jeux</div>
         </div>
+        <DropdownButton id="dropdown-basic-button" title="Jeux">
+          <Dropdown.Item><NavLink to="/Lol">Lol</NavLink></Dropdown.Item>
+          <Dropdown.Item><NavLink to="/Wow">Wow</NavLink></Dropdown.Item>
+        </DropdownButton>
 
         <div className="Top-nav-right">
           <div className="XP">

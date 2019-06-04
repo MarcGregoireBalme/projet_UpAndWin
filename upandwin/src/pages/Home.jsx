@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Topnav from '../Components/Topnav';
 import Addvertising from '../Components/Addvertising';
 import DisplayVideo from '../Components/DisplayVideo';
+import BottomNav from '../Components/BottomNav';
 
 class Home extends Component {
   constructor(props) {
@@ -22,23 +23,7 @@ class Home extends Component {
         <Topnav />
         <Addvertising />
         <DisplayVideo />
-        <Nav className="justify-content-around">
-          <Button variant="dark">
-            <NavLink to="/" activeClassName="selected">
-              Home
-            </NavLink>
-          </Button>
-          <DropdownButton id="dropdown-basic-button" title="Jeux">
-            <Dropdown.Item><NavLink to="/Lol">Lol</NavLink></Dropdown.Item>
-            <Dropdown.Item><NavLink to="/Wow">Wow</NavLink></Dropdown.Item>
-          </DropdownButton>
-          <Button variant="dark">
-            <NavLink to="/Search">Search</NavLink>
-          </Button>
-          <Button variant="dark">
-            <NavLink to="/Profil">Profil</NavLink>
-          </Button>
-        </Nav>
+        <BottomNav />
       </div>
     );
   }
