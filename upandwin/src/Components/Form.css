@@ -1,0 +1,9 @@
+.wholeform {
+  position: fixed;
+  top: 20%;
+  z-index: 100;
+  display: block;
+  background-color: rgba(40, 44, 52, 0.66);
+  border: 10px solid black;
+  transition: all 750ms;
+}

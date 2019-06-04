@@ -1,0 +1,50 @@
+@media screen and (max-width: 400px) {
+  .wow-img {
+    /*position: absolute;*/
+    background-image: url("https://www.mamytwink.com/upload/news/2019/mai/22/wow-classic-stress-test.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+  }
+
+  .Addvertising {
+    position: relative;
+    padding: 24px;
+  }
+
+  .Logo-jeu {
+    max-width: 100%;
+  }
+
+  .Text-background {
+    background-color: rgba(40, 44, 52, 0.66);
+  }
+}
+
+@media screen and (min-width: 401px) {
+  .wow-img {
+    /*position: absolute;*/
+    background-image: url("https://www.mamytwink.com/upload/news/2019/mai/22/wow-classic-stress-test.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+  }
+
+  .Addvertising {
+    position: relative;
+    padding: 24px;
+    max-width: 33%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .Logo-jeu {
+    max-width: 100%;
+  }
+
+  .Text-background {
+    background-color: rgba(40, 44, 52, 0.66);
+  }
+}
