@@ -10,6 +10,7 @@ import Wow from './pages/Wow';
 import Search from './pages/Search';
 import Profil from './pages/Profil';
 import Fav from './pages/Fav';
+import ModalSuccess from './Components/ModalSuccess';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/Search" component={Search} />
           <Route path="/Profil" component={Profil} />
           <Route path="/Fav" component={Fav} />
+          <ModalSuccess />
         </Provider>
       </Switch>
     </div>
