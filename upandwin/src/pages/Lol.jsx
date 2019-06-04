@@ -6,8 +6,8 @@ import Nav from 'react-bootstrap/Nav';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
-import LogoJeu from '../img/League_of_Legends_Logo.png';
-import DisplayVideo from '../components/DisplayVideo';
+import LogoJeu from '../Images/League_of_Legends_Logo.png';
+import DisplayVideo from '../Components/DisplayVideo';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class Home extends Component {
@@ -36,6 +36,7 @@ class Home extends Component {
             <NavLink to="/Profil">Profil</NavLink>
           </Button>
         </Nav>
+
         <div className="Addvertising-img">
           <div className="Addvertising">
             <img src={LogoJeu} className="Logo-jeu" alt="" />
@@ -54,9 +55,11 @@ sont
             </button>
           </div>
         </div>
+
         <div>
           <DisplayVideo />
         </div>
+
       </div>
     );
   }
