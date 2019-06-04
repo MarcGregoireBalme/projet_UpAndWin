@@ -48,6 +48,17 @@ class Form extends Component {
             </div>
           </div>
           <div>
+            <div>Pseudo</div>
+            <div>
+              <Field
+                name="pseudo"
+                component="input"
+                type="text"
+                placeholder="Pseudo"
+              />
+            </div>
+          </div>
+          <div>
             <div>Email</div>
             <div>
               <Field
@@ -59,46 +70,16 @@ class Form extends Component {
             </div>
           </div>
           <div>
-            <div>Sex</div>
-            <div>
-              <div>
-                <Field name="sex" component="input" type="radio" value="male" />
-                {' '}
-                Male
-              </div>
-              <div>
-                <Field name="sex" component="input" type="radio" value="female" />
-                {' '}
-                Female
-              </div>
-            </div>
-          </div>
-          <div>
-            <div>Favorite Color</div>
+            <div>Main Lane</div>
             <div>
               <Field name="favoriteColor" component="select">
                 <option />
-                <option value="ff0000">Red</option>
-                <option value="00ff00">Green</option>
-                <option value="0000ff">Blue</option>
+                <option value="top">Top</option>
+                <option value="mid">Mid</option>
+                <option value="jungle">Jungle</option>
+                <option value="adc">ADC</option>
+                <option value="bottom">Bottom</option>
               </Field>
-            </div>
-          </div>
-          <div>
-            <div>Employed</div>
-            <div>
-              <Field
-                name="employed"
-                id="employed"
-                component="input"
-                type="checkbox"
-              />
-            </div>
-          </div>
-          <div>
-            <div>Notes</div>
-            <div>
-              <Field name="notes" component="textarea" />
             </div>
           </div>
           <div>
@@ -106,6 +87,10 @@ class Form extends Component {
             <button type="button" disabled={pristine || submitting} onClick={reset}>
               Clear Values
             </button>
+          </div>
+          <div>
+            <button type="submit" disabled={pristine || submitting}>Connection via Facebook</button>
+            <button type="submit" disabled={pristine || submitting}>Connection via Google</button>
           </div>
         </form>
       </div>
