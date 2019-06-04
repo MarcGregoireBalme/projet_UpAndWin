@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import '../App.css';
-import './wow.css';
+import './Wow.css';
 import { NavLink } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
-import DisplayVideo from '../components/DisplayVideo';
+import DisplayVideo from '../Components/DisplayVideo';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class Home extends Component {
