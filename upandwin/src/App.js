@@ -9,6 +9,7 @@ import Lol from './pages/Lol';
 import Wow from './pages/Wow';
 import Search from './pages/Search';
 import Profil from './pages/Profil';
+import Fav from './pages/Fav';
 import ModalSuccess from './Components/ModalSuccess';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/Wow" component={Wow} />
           <Route path="/Search" component={Search} />
           <Route path="/Profil" component={Profil} />
+          <Route path="/Fav" component={Fav} />
           <ModalSuccess />
         </Provider>
       </Switch>
