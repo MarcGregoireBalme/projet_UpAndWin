@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import '../App.css';
-import './Profil.css';
+
+import DisplayVideo from '../Components/DisplayVideo';
 import 'bootstrap/dist/css/bootstrap.css';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
 
-class Profil extends Component {
+class Fav extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -13,13 +14,11 @@ class Profil extends Component {
 
   render() {
     return (
-      <div className="profil">
+      <div>
         <Topnav />
+        <h1>Fav video</h1>
         <div>
-          <h1>Profil</h1>
-        </div>
-        <div>
-          Profil here
+          <DisplayVideo />
         </div>
         <BottomNav />
       </div>
@@ -27,4 +26,4 @@ class Profil extends Component {
   }
 }
 
-export default Profil;
+export default Fav;
