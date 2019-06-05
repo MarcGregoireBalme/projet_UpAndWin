@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import '../App.css';
 import './Wow.css';
-import DisplayVideo from '../Components/DisplayVideo';
 import 'bootstrap/dist/css/bootstrap.css';
 import Topnav from '../Components/Topnav';
 import Addvertising from '../Components/Addvertising';
+import DisplayVideo from '../Components/DisplayVideo';
 import BottomNav from '../Components/BottomNav';
 
 class Wow extends Component {
@@ -17,26 +17,10 @@ class Wow extends Component {
     return (
       <div>
         <Topnav />
-        <div className="wow-img">
-          <div className="Addvertising">
-            <h1>
-              <span className="Text-background">
-                Les tutos
-                {' '}
-                <span className="Semi-bold-Italic">World of Warcraft</span>
-                {' '}
-                sont
-                                maintenant disponibles sur Up&Win !
-              </span>
-            </h1>
-            <button type="button" className="Button">
-              Go !
-            </button>
-          </div>
-        </div>
-        {/* <div>
-          <DisplayVideo />
-        </div> */}
+        <h1>World of Warcraft</h1>
+        <h1>World of Warcraft</h1>
+        <Addvertising />
+        <DisplayVideo />
         <BottomNav />
       </div>
     );
