@@ -20,17 +20,72 @@
 }
 
 .Logo {
+  position: absolute;
+  left: 24px;
+  top: 18px;
   background-image: url("../Images/Up&Win_Logo.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
+  z-index: 1002;
 }
 
-.Game-selection {
-  margin-left: 12px;
+/*
+  min-width: 100%;
+  background-image: linear-gradient(45deg, #eb1a0f, #eb4d0f);
+  border-style: none;
+  border-radius: 50px;
+  padding: 12px 24px 12px;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+*/
+
+.Game-selection > select {
+  background-color: #1d1d1d;
+  position: absolute;
+  left: 24px;
+  top: 18px;
+  width: 144px;
+  height: 48px;
   margin-right: 12px;
+  padding: 12px 0px 12px 60px;
+  border-style: none;
+  border-radius: 50px;
+  font-weight: 700;
+  color: #ffffff;
+  z-index: 1001;
+}
+.Game-selection > select:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+/*point the arrow upwards when the select box is open (active):*/
+.Game-selection.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+/*style the items (options), including the selected item:*/
+.Game-selection > select-selected {
+  background-image: linear-gradient(45deg, #eb1a0f, #eb4d0f);
+}
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-image: linear-gradient(45deg, #eb1a0f, #eb4d0f);
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
 }
 
 .Top-nav-right {
@@ -41,4 +96,5 @@
 
 .XP {
   margin-left: 12px;
+  color: white;
 }
