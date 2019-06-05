@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import './Home.css';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import Topnav from '../Components/Topnav';
 import Addvertising from '../Components/Addvertising';
@@ -10,17 +11,27 @@ import BottomNav from '../Components/BottomNav';
 class Lol extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      videos: [],
+    };
+  }
+
+  componentWillMount() {
+    axios.get('/videos/Lol')
+      .then((res) => {
+        this.setState({ videos: res.data });
+      });
   }
 
   render() {
+    const { videos } = this.state;
     return (
       <div>
         <Topnav />
         <h1>League of Legends</h1>
         <h1>League of Legends</h1>
         <Addvertising />
-        <DisplayVideo />
+        <DisplayVideo videos={videos} />
         <BottomNav />
       </div>
     );
