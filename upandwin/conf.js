@@ -7,7 +7,7 @@ const express = require('express');
 
 const app = express();
 const hostname = 'localhost';
-const port = 3000;
+const port = 3005;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
