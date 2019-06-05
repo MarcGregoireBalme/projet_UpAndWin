@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
 
-class Search extends Component {
+class Fav extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -19,7 +19,7 @@ class Search extends Component {
           <Topnav />
         </div>
         <div>
-          <h1 style={{ paddingTop: '10vh' }}>Search</h1>
+          <h1 style={{ paddingTop: '10vh' }}>Fav video</h1>
           <DisplayVideo />
         </div>
         <BottomNav />
@@ -28,4 +28,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default Fav;

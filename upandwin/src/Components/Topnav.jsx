@@ -61,7 +61,6 @@ class Topnav extends Component {
             </select>
           </div>
         </div>
-
         <div className="Top-nav-right">
           <Link to="/GamerStatistics">
             <div className="XP">
