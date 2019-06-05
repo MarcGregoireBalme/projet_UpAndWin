@@ -19,7 +19,6 @@ class Fav extends Component {
     axios.get('/videos')
       .then((res) => {
         this.setState({ videos: res.data });
-        console.log(this.state.videos);
       });
   }
 
@@ -38,12 +37,12 @@ class Fav extends Component {
               <h1 key={video.id}>
                 {video.titre}
                 {' '}
-Bonjour
+                Bonjour
                 {' '}
               </h1>
             ))
           }
-          <DisplayVideo />
+          <DisplayVideo videos={videos} />
         </div>
         <BottomNav />
       </div>

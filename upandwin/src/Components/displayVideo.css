@@ -18,3 +18,7 @@ h1 {
   text-align: center;
   margin: 40px !important;
 }
+
+.videoDisplay {
+  padding-bottom: 58px;
+}

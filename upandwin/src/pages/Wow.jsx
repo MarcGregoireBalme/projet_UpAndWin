@@ -34,9 +34,9 @@ class Wow extends Component {
             </button>
           </div>
         </div>
-        <div>
+        {/* <div>
           <DisplayVideo />
-        </div>
+        </div> */}
         <BottomNav />
       </div>
     );

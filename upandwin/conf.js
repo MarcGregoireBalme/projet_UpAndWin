@@ -93,7 +93,7 @@ const videoSchema = mongoose.Schema({
   duree: String,
   nbVue: Number,
   notes: Array,
-  jeux: String,
+  jeu: String,
   difficulte: String,
   categorie: String,
   commentaires: Array,
@@ -121,7 +121,7 @@ myRouter.route('/videos')
     videos.duree = req.body.duree;
     videos.nbVue = req.body.nbVue;
     videos.notes = [req.body.notes];
-    videos.jeux = [req.body.jeux];
+    videos.jeu = req.body.jeu;
     videos.difficulte = req.body.difficulte;
     videos.commentaires = [req.body.commentaires];
     videos.objectifs = [req.body.objectifs];
@@ -130,6 +130,16 @@ myRouter.route('/videos')
         res.send(err);
       }
       res.json({ message: 'Bravo, la video est maintenant stockée en base de données' });
+    });
+  });
+
+myRouter.route('/videos/:jeu')
+  .get(function (req, res) {
+    Video.find({ jeu: req.params.jeu }, function (err, videos) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(videos);
     });
   });
 
@@ -162,7 +172,7 @@ myRouter.route('/videos/:video_id')
       videos.duree = req.body.duree;
       videos.nbVue = req.body.nbVue;
       videos.notes = [req.body.notes];
-      videos.jeux = [req.body.jeux];
+      videos.jeu = req.body.jeu;
       videos.difficulte = req.body.difficulte;
       videos.commentaires = [req.body.commentaires];
       videos.objectifs = [req.body.objectifs];
