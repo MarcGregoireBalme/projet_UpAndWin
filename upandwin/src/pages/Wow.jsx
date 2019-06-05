@@ -4,7 +4,6 @@ import './Wow.css';
 import DisplayVideo from '../Components/DisplayVideo';
 import 'bootstrap/dist/css/bootstrap.css';
 import Topnav from '../Components/Topnav';
-import Addvertising from '../Components/Addvertising';
 import BottomNav from '../Components/BottomNav';
 
 class Wow extends Component {

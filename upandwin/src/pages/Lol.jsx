@@ -5,7 +5,6 @@ import LogoJeu from '../Images/League_of_Legends_Logo.png';
 import DisplayVideo from '../Components/DisplayVideo';
 import 'bootstrap/dist/css/bootstrap.css';
 import Topnav from '../Components/Topnav';
-import Addvertising from '../Components/Addvertising';
 import BottomNav from '../Components/BottomNav';
 
 class Lol extends Component {
