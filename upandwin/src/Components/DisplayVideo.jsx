@@ -7,7 +7,7 @@ const DisplayVideo = ({ videos }) => (
   <div className="container-fluid">
     <div className="row videoDisplay">
       {videos.map(video => (
-        <div className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
+        <div key={video.titre} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
           <h3>{video.titre}</h3>
           <iframe
             title={video.titre}
