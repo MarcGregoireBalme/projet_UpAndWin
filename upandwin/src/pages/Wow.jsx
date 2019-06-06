@@ -28,8 +28,7 @@ class Wow extends Component {
     return (
       <div>
         <Topnav />
-        <h1>World of Warcraft</h1>
-        <h1>World of Warcraft</h1>
+        <h1 style={{ paddingTop: '10vh' }}>World of Warcraft</h1>
         <Addvertising />
         <DisplayVideo videos={videos} />
         <BottomNav />
