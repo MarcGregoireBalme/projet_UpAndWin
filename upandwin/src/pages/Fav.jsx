@@ -32,16 +32,6 @@ class Fav extends Component {
         </div>
         <div>
           <h1 style={{ paddingTop: '10vh' }}>Fav video</h1>
-          {
-            videos.map(video => (
-              <h1 key={video.id}>
-                {video.titre}
-                {' '}
-                Bonjour
-                {' '}
-              </h1>
-            ))
-          }
           <DisplayVideo videos={videos} />
         </div>
         <BottomNav />

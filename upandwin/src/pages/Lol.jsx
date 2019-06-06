@@ -28,8 +28,7 @@ class Lol extends Component {
     return (
       <div>
         <Topnav />
-        <h1>League of Legends</h1>
-        <h1>League of Legends</h1>
+        <h1 style={{ paddingTop: '10vh' }}>League of Legends</h1>
         <Addvertising />
         <DisplayVideo videos={videos} />
         <BottomNav />

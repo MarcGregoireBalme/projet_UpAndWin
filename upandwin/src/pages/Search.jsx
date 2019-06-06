@@ -15,7 +15,7 @@ class Search extends Component {
   }
 
   componentWillMount() {
-    axios.get('/videos/Lol')
+    axios.get('/videos')
       .then((res) => {
         this.setState({ videos: res.data });
       });
