@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import '../App.css';
-import './Home.css';
-import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.css';
-import Topnav from '../Components/Topnav';
-import Addvertising from '../Components/Addvertising';
-import DisplayVideo from '../Components/DisplayVideo';
-import BottomNav from '../Components/BottomNav';
 
-class Lol extends Component {
+import axios from 'axios';
+import DisplayVideo from '../Components/DisplayVideo';
+import 'bootstrap/dist/css/bootstrap.css';
+import BottomNav from '../Components/BottomNav';
+import Topnav from '../Components/Topnav';
+
+class Fav extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,24 +16,28 @@ class Lol extends Component {
   }
 
   componentWillMount() {
-    axios.get('/videos/Lol')
+    axios.get('/videos')
       .then((res) => {
         this.setState({ videos: res.data });
       });
   }
 
+
   render() {
     const { videos } = this.state;
     return (
       <div>
-        <Topnav />
-        <h1 style={{ paddingTop: '10vh' }}>League of Legends</h1>
-        <Addvertising />
-        <DisplayVideo videos={videos} />
+        <div>
+          <Topnav />
+        </div>
+        <div>
+          <h1 style={{ paddingTop: '10vh' }}>Fav video</h1>
+          <DisplayVideo videos={videos} />
+        </div>
         <BottomNav />
       </div>
     );
   }
 }
 
-export default Lol;
+export default Fav;
