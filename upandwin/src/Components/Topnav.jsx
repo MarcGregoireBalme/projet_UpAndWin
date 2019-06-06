@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import './Topnav.css';
-import { NavLink } from 'react-router-dom';
-import Nav from 'react-bootstrap/Nav';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Button from 'react-bootstrap/Button';
-
+import { Link, NavLink, Redirect } from 'react-router-dom';
 
 class Topnav extends Component {
   constructor(props) {
     super(props);
     this.state = {
       prevScrollpos: window.pageYOffset,
+      game: '',
     };
   }
 
@@ -34,23 +30,46 @@ class Topnav extends Component {
     this.setState({
       prevScrollpos: currentScrollPos,
     });
-  };
+  }
+
+  handleGameChange = (selectValue) => {
+    this.setState({
+      game: selectValue,
+    });
+  }
 
   render() {
+    const { game } = this.state;
+    if (game) {
+      return <Redirect to={game} />;
+    }
     return (
       <div id="Top-nav">
 
         <div className="Top-nav-left">
-          <div className="Logo" />
-          <div className="Game-selection">Jeux</div>
+          <NavLink to="/">
+            <div className="Logo" />
+          </NavLink>
+          <div className="Game-selection">
+            <select
+              id="pet-select"
+              onChange={e => this.handleGameChange(e.target.value)}
+            >
+              <option value="">Jeux</option>
+              <option value="/Lol">League of Legends</option>
+              <option value="/Wow">World of Warcraft</option>
+            </select>
+          </div>
         </div>
         <div className="Top-nav-right">
-          <div className="XP">
-            <span className="Bold">
-              2 456
-            </span>
-            &nbsp;xp
-          </div>
+          <Link to="/GamerStatistics">
+            <div className="XP">
+              <span className="Bold">
+                2 456
+              </span>
+              &nbsp;xp
+            </div>
+          </Link>
         </div>
 
       </div>

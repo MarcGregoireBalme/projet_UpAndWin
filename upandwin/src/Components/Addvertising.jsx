@@ -73,7 +73,11 @@ class Addvertising extends Component {
               {' '}
               <Button color="secondary" onClick={this.toggleNested}>Connexion</Button>
               <br />
-              <Modal isOpen={nestedModal} toggle={this.toggleNested} onClosed={closeAll ? this.toggle : undefined}>
+              <Modal
+                isOpen={nestedModal}
+                toggle={this.toggleNested}
+                onClosed={closeAll ? this.toggle : undefined}
+              >
                 <Form />
               </Modal>
             </ModalBody>
