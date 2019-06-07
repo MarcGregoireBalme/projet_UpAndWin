@@ -7,17 +7,16 @@ class RatingStar extends React.Component {
 
     this.state = {
       rating: 1,
-      name: '',
     };
     this.onStarClick = this.onStarClick.bind(this);
   }
 
-  onStarClick(nextValue, name) {
+  onStarClick(nextValue) {
     this.setState({ rating: nextValue });
   }
 
   render() {
-    const { rating, name } = this.state;
+    const { rating } = this.state;
     return (
       <div>
         <h2>
