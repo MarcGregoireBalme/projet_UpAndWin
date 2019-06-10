@@ -4,7 +4,7 @@ import './Home.css';
 import axios from 'axios';
 import Topnav from '../Components/Topnav';
 import Addvertising from '../Components/Addvertising';
-import DisplayVideo from '../Components/DisplayVideo';
+import DisplayVideoHorizontal from '../Components/DisplayVideoHorizontal';
 import BottomNav from '../Components/BottomNav';
 
 class Home extends Component {
@@ -28,7 +28,7 @@ class Home extends Component {
       <div>
         <Topnav />
         <Addvertising />
-        <DisplayVideo videos={videos} />
+        <DisplayVideoHorizontal videos={videos} />
         <BottomNav />
       </div>
     );

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 import './UserForm.scss';
 
-export default class PersonList extends React.Component {
+export default class VideoForm extends React.Component {
   state = {
     titre: '',
     auteur: '',
@@ -15,11 +15,6 @@ export default class PersonList extends React.Component {
   };
 
   handleChange = (e) => {
-    /*
-      Because we named the inputs to match their
-      corresponding values in state, it's
-      super easy to update the state
-    */
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -37,10 +32,6 @@ export default class PersonList extends React.Component {
         duree,
         categorie,
         jeu,
-      })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
       });
 
     this.setState({

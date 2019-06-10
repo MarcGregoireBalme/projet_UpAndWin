@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 // import './Admin.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import UserForm from '../Components/UserForm';
+import VideoForm from '../Components/UserForm';
 
 class Admin extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class Admin extends Component {
     return (
       <div className="Admin">
         <h1>Admin page</h1>
-        <UserForm />
+        <VideoForm />
       </div>
     );
   }
