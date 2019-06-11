@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import {
   Button, Form, FormGroup, Label,
 } from 'reactstrap';
-import { Field, reduxForm } from 'redux-form';
+// import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import './Form.css';
 
-class subForm extends Component {
+class ConnexionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       formmodal: false,
+      user: {},
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -20,16 +22,29 @@ class subForm extends Component {
     }));
   }
 
+  handleSubmit = () => {
+    // check react doc
+
+    this.setState({ user: {} }, () => {
+      console.log(this.state.user);
+      // this.props.dispatch({
+      //   type: 'UPDATE_USER',
+      //   payload: this.state.user,
+      // });
+    });
+  }
+
   render() {
     const {
       handleSubmit, pristine, submitting,
     } = this.props;
+    console.log(this.props);
     return (
       <div>
         <div className="Logomodal" />
         <Form onSubmit={handleSubmit} className="wholeform">
           <FormGroup>
-            <Label for="pseudo" className="fieldtitle">Pseudo</Label>
+            <Label for="pseudo" className="fieldtitle">Coucou</Label>
             {' '}
             <Field
               name="pseudo"
@@ -77,6 +92,7 @@ class subForm extends Component {
   }
 }
 
-export default reduxForm({
-  subform: 'simple', // a unique identifier for this form
-})(subForm);
+// export default reduxForm({
+//   connexionform: 'toto', // a unique identifier for this form
+// })(ConnexionForm);
+export default connect()(ConnexionForm);

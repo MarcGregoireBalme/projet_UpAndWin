@@ -16,10 +16,10 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    axios.get('/videos')
-      .then((res) => {
-        this.setState({ videos: res.data });
-      });
+    // axios.get('/videos')
+    //   .then((res) => {
+    //     this.setState({ videos: res.data });
+    //   });
   }
 
   render() {
@@ -28,7 +28,7 @@ class Home extends Component {
       <div>
         <Topnav />
         <Addvertising />
-        <DisplayVideo videos={videos} />
+        {/* <DisplayVideo videos={videos} /> */}
         <BottomNav />
       </div>
     );

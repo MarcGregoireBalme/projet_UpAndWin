@@ -30,3 +30,14 @@
 .btn-secondary.disabled {
   margin-top: 2vh;
 }
+
+.formheader {
+  align-self: flex-end;
+  border-bottom: none !important;
+  border-top-left-radius: none !important;
+  border-top-right-radius: none !important;
+}
+
+.close {
+  color: #fff !important;
+}
