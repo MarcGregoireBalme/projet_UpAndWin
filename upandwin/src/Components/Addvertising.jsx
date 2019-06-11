@@ -4,7 +4,7 @@ import {
   Button, Modal, ModalBody,
 } from 'reactstrap';
 import LogoJeu from '../Images/League_of_Legends_Logo.png';
-import Form from './Form';
+import RegisterForm from './RegisterForm';
 
 class Addvertising extends Component {
   constructor(props) {
@@ -60,7 +60,7 @@ class Addvertising extends Component {
                 sont maintenant disponibles sur Up&Win !
               </span>
             </p>
-            <button type="button" className="Button" onClick={this.toggle}>
+            <button type="button" className="Button">
               Go !
             </button>
           </div>
@@ -79,7 +79,7 @@ class Addvertising extends Component {
                 toggle={this.toggleNested}
                 onClosed={closeAll ? this.toggle : undefined}
               >
-                <Form />
+                <RegisterForm />
               </Modal>
             </ModalBody>
           </Modal>
