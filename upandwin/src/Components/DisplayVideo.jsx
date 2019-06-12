@@ -1,6 +1,9 @@
 import React from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import StarRatingComponent from 'react-star-rating-component';
+import RatingStar from './StarRating';
+
 
 const DisplayVideo = () => (
   <div className="container-fluid">
@@ -34,6 +37,7 @@ const DisplayVideo = () => (
 
       <div className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
         <h3>Objets et statistiques</h3>
+        <RatingStar />
         <iframe
           title="Objets et statistiques"
           width="100%"
