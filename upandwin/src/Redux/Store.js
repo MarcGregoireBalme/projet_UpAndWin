@@ -1,11 +1,6 @@
-import { createStore, combineReducers } from 'redux';
-import { reducer as reduxFormReducer } from 'redux-form';
+import { createStore } from 'redux';
+import users from './Reducers';
 
-const reducer = combineReducers({
-  form: reduxFormReducer,
-});
-const store = (window.devToolsExtension
-  ? window.devToolsExtension()(createStore)
-  : createStore)(reducer);
+const store = createStore(users);
 
 export default store;
