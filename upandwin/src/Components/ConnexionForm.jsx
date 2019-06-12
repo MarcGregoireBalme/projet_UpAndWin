@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import {
   Button, FormGroup, Input, Label,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import './ConnexionForm.css';
+import Topnav from './Topnav';
+import BottomNav from './BottomNav';
+import './Form.css';
 
 class ConnexionForm extends Component {
   constructor(props) {
@@ -26,39 +30,52 @@ class ConnexionForm extends Component {
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    const { email, password } = this.state;
+    return email.length > 0 && password.length > 0;
   }
 
   render() {
+    const { email, password } = this.state;
     return (
-      <div className="Login">
+      <div className="wholeform">
+        <Topnav />
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
             <Label>Email</Label>
             <Input
               autoFocus
               type="email"
-              value={this.state.email}
+              value={email}
               onChange={this.handleChange}
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
             <Label>Password</Label>
             <Input
-              value={this.state.password}
+              value={password}
               onChange={this.handleChange}
               type="password"
             />
           </FormGroup>
-          <Button
-            block
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-          >
-            Login
-          </Button>
+          <FormGroup bsSize="large">
+            <div className="pititephrase">
+              Je n’ai pas de compte, je souhaite
+              {' '}
+              <Link to="/Register">m’inscrire</Link>
+            </div>
+          </FormGroup>
+          <FormGroup bsSize="large">
+            <Button
+              block
+              bsSize="large"
+              disabled={!this.validateForm()}
+              type="submit"
+            >
+              Login
+            </Button>
+          </FormGroup>
         </form>
+        <BottomNav />
       </div>
     );
   }

@@ -11,16 +11,22 @@
   color: #fff;
   position: fixed;
   transition: all 750ms;
-  margin-left: -6vh;
-  margin-top: 4vh;
   font-family: 'Open Sans', sans-serif !important;
   font-weight: 700 !important;
   font-size: 1em !important;
+  background-color: #1d1d1d;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
+  width: 80vw;
+  margin-left: 5vh;
 }
 
 .fieldtitle {
