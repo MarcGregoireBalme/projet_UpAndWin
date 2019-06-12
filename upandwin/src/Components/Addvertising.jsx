@@ -67,11 +67,12 @@ class Addvertising extends Component {
         </div>
         <div>
           <Modal isOpen={modal} toggle={this.toggle} className={className}>
-            <div className="Logo" />
+            <div className="Logomodal" />
+            <h4 className="accroche">Bienvenue sur Up & Win</h4>
             <ModalBody>
-              <Button color="primary" onClick={this.toggleNested}>Subscribe</Button>
+              <Button onClick={this.toggleNested}>S’enregistrer</Button>
               {' '}
-              <Button color="secondary" onClick={this.toggleNested}>Connexion</Button>
+              <Button onClick={this.toggleNested}>S’identifier</Button>
               <br />
               <Modal
                 isOpen={nestedModal}

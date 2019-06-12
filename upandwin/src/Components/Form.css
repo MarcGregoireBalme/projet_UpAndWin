@@ -1,9 +1,32 @@
+.Logomodal {
+  background-image: url("../Images/Up&Win_Logo.png");
+  background-size: cover;
+  width: 88px;
+  height: 88px;
+  align-self: center;
+  margin-top: 15vh;
+}
+
 .wholeform {
+  color: #fff;
   position: fixed;
-  top: 20%;
-  z-index: 100;
-  display: block;
-  background-color: rgba(40, 44, 52, 0.66);
-  border: 10px solid black;
   transition: all 750ms;
+  margin-left: -6vh;
+  margin-top: 4vh;
+  font-family: 'Open Sans', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1em !important;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldtitle {
+  align-self: center;
+}
+
+.btn-secondary.disabled {
+  margin-top: 2vh;
 }

@@ -10,6 +10,9 @@ const hostname = 'localhost';
 const port = 3005;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
+app.use(cors());
 
 const myRouter = express.Router();
 
