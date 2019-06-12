@@ -1,6 +1,8 @@
 import React from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import RatingStar from './StarRating';
+
 
 const DisplayVideo = ({ videos }) => (
 
@@ -9,6 +11,7 @@ const DisplayVideo = ({ videos }) => (
       {videos.map(video => (
         <div className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
           <h3>{video.titre}</h3>
+          <RatingStar />
           <iframe
             title={video.titre}
             width="100%"
