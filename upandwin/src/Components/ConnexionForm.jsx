@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Button, FormGroup, Input, Label,
+  Button, FormGroup, Input, Label, Form,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './ConnexionForm.css';
 import Topnav from './Topnav';
 import BottomNav from './BottomNav';
@@ -11,22 +12,32 @@ import './Form.css';
 class ConnexionForm extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       email: '',
       password: '',
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-  handleChange = (event) => {
-    this.setState({
-      [event.target.id]: event.target.value,
+  handleSubmit(event) {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'CHECK_USER',
+      user: this.state,
     });
+    event.preventDefault();
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleInputChange(event) {
+    const { target } = event;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = target;
+
+    this.setState({
+      [name]: value,
+    });
   }
 
   validateForm() {
@@ -39,22 +50,26 @@ class ConnexionForm extends Component {
     return (
       <div className="wholeform">
         <Topnav />
-        <form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
             <Label>Email</Label>
             <Input
-              autoFocus
+              name="email"
+              autofocus="true"
               type="email"
-              value={email}
-              onChange={this.handleChange}
+              checked={email}
+              onChange={this.handleInputChange}
+              placeholder="@"
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
             <Label>Password</Label>
             <Input
-              value={password}
-              onChange={this.handleChange}
+              name="password"
+              checked={password}
+              onChange={this.handleInputChange}
               type="password"
+              placeholder="Password"
             />
           </FormGroup>
           <FormGroup bsSize="large">
@@ -70,15 +85,20 @@ class ConnexionForm extends Component {
               bsSize="large"
               disabled={!this.validateForm()}
               type="submit"
+              value="Submit"
             >
               Login
             </Button>
           </FormGroup>
-        </form>
+        </Form>
         <BottomNav />
       </div>
     );
   }
 }
 
-export default ConnexionForm;
+const mapStateToProps = function users(state) {
+  return { state };
+};
+
+export default connect(mapStateToProps)(ConnexionForm);

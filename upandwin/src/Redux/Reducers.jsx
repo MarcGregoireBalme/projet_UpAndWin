@@ -5,6 +5,14 @@ const users = (state = {}, action) => {
         ...state,
         pseudo: action.pseudo,
         email: action.email,
+        password: action.password,
+        confpassword: action.password,
+      };
+    case 'CHECK_USER':
+      return {
+        ...state,
+        pseudo: action.pseudo,
+        password: action.password,
       };
     default:
       return state;
