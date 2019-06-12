@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
-import './UserForm.scss';
+import './videoForm.scss';
 
 export default class VideoForm extends React.Component {
   state = {

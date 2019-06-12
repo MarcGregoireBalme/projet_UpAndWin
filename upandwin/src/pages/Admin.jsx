@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 // import './Admin.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import VideoForm from '../Components/UserForm';
+import VideoForm from '../Components/VideoForm';
 
 class Admin extends Component {
   constructor(props) {
