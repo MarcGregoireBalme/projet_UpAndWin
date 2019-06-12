@@ -17,7 +17,7 @@ class Wow extends Component {
   }
 
   componentWillMount() {
-    axios.get('/videos/Wow')
+    axios.get('http://localhost3005:/videos/Wow')
       .then((res) => {
         this.setState({ videos: res.data });
       });

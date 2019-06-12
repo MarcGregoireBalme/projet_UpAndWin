@@ -13,6 +13,7 @@ import GamerStatistics from './pages/GamerStatistics';
 import Fav from './pages/Fav';
 import ModalSuccess from './Components/ModalSuccess';
 
+
 function App() {
   return (
     <div className="App">
