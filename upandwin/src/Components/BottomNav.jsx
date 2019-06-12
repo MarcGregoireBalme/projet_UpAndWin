@@ -33,11 +33,11 @@ function BottomNav() {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton color="inherit">
-            <NavLink to="/"><Home color="dark" /></NavLink>
+            <NavLink to="/"><Home color="inherit" /></NavLink>
           </IconButton>
           <div className={classes.grow} />
           <IconButton color="inherit">
-            <NavLink to="/Fav"><Stars color="dark" /></NavLink>
+            <NavLink to="/Fav"><Stars color="inherit" /></NavLink>
           </IconButton>
           <div className={classes.grow} />
           <IconButton color="inherit">
