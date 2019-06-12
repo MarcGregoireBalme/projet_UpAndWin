@@ -16,7 +16,7 @@ class Fav extends Component {
   }
 
   componentWillMount() {
-    axios.get('/videos')
+    axios.get('http://localhost:3005/videos')
       .then((res) => {
         this.setState({ videos: res.data });
       });
