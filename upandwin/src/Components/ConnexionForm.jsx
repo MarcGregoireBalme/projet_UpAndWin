@@ -51,18 +51,18 @@ class ConnexionForm extends Component {
       <div className="wholeform">
         <Topnav />
         <Form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup controlid="email">
             <Label>Email</Label>
             <Input
               name="email"
-              autofocus="true"
+              autoFocus
               type="email"
               checked={email}
               onChange={this.handleInputChange}
               placeholder="@"
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup controlid="password">
             <Label>Password</Label>
             <Input
               name="password"
@@ -72,17 +72,16 @@ class ConnexionForm extends Component {
               placeholder="Password"
             />
           </FormGroup>
-          <FormGroup bsSize="large">
+          <FormGroup>
             <div className="pititephrase">
               Je n’ai pas de compte, je souhaite
               {' '}
               <Link to="/Register">m’inscrire</Link>
             </div>
           </FormGroup>
-          <FormGroup bsSize="large">
+          <FormGroup>
             <Button
               block
-              bsSize="large"
               disabled={!this.validateForm()}
               type="submit"
               value="Submit"

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Topnav.css';
 import { Link, NavLink, Redirect } from 'react-router-dom';
-import ConnexionForm from './ConnexionForm';
 
 class Topnav extends Component {
   constructor(props) {
@@ -65,7 +64,7 @@ class Topnav extends Component {
         <div className="Top-nav-right">
           <Link to="/Connexion">
             <div className="connexionbutton">
-              <button type="button" className="Button" onClick={<ConnexionForm />}>
+              <button type="button" className="Button">
                 Connexion
               </button>
             </div>
