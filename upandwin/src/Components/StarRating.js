@@ -1,5 +1,6 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
+import axios from 'axios';
 
 class RatingStar extends React.Component {
   constructor() {
