@@ -236,9 +236,20 @@ myRouter.route('/users')
       if (err) {
         res.send(err);
       }
-      res.json({ message: 'Bravo, la video est maintenant stockée en base de données' });
+      res.json({ message: 'Bravo, le user a été mis en base de donnée' });
     });
   });
+
+myRouter.route('/users/:pseudo')
+  .get(function (req, res) {
+    User.find({ pseudo: req.params.pseudo }, function (err, users) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(users);
+    });
+  });
+
 app.use(myRouter);
 app.listen(port, hostname, function () {
   console.log('Mon serveur fonctionne');

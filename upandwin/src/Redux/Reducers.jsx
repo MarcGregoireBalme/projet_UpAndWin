@@ -4,15 +4,15 @@ const users = (state = {}, action) => {
       return {
         ...state,
         pseudo: action.pseudo,
-        email: action.email,
+        mail: action.mail,
         password: action.password,
-        confpassword: action.password,
       };
     case 'CHECK_USER':
+      console.log(action.payload);
       return {
         ...state,
-        pseudo: action.pseudo,
-        password: action.password,
+        user: action.payload,
+
       };
     default:
       return state;
