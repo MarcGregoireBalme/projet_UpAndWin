@@ -62,16 +62,14 @@ class Topnav extends Component {
           </div>
         </div>
         <div className="Top-nav-right">
-          <Link to="/GamerStatistics">
-            <div className="XP">
-              <span className="Bold">
-                2 456
-              </span>
-              &nbsp;xp
+          <Link to="/Connexion">
+            <div className="connexionbutton">
+              <button type="button" className="Button">
+                Connexion
+              </button>
             </div>
           </Link>
         </div>
-
       </div>
     );
   }

@@ -11,7 +11,11 @@ import Search from './pages/Search';
 import Profil from './pages/Profil';
 import GamerStatistics from './pages/GamerStatistics';
 import Fav from './pages/Fav';
+import Admin from './pages/Admin';
 import ModalSuccess from './Components/ModalSuccess';
+import ConnexionForm from './Components/ConnexionForm';
+import RegisterForm from './Components/RegisterForm';
+
 
 function App() {
   return (
@@ -20,12 +24,15 @@ function App() {
         <Provider store={Store}>
           <Route exact path="/" component={Home} />
           <Route path="/form/" component={subForm} />
+          <Route path="/Connexion" component={ConnexionForm} />
+          <Route path="/Register" component={RegisterForm} />
           <Route path="/Lol" component={Lol} />
           <Route path="/Wow" component={Wow} />
           <Route path="/Search" component={Search} />
           <Route path="/Profil" component={Profil} />
           <Route path="/GamerStatistics" component={GamerStatistics} />
           <Route path="/Fav" component={Fav} />
+          <Route path="/Admin" component={Admin} />
           <ModalSuccess />
         </Provider>
       </Switch>
