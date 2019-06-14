@@ -29,13 +29,13 @@ class subForm extends Component {
         <div className="Logomodal" />
         <Form onSubmit={handleSubmit} className="wholeform">
           <FormGroup>
-            <Label for="pseudo" className="fieldtitle">Pseudo</Label>
+            <Label for="alias" className="fieldtitle">Pseudo</Label>
             {' '}
             <Field
-              name="pseudo"
+              name="alias"
               component="input"
               type="text"
-              placeholder="Pseudo"
+              placeholder="alias"
             />
           </FormGroup>
           <FormGroup>
