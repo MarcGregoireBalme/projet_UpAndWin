@@ -4,6 +4,7 @@ import './Profil.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
+import DisplayQuiz from '../Components/DisplayQuiz';
 
 class Profil extends Component {
   constructor(props) {
@@ -20,6 +21,9 @@ class Profil extends Component {
         </div>
         <div>
           Profil here
+        </div>
+        <div>
+          <DisplayQuiz />
         </div>
         <BottomNav />
       </div>
