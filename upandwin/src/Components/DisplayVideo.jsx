@@ -13,6 +13,10 @@ const DisplayVideo = ({ videos }) => (
           <h3>{video.titre}</h3>
           <div>
             <RatingStar />
+            <span className="nbVote">
+              votes :
+              {video.notes.length - 1}
+            </span>
           </div>
           <iframe
             title={video.titre}
