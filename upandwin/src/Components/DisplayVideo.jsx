@@ -11,7 +11,9 @@ const DisplayVideo = ({ videos }) => (
       {videos.map(video => (
         <div key={video.titre} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
           <h3>{video.titre}</h3>
-          <RatingStar />
+          <div>
+            <RatingStar />
+          </div>
           <iframe
             title={video.titre}
             width="100%"
