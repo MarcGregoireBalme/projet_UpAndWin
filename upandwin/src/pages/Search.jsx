@@ -5,6 +5,7 @@ import DisplayVideo from '../Components/DisplayVideo';
 import 'bootstrap/dist/css/bootstrap.css';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
+import SearchBar from '../Components/SearchBar';
 
 class Search extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class Search extends Component {
           <Topnav />
         </div>
         <div>
-          <h1 style={{ paddingTop: '10vh' }}>Search</h1>
+          <h1 style={{ paddingTop: '10vh', display: 'flex', justifyContent: 'center' }}><SearchBar videos={videos} /></h1>
           <DisplayVideo videos={videos} />
         </div>
         <BottomNav />

@@ -146,9 +146,9 @@ myRouter.route('/videos/:jeu')
     });
   });
 
-myRouter.route('/videos/:video_id')
+myRouter.route('/videos/:videos_id')
   .get(function (req, res) {
-    Video.find({ _id: req.params.video_id }, function (err, videos) {
+    Video.find({ _id: req.params.videos_id }, function (err, videos) {
       if (err) {
         res.send(err);
       }
