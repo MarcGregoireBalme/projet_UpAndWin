@@ -48,9 +48,66 @@ export default function DisplayQuiz() {
   return (
 
     <div>
-      {quizs && quizs.map(quiz => <h1>{quiz.titre}</h1>)}
-
       <FormControl component="fieldset">
+        {quizs && quizs.map((quiz, index) => (
+          <div>
+            <h1>{quiz.titre}</h1>
+            <FormLabel component="legend" color="inherit" key={quiz._id}>{quiz.question1}</FormLabel>
+            <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
+              {quiz.answer1.map(qa => (
+                <FormControlLabel
+                  value={qa}
+                  control={<Radio color="primary" />}
+                  label={qa}
+                  labelPlacement="start"
+                />
+              ))}
+            </RadioGroup>
+
+            <FormLabel component="legend" color="inherit" key={quiz._id}>{quiz.question2}</FormLabel>
+            <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
+
+              {quiz.answer2.map(qa => (
+                <FormControlLabel
+                  value={qa}
+                  control={<Radio color="primary" />}
+                  label={qa}
+                  labelPlacement="start"
+                />
+              ))}
+            </RadioGroup>
+
+            <FormLabel component="legend" color="inherit" key={quiz._id}>{quiz.question3}</FormLabel>
+            <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
+
+              {quiz.answer3.map(qa => (
+                <FormControlLabel
+                  value={qa}
+                  control={<Radio color="primary" />}
+                  label={qa}
+                  labelPlacement="start"
+                />
+              ))}
+            </RadioGroup>
+
+            <FormLabel component="legend" color="inherit" key={quiz._id}>{quiz.question4}</FormLabel>
+            <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
+
+              {quiz.answer4.map(qa => (
+                <FormControlLabel
+                  value={qa}
+                  control={<Radio color="primary" />}
+                  label={qa}
+                  labelPlacement="start"
+                />
+              ))}
+            </RadioGroup>
+          </div>
+        ))}
+
+      </FormControl>
+
+      {/* <FormControl component="fieldset">
         <FormLabel component="legend" color="inherit">Combien de fois as-tu joué ce champion?</FormLabel>
         <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
           <FormControlLabel
@@ -78,7 +135,7 @@ export default function DisplayQuiz() {
             labelPlacement="start"
           />
         </RadioGroup>
-      </FormControl>
+              </FormControl> */}
     </div>
   );
 }
