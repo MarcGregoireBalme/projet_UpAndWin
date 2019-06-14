@@ -12,7 +12,13 @@ const DisplayVideo = ({ videos }) => (
       {videos.map(video => (
         <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
           <h3>{video.titre}</h3>
-          <RatingStar />
+          <div>
+            <RatingStar />
+            <span className="nbVote">
+              votes :
+              {video.notes.length - 1}
+            </span>
+          </div>
           <iframe
             title={video.titre}
             width="100%"

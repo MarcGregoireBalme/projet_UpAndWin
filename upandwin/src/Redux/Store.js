@@ -1,11 +1,12 @@
-import { createStore, combineReducers } from 'redux';
-import { reducer as reduxFormReducer } from 'redux-form';
+import { createStore } from 'redux';
+import users from './Reducers';
 
-const reducer = combineReducers({
-  form: reduxFormReducer,
-});
-const store = (window.devToolsExtension
-  ? window.devToolsExtension()(createStore)
-  : createStore)(reducer);
+const store = createStore(
+  users,
+  // eslint-disable-next-line no-underscore-dangle
+  window.__REDUX_DEVTOOLS_EXTENSION__
+  // eslint-disable-next-line no-underscore-dangle
+  && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 export default store;
