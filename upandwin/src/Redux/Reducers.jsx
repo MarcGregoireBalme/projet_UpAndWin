@@ -3,16 +3,14 @@ const users = (state = {}, action) => {
     case 'CREATE_USER':
       return {
         ...state,
-        pseudo: action.pseudo,
-        mail: action.mail,
+        alias: action.alias,
+        email: action.email,
         password: action.password,
       };
     case 'CHECK_USER':
-      console.log(action.payload);
       return {
         ...state,
         user: action.payload,
-
       };
     default:
       return state;

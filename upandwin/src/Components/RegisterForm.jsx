@@ -15,8 +15,8 @@ class RegisterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pseudo: '',
-      mail: '',
+      alias: '',
+      email: '',
       password: '',
       confpassword: '',
       show: false,
@@ -43,15 +43,15 @@ class RegisterForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { dispatch } = this.props;
-    const { pseudo, mail, password } = this.state;
+    const { alias, email, password } = this.state;
     dispatch({
       type: 'CREATE_USER',
       user: this.state,
     });
     axios
       .post('http://localhost:3005/users', {
-        pseudo,
-        mail,
+        alias,
+        email,
         password,
       });
     this.setState({
@@ -61,31 +61,31 @@ class RegisterForm extends Component {
 
   validateForm() {
     const {
-      pseudo, mail, password, confpassword,
+      alias, email, password, confpassword,
     } = this.state;
-    return pseudo.length > 0
-      && mail.length > 0
+    return alias.length > 0
+      && email.length > 0
       && password.length > 0
       && password === confpassword;
   }
 
   render() {
     const {
-      pseudo, mail, password, confpassword, show,
+      alias, email, password, confpassword, show,
     } = this.state;
     return (
       <div className="wholeform">
         <Topnav />
         <Form onSubmit={this.handleSubmit} className="formcontainer">
           <FormGroup>
-            <Label for="pseudo" className="fieldtitle">Pseudo</Label>
+            <Label for="alias" className="fieldtitle">Pseudo</Label>
             {' '}
-            <Input name="pseudo" type="pseudo" checked={pseudo} onChange={this.handleInputChange} placeholder="Pseudo" />
+            <Input name="alias" type="alias" checked={alias} onChange={this.handleInputChange} placeholder="Pseudo" />
           </FormGroup>
           <FormGroup>
-            <Label for="mail" className="fieldtitle">Email</Label>
+            <Label for="email" className="fieldtitle">Email</Label>
             {' '}
-            <Input name="mail" type="mail" checked={mail} onChange={this.handleInputChange} placeholder="Email" />
+            <Input name="email" type="email" checked={email} onChange={this.handleInputChange} placeholder="Email" />
           </FormGroup>
           <FormGroup>
             <Label for="password" className="fieldtitle">Password</Label>
@@ -107,7 +107,7 @@ class RegisterForm extends Component {
             <div>
               <h4>
                 A user was submitted:
-                {pseudo}
+                {alias}
               </h4>
             </div>
           </Modal.Body>
