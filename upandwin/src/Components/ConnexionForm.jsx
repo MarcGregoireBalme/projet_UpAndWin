@@ -36,7 +36,6 @@ class ConnexionForm extends Component {
     axios
       .get(`http://localhost:3005/users/${alias}`)
       .then((res) => {
-        console.log(res);
         if (res.data[0].alias === alias && res.data[0].password === password) {
           this.setState({ redirect: true });
         } else {
