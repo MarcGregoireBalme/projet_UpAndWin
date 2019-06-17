@@ -146,7 +146,7 @@ myRouter.route('/videos/:jeu')
     });
   });
 
-myRouter.route('/videos/:video_id')
+myRouter.route('/videosid/:video_id')
   .get(function (req, res) {
     Video.find({ _id: req.params.video_id }, function (err, videos) {
       if (err) {
@@ -195,6 +195,7 @@ const userSchema = mongoose.Schema({
   lastname: String,
   alias: String,
   password: String,
+  confpassword: String,
   age: Number,
   registration_date: Date,
   games: Array,
@@ -225,6 +226,7 @@ myRouter.route('/users')
     users.lastname = req.body.lastname;
     users.alias = req.body.alias;
     users.password = req.body.password;
+    users.confpassword = req.body.confpassword;
     users.age = req.body.age;
     users.registration_date = req.body.registration_date;
     users.games = [req.body.games];
@@ -242,6 +244,17 @@ myRouter.route('/users')
       res.json({ message: 'Bravo, la video est maintenant stockée en base de données' });
     });
   });
+
+myRouter.route('/users/:alias')
+  .get(function (req, res) {
+    User.find({ alias: req.params.alias }, function (err, users) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(users);
+    });
+  });
+
 app.use(myRouter);
 app.listen(port, hostname, function () {
   console.log('Mon serveur fonctionne');
