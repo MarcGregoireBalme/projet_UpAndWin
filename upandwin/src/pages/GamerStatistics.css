@@ -1,0 +1,9 @@
+.WinRoot {
+  margin: 24px;
+  flex-grow: 1;
+}
+
+.WinPaper {
+  padding: 24px;
+  text-align: center;
+}
