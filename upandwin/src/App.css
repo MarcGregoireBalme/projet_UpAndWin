@@ -38,5 +38,7 @@
 }
 
 .Page {
-  margin-top: 108px;
+  padding-top: 108px;
+  padding-bottom: 108px;
+  min-height: 100vh;
 }

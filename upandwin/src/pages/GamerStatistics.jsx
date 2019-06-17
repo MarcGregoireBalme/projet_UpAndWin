@@ -5,7 +5,7 @@ import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Topnav from '../Components/Topnav';
-
+import BottomNav from '../Components/BottomNav';
 
 class GamerStatistics extends Component {
   constructor(props) {
@@ -25,11 +25,10 @@ class GamerStatistics extends Component {
   render() {
     const { users } = this.state;
     return (
-      <div className="Page">
+      <div className="App">
         <Topnav />
-        <h1>Gamer Statistics</h1>
-
-        <div className="">
+        <div className="Page">
+          <h1>Gamer Statistics</h1>
           <div className="">
             {users
               .filter(user => (
@@ -40,21 +39,21 @@ class GamerStatistics extends Component {
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Paper className="WinPaper">
-                        <h1>{user.wins}</h1>
+                        <div className="Number">{user.wins}</div>
                         <br />
                         <p>wins</p>
                       </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Paper className="WinPaper">
-                        <h1>{user.viewed_videos.length}</h1>
+                        <div className="Number">{user.viewed_videos.length}</div>
                         <br />
                         <p>vidéos vues</p>
                       </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Paper className="WinPaper">
-                        <h1>{user.friends.length}</h1>
+                        <div className="Number">{user.friends.length}</div>
                         <br />
                         <p>amis</p>
                       </Paper>
@@ -64,7 +63,7 @@ class GamerStatistics extends Component {
               ))}
           </div>
         </div>
-
+        <BottomNav />
       </div>
     );
   }
