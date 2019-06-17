@@ -21,7 +21,7 @@ class Profil extends Component {
           <h1 style={{ paddingTop: '10vh' }}>Profil</h1>
         </div>
         <div>
-          {user.alias}
+          {user ? user.alias : 'guest'}
         </div>
         <BottomNav />
       </div>
