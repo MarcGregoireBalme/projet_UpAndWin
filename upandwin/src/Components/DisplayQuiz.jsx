@@ -8,7 +8,7 @@ import axios from 'axios';
 
 
 export default function DisplayQuiz() {
-  const [value, setValue] = useState('female');
+  const [value, setValue] = useState('');
   const [quizs, setquizs] = useState('');
 
   useEffect(() => {
@@ -29,8 +29,10 @@ export default function DisplayQuiz() {
         {quizs && quizs.map((quiz, index) => (
           <div>
             <h1 key={quiz._id}>{quiz.titre}</h1>
+
             <FormLabel component="legend" color="inherit">{quiz.question1}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
+
               {quiz.answer1.map(qa => (
                 <FormControlLabel
                   value={qa}
@@ -40,6 +42,7 @@ export default function DisplayQuiz() {
                 />
               ))}
             </RadioGroup>
+
             <FormLabel component="legend" color="inherit">{quiz.question2}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
 
@@ -52,6 +55,7 @@ export default function DisplayQuiz() {
                 />
               ))}
             </RadioGroup>
+
             <FormLabel component="legend" color="inherit">{quiz.question3}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
 
@@ -64,6 +68,7 @@ export default function DisplayQuiz() {
                 />
               ))}
             </RadioGroup>
+
             <FormLabel component="legend" color="inherit">{quiz.question4}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
 

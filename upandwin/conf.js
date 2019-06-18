@@ -36,6 +36,33 @@ app.use(bodyParser.json());
 
 
 // Schema collection quizzs
+const quizzesSchema = mongoose.Schema({
+  titre: String,
+  qa: Array,
+  score: Number,
+  video_id: mongoose.Schema.Types.ObjectId,
+
+});
+const Quizzes = mongoose.model('Quizzes', quizzesSchema);
+// Route /
+myRouter.route('/')
+  .all(function (req, res) {
+    res.json({ message: "Bienvenue sur l'API upandwin ", methode: req.method });
+  });
+
+// Route collection Quizzs
+myRouter.route('/quizzes/:quizzid')
+  .get(function (req, res) {
+    Quizzes.find(function (err, quizzes) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(quizzes);
+    });
+  });
+
+
+// Schema collection quizzs
 const quizzSchema = mongoose.Schema({
   titre: String,
   question: Array,
@@ -47,7 +74,7 @@ const Quizz = mongoose.model('Quizz', quizzSchema);
 // Route /
 myRouter.route('/')
   .all(function (req, res) {
-    res.json({ message: "Bienvenue sur 'API upandwin ", methode: req.method });
+    res.json({ message: "Bienvenue sur l'API upandwin ", methode: req.method });
   });
 
 // Route collection Quizzs
