@@ -103,6 +103,14 @@ myRouter.route('/quizzs')
 // route quizzs avec fonction delete
 myRouter.route('/quizzs/:quizz_id')
 
+  .get(function (req, res) {
+    Quizz.remove({ _id: req.params.quizz_id }, function (err, quizzs) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(quizzs);
+    });
+  })
   .delete(function (req, res) {
     Quizz.remove({ _id: req.params.quizz_id }, function (err) {
       if (err) {

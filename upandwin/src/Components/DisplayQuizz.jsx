@@ -26,15 +26,15 @@ export default function DisplayQuizz() {
 
     <div>
       <FormControl component="fieldset">
-        {quizzes && quizzes.map((quizz, index) => (
+        {quizzes && quizzes.map(quizz => (
           <div key={quizz._id}>
-            <h1 key={quizz._id}>{quizz.titre}</h1>
-            {console.log((quizz.qa).map((r => r)))
+            <h1>{quizz.titre}</h1>
+            {console.log((quizz.qa).filter((r, ind) => ind % 2 === 0))
               }
-            <FormLabel component="legend" color="inherit">{quizz.qa}</FormLabel>
+            <FormLabel component="legend" color="inherit">{quizz.qa.filter((r, ind) => ind % 2 === 0)}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
 
-              {(quizz.qa).filter(a => a % 2 === 1).map(qa => (
+              {(quizz.qa).filter((r, index) => index % 2 === 1).map(qa => (
                 <FormControlLabel
                   value={qa}
                   control={<Radio color="primary" />}

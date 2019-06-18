@@ -43,7 +43,7 @@ export default function DisplayQuiz() {
               ))}
             </RadioGroup>
 
-            <FormLabel component="legend" color="inherit">{quiz.question2}</FormLabel>
+            <FormLabel component="legend" color="primary">{quiz.question2}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
 
               {quiz.answer2.map(qa => (
@@ -56,7 +56,7 @@ export default function DisplayQuiz() {
               ))}
             </RadioGroup>
 
-            <FormLabel component="legend" color="inherit">{quiz.question3}</FormLabel>
+            <FormLabel component="legend" color="primary">{quiz.question3}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
 
               {quiz.answer3.map(qa => (
@@ -69,7 +69,7 @@ export default function DisplayQuiz() {
               ))}
             </RadioGroup>
 
-            <FormLabel component="legend" color="inherit">{quiz.question4}</FormLabel>
+            <FormLabel component="legend" color="primary">{quiz.question4}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
 
               {quiz.answer4.map(qa => (

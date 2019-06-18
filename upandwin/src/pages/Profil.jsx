@@ -24,9 +24,7 @@ class Profil extends Component {
         <div>
           {user ? user.alias : 'Guest'}
         </div>
-        <div>
-          <DisplayQuiz />
-        </div>
+        <DisplayQuiz />
         <BottomNav />
       </div>
     );
