@@ -1,19 +1,15 @@
 .WinRoot {
-    display: 'flex';
     align-items: 'center';
-    width: 400px;
+    width: 100;
+    display: flex;
+
 }
 
 .WinInput {
     margin-left: 8;
     flex: 1;
 }
-.WinIconButton {
-    padding: 10;
-}
-.WinDivider {
-    width: 1;
-    height: 28;
-    margin: 4;
-}
 
+.searchbar {
+    padding-top: 5em;
+}
