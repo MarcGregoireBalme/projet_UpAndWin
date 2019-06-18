@@ -146,7 +146,7 @@ myRouter.route('/videos/:jeu')
     });
   });
 
-myRouter.route('/videos/:videos_id')
+myRouter.route('/videosid/:video_id')
   .get(function (req, res) {
     Video.find({ _id: req.params.videos_id }, function (err, videos) {
       if (err) {
@@ -190,19 +190,21 @@ myRouter.route('/videos/:videos_id')
 
 // schema collection users
 const userSchema = mongoose.Schema({
-  mail: String,
-  prenom: String,
-  nom: String,
-  pseudo: String,
+  email: String,
+  firstname: String,
+  lastname: String,
+  alias: String,
   password: String,
+  confpassword: String,
   age: Number,
-  dete_inscription: Date,
-  jeux: Array,
-  score: String,
-  video_vues: Array,
-  video_favs: Array,
-  badge: Number,
+  registration_date: Date,
+  games: Array,
+  viewed_videos: Array,
+  fav_videos: Array,
+  badges: Array,
   quizz_id: Array,
+  friends: Array,
+  wins: Number,
 });
 
 const User = mongoose.model('User', userSchema);
@@ -219,19 +221,22 @@ myRouter.route('/users')
 
   .post(function (req, res) {
     const users = new User();
-    users.mail = req.body.mail;
-    users.penom = req.body.prenom;
-    users.nom = req.body.nom;
-    users.pseudo = req.body.pseudo;
+    users.email = req.body.email;
+    users.firstname = req.body.firstname;
+    users.lastname = req.body.lastname;
+    users.alias = req.body.alias;
     users.password = req.body.password;
+    users.confpassword = req.body.confpassword;
     users.age = req.body.age;
-    users.date_inscription = req.body.date_inscription;
-    users.jeux = [req.body.jeux];
+    users.registration_date = req.body.registration_date;
+    users.games = [req.body.games];
     users.score = req.body.score;
-    users.video_vues = [req.body.video_vues];
+    users.viewed_videos = [req.body.viewed_videos];
     users.video_favs = [req.body.video_favs];
-    users.badge = req.body.badge;
+    users.badges = [req.body.badges];
     users.quizz_id = [req.body.quizz_id];
+    users.friends = [req.body.friends];
+    users.wins = req.body.wins;
     users.save(function (err) {
       if (err) {
         res.send(err);
@@ -239,6 +244,17 @@ myRouter.route('/users')
       res.json({ message: 'Bravo, la video est maintenant stockée en base de données' });
     });
   });
+
+myRouter.route('/users/:alias')
+  .get(function (req, res) {
+    User.find({ alias: req.params.alias }, function (err, users) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(users);
+    });
+  });
+
 app.use(myRouter);
 app.listen(port, hostname, function () {
   console.log('Mon serveur fonctionne');
