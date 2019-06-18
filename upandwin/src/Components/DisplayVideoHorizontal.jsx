@@ -3,6 +3,7 @@ import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import RatingStar from './StarRating';
 
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const DisplayVideo = ({ videos }) => (
 
   <div className="container-fluid">
@@ -15,6 +16,12 @@ const DisplayVideo = ({ videos }) => (
             <span className="nbVote">
               votes :
               {video.notes.length - 1}
+              <div>
+                moyenne :
+                {video.notes
+                  ? video.notes.reduce(reducer) / (video.notes.length - 1)
+                  : '2.5'}
+              </div>
             </span>
           </div>
           <iframe
