@@ -44,7 +44,6 @@ class ConnexionForm extends Component {
       });
   }
 
-
   handleInputChange(event) {
     const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -59,7 +58,6 @@ class ConnexionForm extends Component {
     const { alias, password } = this.state;
     return alias.length > 0 && password.length > 0;
   }
-
 
   render() {
     const {
