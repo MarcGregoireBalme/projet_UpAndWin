@@ -41,7 +41,6 @@ const quizzesSchema = mongoose.Schema({
   qa: Array,
   score: Number,
   video_id: mongoose.Schema.Types.ObjectId,
-
 });
 const Quizzes = mongoose.model('Quizzes', quizzesSchema);
 // Route /
@@ -68,7 +67,6 @@ const quizzSchema = mongoose.Schema({
   question: Array,
   score: Number,
   video_id: mongoose.Schema.Types.ObjectId,
-
 });
 const Quizz = mongoose.model('Quizz', quizzSchema);
 // Route /
