@@ -1,7 +1,7 @@
 import React from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import RatingStar from './StarRating';
+import StarRating from './StarRating';
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const DisplayVideo = ({ videos }) => (
@@ -9,12 +9,13 @@ const DisplayVideo = ({ videos }) => (
   <div className="container-fluid">
     <div className="videoDisplayHorizontal">
       {videos.map(video => (
+
         <div key={video.titre} className="scrollHori">
           <h3>{video.titre}</h3>
           <div>
-            <RatingStar />
-            <span className="nbVote">
-              votes :
+            <StarRating moyenne={video.notes.reduce(reducer) / (video.notes.length)} />
+            <div className="nbVote">
+              avis :
               {video.notes.length - 1}
               <div>
                 moyenne :
@@ -22,7 +23,7 @@ const DisplayVideo = ({ videos }) => (
                   ? video.notes.reduce(reducer) / (video.notes.length - 1)
                   : '2.5'}
               </div>
-            </span>
+            </div>
           </div>
           <iframe
             title={video.titre}

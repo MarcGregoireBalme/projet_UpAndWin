@@ -1,12 +1,13 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
+import './StarRating.css';
 
-class RatingStar extends React.Component {
+class StarRating extends React.Component {
   constructor(props) {
     super(props);
     const { moyenne } = this.props;
     this.state = {
-      rating: moyenne,
+      rating: Math.ceil(moyenne),
     };
     this.onStarClick = this.onStarClick.bind(this);
     this.onStarHover = this.onStarHover.bind(this);
@@ -21,16 +22,18 @@ class RatingStar extends React.Component {
     this.setState({ rating: nextValue });
   }
 
-
   //  onStarHoverOut() {
   //    this.setState({ rating: 1 });
   //  }
 
   render() {
     const { rating } = this.state;
+    // console.log(this.props.video)
+
     return (
       <div>
         <StarRatingComponent
+          className="Stars"
           name="rate1"
           starCount={5}
           value={rating}
@@ -43,4 +46,4 @@ class RatingStar extends React.Component {
   }
 }
 
-export default RatingStar;
+export default StarRating;
