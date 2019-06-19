@@ -3,6 +3,7 @@ import '../App.css';
 import './Profil.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
 
@@ -11,7 +12,11 @@ class Profil extends Component {
     super(props);
     this.state = {
       profils: [],
+      selectedFile: null,
+      uploadedImage: '',
     };
+
+    this.fileSelectedhandler = this.fileSelectedhandler.bind(this);
   }
 
   componentDidMount() {
@@ -25,9 +30,31 @@ class Profil extends Component {
     this.setState({ profils });
   }
 
+  fileSelectedhandler = (event) => {
+    this.setState({
+      selectedFile: (event.target.files[0]),
+      uploadedImage: URL.createObjectURL(event.target.files[0]),
+    });
+  }
+
+  fileUploadHandler = () => {
+    const { selectedFile } = this.state;
+    const fd = new FormData();
+    fd.append('image', selectedFile, selectedFile.name);
+    axios.post('http://localhost:3005/', fd, {
+      onUploadProgress: (ProgressEvent) => {
+        console.log(`Upload Progress: ${Math.round(ProgressEvent.loaded / ProgressEvent.total * 100)}%`);
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      });
+  }
+
   render() {
     const { user } = this.props;
     const { profils } = this.state;
+    const { uploadedImage } = this.state;
     return (
       <div className="profil">
         <Topnav />
@@ -35,7 +62,17 @@ class Profil extends Component {
           <h1 style={{ paddingTop: '10vh' }}>{user ? user.alias : profils[0]}</h1>
         </div>
         <div>
-          {profils[0]}
+          <input
+            type="file"
+            onChange={this.fileSelectedhandler}
+          />
+          <button type="button" onClick={this.fileUploadHandler}>Upload</button>
+        </div>
+        <div>
+          {this.selectedFile}
+        </div>
+        <div>
+          <img alt="avatar" src={uploadedImage} />
         </div>
         <BottomNav />
       </div>
