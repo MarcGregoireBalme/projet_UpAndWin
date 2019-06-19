@@ -1,5 +1,6 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
+import './StarRating.css';
 
 class RatingStar extends React.Component {
   constructor() {
@@ -31,6 +32,7 @@ class RatingStar extends React.Component {
     return (
       <div>
         <StarRatingComponent
+          className="Stars"
           name="rate1"
           starCount={5}
           value={rating}
