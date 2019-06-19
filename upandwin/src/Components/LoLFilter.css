@@ -1,0 +1,51 @@
+#Filter-nav {
+  position: fixed;
+  top: 84px;
+  width: 100vw;
+  height: 84px;
+  padding: 12px 24px 12px 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: top 0.6s;
+}
+
+.Top-nav-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+}
+
+.Filter-button {
+  position: absolute;
+  right: 24px;
+  top: 18px;
+  background-image: url("../Images/filter.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 48px;
+  height: 48px;
+  z-index: 1002;
+}
+
+.Top-nav-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+}
+
+.Filter-logo {
+  position: absolute;
+  left: 24px;
+  top: 18px;
+  background-image: url("../Images/League_of_Legends_Icon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 48px;
+  height: 48px;
+  z-index: 1002;
+}
+  

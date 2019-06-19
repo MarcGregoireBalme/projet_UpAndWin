@@ -4,7 +4,7 @@ import './Home.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import Topnav from '../Components/Topnav';
-import Addvertising from '../Components/Addvertising';
+import LoLFilter from '../Components/LoLFilter';
 import DisplayVideo from '../Components/DisplayVideo';
 import BottomNav from '../Components/BottomNav';
 
@@ -13,6 +13,7 @@ class Lol extends Component {
     super(props);
     this.state = {
       videos: [],
+      filters: ['TopLane', 'MidLane'],
     };
   }
 
@@ -24,13 +25,13 @@ class Lol extends Component {
   }
 
   render() {
-    const { videos } = this.state;
+    const { videos, filters } = this.state;
     return (
       <div>
         <Topnav />
-        <h1 style={{ paddingTop: '10vh' }}>League of Legends</h1>
-        <Addvertising />
-        <DisplayVideo videos={videos} />
+        <LoLFilter />
+        <div style={{ paddingTop: '40vh' }} />
+        <DisplayVideo filters={filters} videos={videos} />
         <BottomNav />
       </div>
     );

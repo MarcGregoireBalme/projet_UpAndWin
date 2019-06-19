@@ -101,6 +101,7 @@ const videoSchema = mongoose.Schema({
   categorie: String,
   commentaires: Array,
   objectifs: Array,
+  lane: Array,
 });
 
 const Video = mongoose.model('Video', videoSchema);
@@ -128,6 +129,7 @@ myRouter.route('/videos')
     videos.difficulte = req.body.difficulte;
     videos.commentaires = [req.body.commentaires];
     videos.objectifs = [req.body.objectifs];
+    videos.lane = [req.body.lane];
     videos.save(function (err) {
       if (err) {
         res.send(err);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import {
-  Stars,
+  Star,
   Home,
   Search,
 } from '@material-ui/icons';
@@ -54,7 +54,7 @@ function BottomNav() {
             </IconButton>
             <div className={classes.grow} />
             <IconButton color="inherit">
-              <NavLink to="/Fav"><Stars color="inherit" /></NavLink>
+              <NavLink to="/Fav"><Star color="inherit" /></NavLink>
             </IconButton>
             <div className={classes.grow} />
             <IconButton color="inherit">
