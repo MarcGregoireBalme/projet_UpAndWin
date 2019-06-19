@@ -2,11 +2,11 @@ import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 
 class RatingStar extends React.Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
+    const { moyenne } = this.props;
     this.state = {
-      rating: 1,
+      rating: moyenne,
     };
     this.onStarClick = this.onStarClick.bind(this);
     this.onStarHover = this.onStarHover.bind(this);

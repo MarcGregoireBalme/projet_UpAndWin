@@ -12,7 +12,7 @@ const DisplayVideo = ({ videos }) => (
         <div key={video.titre} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
           <h3>{video.titre}</h3>
           <div>
-            <RatingStar />
+            <RatingStar moyenne={video.notes.reduce(reducer) / (video.notes.length - 1)} />
             <span className="nbVote">
               votes :
               {video.notes.length - 1}
