@@ -73,6 +73,7 @@
   },
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
-    "husky": "^2.3.0"
+    "husky": "^2.3.0",
+    "nodemon": "^1.19.1"
   }
 }

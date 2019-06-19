@@ -50,9 +50,19 @@ myRouter.route('/')
   });
 
 // Route collection Quizzs
-myRouter.route('/quizzes/:quizzid')
+myRouter.route('/quizzes')
   .get(function (req, res) {
     Quizzes.find(function (err, quizzes) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(quizzes);
+    });
+  });
+
+myRouter.route('/quizzes/:quizz_id')
+  .get(function (req, res) {
+    Quizzes.find({ _id: req.params.quizz_id }, function (err, quizzes) {
       if (err) {
         res.send(err);
       }
@@ -104,7 +114,7 @@ myRouter.route('/quizzs')
 myRouter.route('/quizzs/:quizz_id')
 
   .get(function (req, res) {
-    Quizz.remove({ _id: req.params.quizz_id }, function (err, quizzs) {
+    Quizz.find({ _id: req.params.quizz_id }, function (err, quizzs) {
       if (err) {
         res.send(err);
       }

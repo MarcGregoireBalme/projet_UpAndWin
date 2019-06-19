@@ -12,37 +12,44 @@ export default function DisplayQuizz() {
   const [quizzes, setquizzes] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3005/quizzes/5d0764b1e3dfb9241fb360f6')
-      .then((res) => {
-        setquizzes(res.data);
-      });
+    const fetchData = async () => {
+      const res = await axios.get(
+        'http://localhost:3005/quizzes/5d08ef30e3dfb9241fb360f7',
+      );
+      setquizzes(res.data);
+    };
+    fetchData();
   }, []);
 
   function handleChange(event) {
     setValue(event.target.value);
   }
-
+  console.log(value);
   return (
 
     <div>
       <FormControl component="fieldset">
         {quizzes && quizzes.map(quizz => (
           <div key={quizz._id}>
-            <h1>{quizz.titre}</h1>
-            {console.log((quizz.qa).filter((r, ind) => ind % 2 === 0))
-              }
-            <FormLabel component="legend" color="inherit">{quizz.qa.filter((r, ind) => ind % 2 === 0)}</FormLabel>
-            <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
-
-              {(quizz.qa).filter((r, index) => index % 2 === 1).map(qa => (
-                <FormControlLabel
-                  value={qa}
-                  control={<Radio color="primary" />}
-                  label={qa}
-                  labelPlacement="start"
-                />
+            <h1>{quizz.title}</h1>
+            {(quizz.qa)
+              .map((ques, id) => (
+                <div key={ques.id}>
+                  <FormLabel component="legend" color="inherit">{ques.question}</FormLabel>
+                  <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange}>
+                    {(ques.answers)
+                      .map(answer => (
+                        <FormControlLabel
+                          key={answer.id}
+                          value={`${answer} question ${id}`}
+                          control={<Radio color="primary" />}
+                          label={answer}
+                          labelPlacement="start"
+                        />
+                      ))}
+                  </RadioGroup>
+                </div>
               ))}
-            </RadioGroup>
           </div>
         ))}
 
@@ -76,7 +83,32 @@ export default function DisplayQuizz() {
             labelPlacement="start"
           />
         </RadioGroup>
-              </FormControl> */}
+              </FormControl>
+
+                    <FormControl component="fieldset">
+        {quizzes && quizzes.map(quizz => (
+          <div key={quizz._id}>
+            <h1>{quizz.titre}</h1>
+            {console.log((quizz.qa).filter((r, ind) => ind % 2 === 0))
+              }
+            <FormLabel component="legend" color="inherit">{quizz.qa.filter((r, ind) => ind % 2 === 0)}</FormLabel>
+            <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
+
+              {(quizz.qa).filter((r, index) => index % 2 === 1).map(qa => (
+                <FormControlLabel
+                  value={qa}
+                  control={<Radio color="primary" />}
+                  label={qa}
+                  labelPlacement="start"
+                />
+              ))}
+            </RadioGroup>
+          </div>
+        ))}
+
+      </FormControl>
+
+              */}
     </div>
   );
 }

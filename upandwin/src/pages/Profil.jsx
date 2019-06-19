@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
-import DisplayQuiz from '../Components/DisplayQuiz';
+import DisplayQuizz from '../Components/DisplayQuizz';
 
 class Profil extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Profil extends Component {
         <div>
           {user ? user.alias : 'Guest'}
         </div>
-        <DisplayQuiz />
+        <DisplayQuizz />
         <BottomNav />
       </div>
     );
