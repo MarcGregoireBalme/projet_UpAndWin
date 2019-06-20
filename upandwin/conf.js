@@ -95,7 +95,7 @@ const videoSchema = mongoose.Schema({
   lien: String,
   duree: String,
   nbVue: Number,
-  notes: Array,
+  notes: [Number],
   jeu: String,
   difficulte: String,
   categorie: String,
@@ -123,10 +123,10 @@ myRouter.route('/videos')
     videos.lien = req.body.lien;
     videos.duree = req.body.duree;
     videos.nbVue = req.body.nbVue;
-    videos.notes = [req.body.notes];
+    videos.notes = [];
     videos.jeu = req.body.jeu;
     videos.difficulte = req.body.difficulte;
-    videos.commentaires = [req.body.commentaires];
+    videos.commentaires = [];
     videos.objectifs = [req.body.objectifs];
     videos.save(function (err) {
       if (err) {
@@ -155,6 +155,7 @@ myRouter.route('/videosid/:video_id')
       res.json(videos);
     });
   })
+
   .delete(function (req, res) {
     Video.remove({ _id: req.params.video_id }, function (err) {
       if (err) {
@@ -174,10 +175,10 @@ myRouter.route('/videosid/:video_id')
       videos.lien = req.body.lien;
       videos.duree = req.body.duree;
       videos.nbVue = req.body.nbVue;
-      videos.notes = [req.body.notes];
+      videos.notes = [];
       videos.jeu = req.body.jeu;
       videos.difficulte = req.body.difficulte;
-      videos.commentaires = [req.body.commentaires];
+      videos.commentaires = [];
       videos.objectifs = [req.body.objectifs];
       videos.save(function (errs) {
         if (errs) {
@@ -185,6 +186,24 @@ myRouter.route('/videosid/:video_id')
         }
         res.json({ message: 'Bravo, mise à jour des données OK' });
       });
+    });
+  });
+
+myRouter.route('/videosnotes/:video_id')
+  .get(function (req, res) {
+    Video.find({ _id: req.params.video_id }, function (err, videos) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(videos[0].notes);
+    });
+  })
+  .put(function (req, res) {
+    Video.findById(req.params.videonotes, function (err) {
+      if (err) {
+        res.send(err);
+      }
+      res.json = [req.body.notes];
     });
   });
 
