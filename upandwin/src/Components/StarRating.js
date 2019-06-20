@@ -7,7 +7,7 @@ class StarRating extends React.Component {
     super(props);
     const { moyenne } = this.props;
     this.state = {
-      rating: Math.ceil(moyenne),
+      rating: Math.round(moyenne),
     };
     this.onStarClick = this.onStarClick.bind(this);
     this.onStarHover = this.onStarHover.bind(this);
