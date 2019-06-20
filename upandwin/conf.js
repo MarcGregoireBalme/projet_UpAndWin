@@ -175,10 +175,10 @@ myRouter.route('/videosid/:video_id')
       videos.lien = req.body.lien;
       videos.duree = req.body.duree;
       videos.nbVue = req.body.nbVue;
-      videos.notes = [req.body.notes];
+      videos.notes = [];
       videos.jeu = req.body.jeu;
       videos.difficulte = req.body.difficulte;
-      videos.commentaires = [req.body.commentaires];
+      videos.commentaires = [];
       videos.objectifs = [req.body.objectifs];
       videos.save(function (errs) {
         if (errs) {

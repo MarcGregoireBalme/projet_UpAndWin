@@ -1,6 +1,7 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import './StarRating.css';
+import axios from 'axios';
 
 class StarRating extends React.Component {
   constructor(props) {
@@ -11,8 +12,8 @@ class StarRating extends React.Component {
     };
     this.onStarClick = this.onStarClick.bind(this);
     this.onStarHover = this.onStarHover.bind(this);
-    // this.onStarHoverOut = this.onStarHoverOut.bind(this);
   }
+
 
   onStarClick(nextValue) {
     this.setState({ rating: nextValue });
@@ -22,13 +23,24 @@ class StarRating extends React.Component {
     this.setState({ rating: nextValue });
   }
 
-  //  onStarHoverOut() {
-  //    this.setState({ rating: 1 });
-  //  }
+  handleSubmit = () => {
+    const {
+      rating,
+    } = this.state;
+
+    axios
+      .post('/videos/video_id/:notes', {
+        rating,
+      });
+  };
+
+  onClick = () => {
+    this.onStarClick();
+    this.handleSubmit();
+  }
 
   render() {
     const { rating } = this.state;
-    // console.log(this.props.video)
 
     return (
       <div>
@@ -38,8 +50,9 @@ class StarRating extends React.Component {
           starCount={5}
           value={rating}
           onStarHover={this.onStarHover}
-          // onStarHoverOut={this.onStarHoverOut}
-          onStarClick={this.onStarClick}
+          onStarClick={
+            this.onClick
+          }
         />
       </div>
     );
