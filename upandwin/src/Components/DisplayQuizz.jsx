@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import axios from 'axios';
+import FormControl from '@material-ui/core/FormControl'; import axios from 'axios';
+import Displayquestion from './DisplayQuestion';
 
 
 export default function DisplayQuizz() {
-  const [value, setValue] = useState('');
   const [quizzes, setquizzes] = useState('');
 
   useEffect(() => {
@@ -21,10 +16,6 @@ export default function DisplayQuizz() {
     fetchData();
   }, []);
 
-  function handleChange(event) {
-    setValue(event.target.value);
-  }
-  console.log(value);
   return (
 
     <div>
@@ -32,24 +23,7 @@ export default function DisplayQuizz() {
         {quizzes && quizzes.map(quizz => (
           <div key={quizz._id}>
             <h1>{quizz.title}</h1>
-            {(quizz.qa)
-              .map((ques, id) => (
-                <div key={ques.id}>
-                  <FormLabel component="legend" color="inherit">{ques.question}</FormLabel>
-                  <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange}>
-                    {(ques.answers)
-                      .map(answer => (
-                        <FormControlLabel
-                          key={answer.id}
-                          value={`${answer} question ${id}`}
-                          control={<Radio color="primary" />}
-                          label={answer}
-                          labelPlacement="start"
-                        />
-                      ))}
-                  </RadioGroup>
-                </div>
-              ))}
+            <Displayquestion quizz={quizz} />
           </div>
         ))}
 
