@@ -12,10 +12,10 @@ class Addvertising extends Component {
   render() {
     return (
       <div>
-        <div className="Addvertising-img">
-          <div className="Addvertising">
+        <div className="Add-img">
+          <div className="Add">
             <img src={LogoJeu} className="Logo-jeu" alt="" />
-            <p className="AddvertisingTitle">
+            <p className="Add-title">
               <span className="Text-background">
                 Les tutos
                 {' '}

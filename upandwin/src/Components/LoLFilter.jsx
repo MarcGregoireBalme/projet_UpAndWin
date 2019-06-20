@@ -48,52 +48,34 @@ class LoLFilter extends Component {
     const {
       TopLaneCheckbox, MidLaneCheckbox, BotLaneCheckbox, JungleCheckbox, SupportCheckbox,
     } = this.state;
+    const { videos } = this.props;
+    const filters = ['TopLane', 'MidLane', 'BotLane', 'Jungle', 'Support'];
+    console.log(this.state);
     return (
       <div id="Filter-nav">
         <div className="Top-nav-left">
           <div className="Filter-logo" />
         </div>
         <div>
-          TopLane &nbsp;&nbsp;
-          <input
-            name="TopLaneCheckbox"
-            type="checkbox"
-            checked={TopLaneCheckbox}
-            onChange={this.handleCheck}
-          />
-          <br />
-          MidLane &nbsp;&nbsp;
-          <input
-            name="MidLaneCheckbox"
-            type="checkbox"
-            checked={MidLaneCheckbox}
-            onChange={this.handleCheck}
-          />
-          <br />
-          BotLane &nbsp;&nbsp;
-          <input
-            name="BotLaneCheckbox"
-            type="checkbox"
-            checked={BotLaneCheckbox}
-            onChange={this.handleCheck}
-          />
-          <br />
-          Jungle &nbsp;&nbsp;
-          <input
-            name="JungleCheckbox"
-            type="checkbox"
-            checked={JungleCheckbox}
-            onChange={this.handleCheck}
-          />
-          <br />
-          Support &nbsp;&nbsp;
-          <input
-            name="SupportCheckbox"
-            type="checkbox"
-            checked={SupportCheckbox}
-            onChange={this.handleCheck}
-          />
-          <br />
+
+          {filters
+            .map(filter => (
+              <div>
+                {filter}
+                &nbsp;(
+                {(videos.filter(video => video.lane.includes(filter)).length)}
+                ) &nbsp;
+                <input
+                  name={`${filter}Checkbox`}
+                  type="checkbox"
+                  checked={window[`${filter}Checkbox`]}
+                  onChange={this.handleCheck}
+                />
+                <br />
+              </div>
+            ))
+          }
+
         </div>
         <div className="Top-nav-right">
           <div className="Filter-button" />

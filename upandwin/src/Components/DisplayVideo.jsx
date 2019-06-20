@@ -11,6 +11,7 @@ const DisplayVideo = ({ videos, filters }) => {
     <div className="container-fluid">
       <div className="row videoDisplay">
         {videos
+          .filter(video => video.lane.includes('TopLane') || video.lane.includes('MidLane'))
           .map(video => (
             <div key={video.titre} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
               <h3>{video.titre}</h3>
