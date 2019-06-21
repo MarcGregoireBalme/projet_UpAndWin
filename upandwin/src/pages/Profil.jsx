@@ -57,7 +57,7 @@ class Profil extends Component {
           {this.selectedFile}
         </div>
         <div>
-          <img alt="avatar" src={avatar} />
+          {user ? user.alias : 'guest'}
         </div>
         <BottomNav />
       </div>

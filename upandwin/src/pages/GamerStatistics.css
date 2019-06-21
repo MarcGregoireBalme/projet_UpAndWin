@@ -1,0 +1,15 @@
+.WinRoot {
+  margin: 24px;
+  flex-grow: 1;
+}
+
+.WinPaper {
+  padding: 24px;
+  text-align: center;
+  background-color: #494949;
+  color: white;
+}
+
+.Number {
+  font-size: 3em;
+}
