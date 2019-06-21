@@ -11,7 +11,7 @@ class Profil extends Component {
     super(props);
     this.state = {
       profils: [],
-      avatar: '',
+      fileSelected: '',
     };
 
     this.fileSelectedhandler = this.fileSelectedhandler.bind(this);
@@ -30,14 +30,14 @@ class Profil extends Component {
 
   fileSelectedhandler = (event) => {
     this.setState({
-      avatar: URL.createObjectURL(event.target.files[0]),
+      fileSelected: URL.createObjectURL(event.target.files[0]),
     });
   }
 
   render() {
     const { user } = this.props;
     const { profils } = this.state;
-    const { avatar } = this.state;
+    const { fileSelected } = this.state;
     return (
       <div className="profil">
         <Topnav />
@@ -48,16 +48,15 @@ class Profil extends Component {
           <input
             type="file"
             name="myFile"
-            accept="image/x-png"
             onChange={this.fileSelectedhandler}
           />
           <button type="button">Upload</button>
         </form>
         <div>
-          {this.selectedFile}
+          {user ? user.alias : 'guest'}
         </div>
         <div>
-          {user ? user.alias : 'guest'}
+          <img alt="avatar" src={fileSelected} />
         </div>
         <BottomNav />
       </div>

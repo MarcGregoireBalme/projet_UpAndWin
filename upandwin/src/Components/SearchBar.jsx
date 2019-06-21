@@ -29,7 +29,7 @@ class SearchBar extends Component {
 
   render() {
     const { videos, searchtext } = this.state;
-    console.log(videos.filter(video => (video.titre) !== searchtext));
+    console.log(videos.filter(video => (video.titre) === searchtext));
 
     return (
       <div>
@@ -46,7 +46,9 @@ class SearchBar extends Component {
           </h1>
           <div className="container-fluid">
             <div className="row videoDisplay">
-              { videos.filter(test => (test.titre === searchtext))
+              {videos.filter(
+                test => test.titre.toLowerCase().indexOf(searchtext.toLowerCase()) !== -1,
+              )
                 .map(video => (
                   <div key={video.titre} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
                     <h3>{video.titre}</h3>
@@ -61,7 +63,7 @@ class SearchBar extends Component {
                       allowFullScreen
                     />
                   </div>
-                )) }
+                ))}
             </div>
           </div>
         </div>
