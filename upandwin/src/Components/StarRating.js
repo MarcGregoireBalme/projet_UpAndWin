@@ -32,7 +32,7 @@ class StarRating extends React.Component {
       // eslint-disable-next-line react/destructuring-assignment
       .put(`http://localhost:3005/videosnotes/${vId}`, {
         note: rating,
-      }).then(res => console.log(res));
+      });
   };
 
   onClick = () => {
