@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable max-len */
 import React from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -14,7 +16,7 @@ const DisplayVideo = ({ videos }) => (
         <div key={video.titre} className="scrollHori">
           <h3>{video.titre}</h3>
           <div>
-            <StarRating moyenne={(video.notes.length !== 0) ? video.notes.reduce(reducer) / (video.notes.length - 1) : 3} />
+            <StarRating videoId={video._id} moyenne={(video.notes.length !== 0) ? video.notes.reduce(reducer) / (video.notes.length - 1) : 3} />
             <div className="nbVote">
               avis :
               {video.notes.length - 1}

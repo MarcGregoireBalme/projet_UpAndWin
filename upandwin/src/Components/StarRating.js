@@ -6,14 +6,14 @@ import axios from 'axios';
 class StarRating extends React.Component {
   constructor(props) {
     super(props);
-    const { moyenne } = this.props;
+    const { moyenne, videoId } = this.props;
     this.state = {
       rating: Math.round(moyenne),
+      vId: videoId,
     };
     this.onStarClick = this.onStarClick.bind(this);
     this.onStarHover = this.onStarHover.bind(this);
   }
-
 
   onStarClick(nextValue) {
     this.setState({ rating: nextValue });
@@ -27,11 +27,12 @@ class StarRating extends React.Component {
     const {
       rating,
     } = this.state;
-
+    const { vId } = this.state;
     axios
-      .post('/videos/video_id/:notes', {
-        rating,
-      });
+      // eslint-disable-next-line react/destructuring-assignment
+      .put(`http://localhost:3005/videosnotes/${vId}`, {
+        note: rating,
+      }).then(res => console.log(res));
   };
 
   onClick = () => {
@@ -50,9 +51,7 @@ class StarRating extends React.Component {
           starCount={5}
           value={rating}
           onStarHover={this.onStarHover}
-          onStarClick={
-            this.onClick
-          }
+          onStarClick={this.onClick}
         />
       </div>
     );

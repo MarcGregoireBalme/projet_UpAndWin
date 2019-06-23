@@ -178,7 +178,7 @@ myRouter.route('/videosid/:video_id')
       videos.notes = [];
       videos.jeu = req.body.jeu;
       videos.difficulte = req.body.difficulte;
-      videos.commentaires = [];
+      videos.commentaires = [req.body.commentaires];
       videos.objectifs = [req.body.objectifs];
       videos.save(function (errs) {
         if (errs) {
@@ -199,11 +199,20 @@ myRouter.route('/videosnotes/:video_id')
     });
   })
   .put(function (req, res) {
-    Video.findById(req.params.videonotes, function (err) {
+    Video.findById(req.params.video_id, function (err, video) {
       if (err) {
+        console.log(err);
         res.send(err);
       }
-      res.json = [req.body.notes];
+      console.log(video);
+      video.notes.push(req.body.note);
+      video.save(function (error) {
+        if (error) {
+          res.send(error);
+        } else {
+          res.json({ status: 'ok', finalNotes: video.notes });
+        }
+      });
     });
   });
 
