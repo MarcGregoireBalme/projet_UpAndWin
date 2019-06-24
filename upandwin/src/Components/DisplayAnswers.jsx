@@ -13,17 +13,18 @@ export default function Displayquestions({ ans }) {
   return (
     <div>
       {(ans.answers)
-        .map(answer => (
+        .map((answer, id) => (
           <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange}>
             <div>
               <FormControlLabel
                 style={{ color: 'white' }}
                 key={answer.id}
-                value={`${answer} question ${ans.id}`}
+                value={`${answer} question ${id}`}
                 control={<Radio color="secondary" />}
                 label={answer}
                 labelPlacement="start"
               />
+              {console.log(value)}
             </div>
           </RadioGroup>
         ))}
