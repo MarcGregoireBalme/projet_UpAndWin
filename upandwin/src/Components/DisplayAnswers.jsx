@@ -7,6 +7,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 export default function Displayquestions({ ans }) {
   const [value, setValue] = useState('');
 
+  console.log(ans);
+
+
   function handleChange(event) {
     setValue(event.target.value);
   }
@@ -19,7 +22,7 @@ export default function Displayquestions({ ans }) {
               <FormControlLabel
                 style={{ color: 'white' }}
                 key={answer.id}
-                value={`${answer} question ${id}`}
+                value={`${ans.question} : ${answer}`}
                 control={<Radio color="secondary" />}
                 label={answer}
                 labelPlacement="start"
