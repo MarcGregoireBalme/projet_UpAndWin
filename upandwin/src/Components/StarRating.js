@@ -8,7 +8,7 @@ class StarRating extends React.Component {
     super(props);
     const { moyenne, videoId } = this.props;
     this.state = {
-      rating: Math.round(moyenne),
+      rating: Math.round(moyenne * 100) / 100,
       vId: videoId,
     };
     this.onStarClick = this.onStarClick.bind(this);
@@ -29,7 +29,6 @@ class StarRating extends React.Component {
     } = this.state;
     const { vId } = this.state;
     axios
-      // eslint-disable-next-line react/destructuring-assignment
       .put(`http://localhost:3005/videosnotes/${vId}`, {
         note: rating,
       });

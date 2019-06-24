@@ -178,7 +178,7 @@ myRouter.route('/videosid/:video_id')
       videos.notes = [];
       videos.jeu = req.body.jeu;
       videos.difficulte = req.body.difficulte;
-      videos.commentaires = [req.body.commentaires];
+      videos.commentaires = [];
       videos.objectifs = [req.body.objectifs];
       videos.save(function (errs) {
         if (errs) {
@@ -201,10 +201,8 @@ myRouter.route('/videosnotes/:video_id')
   .put(function (req, res) {
     Video.findById(req.params.video_id, function (err, video) {
       if (err) {
-        console.log(err);
         res.send(err);
       }
-      console.log(video);
       video.notes.push(req.body.note);
       video.save(function (error) {
         if (error) {
@@ -280,6 +278,16 @@ myRouter.route('/users/:alias')
         res.send(err);
       }
       res.json(users);
+    });
+  });
+
+myRouter.route('/user/:userId')
+  .put(function (req, res) {
+    User.findByIdAndUpdate(req.params.userId, req.body, function (err, user) {
+      if (err) {
+        res.send(err);
+      }
+      res.json({ status: 'ok', updatedUser: user });
     });
   });
 
