@@ -8,8 +8,13 @@ export default function Displayquestions({ quizz }) {
     <div>
       {(quizz.qa)
         .map((ques, id) => (
-          <div key={ques.id}>
-            <FormLabel component="legend" color="inherit">{ques.question}</FormLabel>
+          <div key={ques}>
+            <FormLabel
+              component="legend"
+              style={{ color: 'white' }}
+            >
+              {ques.question}
+            </FormLabel>
             <DisplayAnswers ans={ques} />
           </div>
         ))}
