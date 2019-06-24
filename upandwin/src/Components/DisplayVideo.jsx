@@ -21,7 +21,7 @@ const DisplayVideo = ({ videos }) => (
               <div>
                 moyenne :
                 {(video.notes.length !== 0)
-                  ? video.notes.reduce(reducer) / (video.notes.length - 1)
+                  ? Math.round(video.notes.reduce(reducer) / (video.notes.length - 1) * 100) / 100
                   : '2.5'}
               </div>
             </div>

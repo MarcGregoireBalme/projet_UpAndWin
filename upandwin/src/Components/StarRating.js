@@ -8,7 +8,7 @@ class StarRating extends React.Component {
     super(props);
     const { moyenne, videoId } = this.props;
     this.state = {
-      rating: Math.round(moyenne * 100) / 100,
+      rating: Math.round(moyenne).toFixed(2),
       vId: videoId,
     };
     this.onStarClick = this.onStarClick.bind(this);
