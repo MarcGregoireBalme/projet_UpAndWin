@@ -1,0 +1,15 @@
+.WinRoot {
+    align-items: 'center';
+    width: 100;
+    display: flex;
+
+}
+
+.WinInput {
+    margin-left: 8;
+    flex: 1;
+}
+
+.searchbar {
+    padding-top: 5em;
+}
