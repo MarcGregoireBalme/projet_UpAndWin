@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FormControl from '@material-ui/core/FormControl'; import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Displayquestion from './DisplayQuestion';
 
 const useStyles = makeStyles(theme => ({
@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function DisplayQuizz() {
   const [quizzes, setquizzes] = useState('');
+  const [redirect, setredirect] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -32,13 +33,14 @@ export default function DisplayQuizz() {
     e.preventDefault();
     axios
       .put('http://localhost:3005/usersubmitquizz/5d0399938c849e032612f5f0', { quizzAnswer: localStorage });
-    console.log(localStorage, 'onclick');
+    setredirect(true);
   };
 
 
   return (
     <div>
       <div>
+        {redirect ? <Redirect to="/Fav" /> : redirect}
         <FormControl component="fieldset">
           {quizzes && quizzes.map(quizz => (
             <div key={quizz._id}>
@@ -48,11 +50,10 @@ export default function DisplayQuizz() {
           ))}
         </FormControl>
       </div>
-      <Link to="/Fav">
-        <Button style={{ paddingBottom: '10vh' }} variant="contained" className={classes.button} onClick={handleSubmit}>
+      <Button style={{ paddingBottom: '10vh' }} variant="contained" className={classes.button} onClick={handleSubmit}>
         Valider
-        </Button>
-      </Link>
+      </Button>
+
     </div>
   );
 }
