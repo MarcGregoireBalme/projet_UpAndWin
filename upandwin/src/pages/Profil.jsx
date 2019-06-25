@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
 import DisplayQuizz from '../Components/DisplayQuizz';
-import SimpleForm from '../Components/SimpleForm';
-
 
 class Profil extends Component {
   constructor(props) {
@@ -26,8 +24,7 @@ class Profil extends Component {
         <div>
           {user ? user.alias : 'Guest'}
         </div>
-        {/* <DisplayQuizz /> */}
-        <SimpleForm />
+        <DisplayQuizz />
         <BottomNav />
       </div>
     );

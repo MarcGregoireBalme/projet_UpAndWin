@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import FormLabel from '@material-ui/core/FormLabel';
 import DisplayAnswers from './DisplayAnswers';
 
-
 export default function Displayquestions({ quizz }) {
+  useEffect(() => {
+    localStorage.setItem('id', quizz._id);
+  }, []);
+
   return (
     <div>
       {(quizz.qa)

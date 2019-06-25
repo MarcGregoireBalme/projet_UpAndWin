@@ -246,6 +246,7 @@ const userSchema = mongoose.Schema({
   fav_videos: Array,
   badges: Array,
   quizz_id: Array,
+  quizzAnswers: Array,
   friends: Array,
   wins: Number,
 });
@@ -278,6 +279,7 @@ myRouter.route('/users')
     users.video_favs = [req.body.video_favs];
     users.badges = [req.body.badges];
     users.quizz_id = [req.body.quizz_id];
+    users.quizzAnswers = [];
     users.friends = [req.body.friends];
     users.wins = req.body.wins;
     users.save(function (err) {
@@ -297,6 +299,33 @@ myRouter.route('/users/:alias')
       res.json(users);
     });
   });
+
+myRouter.route('/usersubmitquizz/:user_id')
+  .put(function (req, res) {
+    User.findById(req.params.user_id, function (err, user) {
+      if (err) {
+        res.send(err);
+      }
+      user.quizzAnswers.push(req.body.quizzAnswers);
+      user.save(function (error) {
+        if (error) {
+          res.send(error);
+        } else {
+          res.json({ status: 'ok', MODIF: req.body });
+        }
+      });
+    });
+  });
+
+/* myRouter.route('/usersubmitquizz/:userId')
+  .put(function (req, res) {
+    User.findByIdAndUpdate(req.params.userId, User.quizzAnswers.push(req.body.quizzAnswers), function (err, user) {
+      if (err) {
+        res.send(err);
+      }
+      res.json({ status: 'ok', MODIF: req.body });
+    });
+  }); */
 
 app.use(myRouter);
 app.listen(port, hostname, function () {
