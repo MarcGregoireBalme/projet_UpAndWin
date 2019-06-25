@@ -32,7 +32,11 @@ export default function DisplayQuizz() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put('http://localhost:3005/usersubmitquizz/5d0399938c849e032612f5f0', { quizzAnswer: localStorage });
+      .put('http://localhost:3005/usersubmitquizz/5d0399938c849e032612f5f0', {
+        quizzAnswer: localStorage,
+        quizz_id: quizzes[0]._id,
+      });
+    console.log(quizzes[0]._id, 'qID');
     setredirect(true);
   };
 
