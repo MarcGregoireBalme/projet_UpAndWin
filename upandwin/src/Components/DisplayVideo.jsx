@@ -4,6 +4,9 @@ import React from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import StarRating from './StarRating';
+import ModalRating from './ModalRating';
+/* import { Button, Modal } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom'; */
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const DisplayVideo = ({ videos }) => (
@@ -23,6 +26,7 @@ const DisplayVideo = ({ videos }) => (
                 {(video.notes.length !== 0)
                   ? Math.round(video.notes.reduce(reducer) / (video.notes.length - 1) * 100) / 100
                   : '2.5'}
+                <ModalRating />
               </div>
             </div>
           </div>
