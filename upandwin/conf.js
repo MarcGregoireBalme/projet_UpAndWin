@@ -306,7 +306,7 @@ myRouter.route('/usersubmitquizz/:user_id')
       if (err) {
         res.send(err);
       }
-      user.quizzAnswers.push(req.body.quizzAnswers);
+      user.quizzAnswers.push(req.body.quizzAnswer);
       user.save(function (error) {
         if (error) {
           res.send(error);
