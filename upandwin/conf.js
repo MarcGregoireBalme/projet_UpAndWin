@@ -6,6 +6,12 @@
 const express = require('express');
 
 const app = express();
+const multer = require('multer');
+
+const upload = multer({ dest: 'tmp/' });
+const fs = require('fs');
+const path = require('path');
+
 const hostname = 'localhost';
 const port = 3005;
 const mongoose = require('mongoose');
@@ -34,6 +40,26 @@ db.once('open', function () {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+/* app.use(function (req, res, next) {
+  // Get auth header value
+  const bearerHeader = req.headers.authorization;
+  // Check if bearer is undefined
+  if (typeof bearerHeader !== 'undefined') {
+    // Split at the space
+    const bearer = bearerHeader.split(' ');
+    // Get token from array
+    const bearerToken = bearer[1];
+    // Set the token
+    // req.token = bearerToken;
+    req.user = jwt.verify(bearerToken, 'monsecret');
+    // Next middleware
+    console.log(req.user);
+    next();
+  } else {
+    // Forbidden
+    res.sendStatus(403);
+  }
+}); */
 
 // Schema collection quizzs
 const quizzesSchema = mongoose.Schema({
@@ -138,7 +164,7 @@ const videoSchema = mongoose.Schema({
   lien: String,
   duree: String,
   nbVue: Number,
-  notes: Array,
+  notes: [Number],
   jeu: String,
   difficulte: String,
   categorie: String,
@@ -166,10 +192,10 @@ myRouter.route('/videos')
     videos.lien = req.body.lien;
     videos.duree = req.body.duree;
     videos.nbVue = req.body.nbVue;
-    videos.notes = [req.body.notes];
+    videos.notes = [];
     videos.jeu = req.body.jeu;
     videos.difficulte = req.body.difficulte;
-    videos.commentaires = [req.body.commentaires];
+    videos.commentaires = [];
     videos.objectifs = [req.body.objectifs];
     videos.save(function (err) {
       if (err) {
@@ -191,13 +217,14 @@ myRouter.route('/videos/:jeu')
 
 myRouter.route('/videosid/:video_id')
   .get(function (req, res) {
-    Video.find({ _id: req.params.video_id }, function (err, videos) {
+    Video.find({ _id: req.params.videos_id }, function (err, videos) {
       if (err) {
         res.send(err);
       }
       res.json(videos);
     });
   })
+
   .delete(function (req, res) {
     Video.remove({ _id: req.params.video_id }, function (err) {
       if (err) {
@@ -217,10 +244,10 @@ myRouter.route('/videosid/:video_id')
       videos.lien = req.body.lien;
       videos.duree = req.body.duree;
       videos.nbVue = req.body.nbVue;
-      videos.notes = [req.body.notes];
+      videos.notes = [];
       videos.jeu = req.body.jeu;
       videos.difficulte = req.body.difficulte;
-      videos.commentaires = [req.body.commentaires];
+      videos.commentaires = [];
       videos.objectifs = [req.body.objectifs];
       videos.save(function (errs) {
         if (errs) {
@@ -228,6 +255,24 @@ myRouter.route('/videosid/:video_id')
         }
         res.json({ message: 'Bravo, mise à jour des données OK' });
       });
+    });
+  });
+
+myRouter.route('/videosnotes/:video_id')
+  .get(function (req, res) {
+    Video.find({ _id: req.params.video_id }, function (err, videos) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(videos[0].notes);
+    });
+  })
+  .put(function (req, res) {
+    Video.findById(req.params.videonotes, function (err) {
+      if (err) {
+        res.send(err);
+      }
+      res.json = [req.body.notes];
     });
   });
 
@@ -239,6 +284,7 @@ const userSchema = mongoose.Schema({
   alias: String,
   password: String,
   confpassword: String,
+  avatar: String,
   age: Number,
   registration_date: Date,
   games: Array,
@@ -271,6 +317,7 @@ myRouter.route('/users')
     users.alias = req.body.alias;
     users.password = req.body.password;
     users.confpassword = req.body.confpassword;
+    users.avatar = req.body.avatar;
     users.age = req.body.age;
     users.registration_date = req.body.registration_date;
     users.games = [req.body.games];
@@ -286,7 +333,16 @@ myRouter.route('/users')
       if (err) {
         res.send(err);
       }
-      res.json({ message: 'Bravo, la video est maintenant stockée en base de données' });
+      res.json({ message: "Bravo, l'utilisateur est maintenant stockée en base de données" });
+    });
+  })
+
+  .put(function (req, res) {
+    User.find(function (err, users) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(users);
     });
   });
 
@@ -327,6 +383,24 @@ myRouter.route('/usersubmitquizz/:user_id')
       res.json({ status: 'ok', MODIF: req.body });
     });
   }); */
+
+myRouter.route('/')
+  .get(function (req, res) {
+    res.sendFile(path.join(`${__dirname}/Profil.jsx`));
+  });
+
+myRouter.route('/sendFile')
+  .put(function (req, res) {
+    upload.single('myFile');
+    fs.rename(req.file.path, `public/images/${req.file.originalname}`,
+      function (err) {
+        if (err) {
+          res.send("Problème durant l'upload du fichier");
+        } else {
+          res.send('Fichier uploadé avec succès');
+        }
+      });
+  });
 
 app.use(myRouter);
 app.listen(port, hostname, function () {
