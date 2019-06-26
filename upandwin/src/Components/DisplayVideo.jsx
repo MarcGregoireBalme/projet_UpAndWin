@@ -5,8 +5,7 @@ import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import StarRating from './StarRating';
 import ModalRating from './ModalRating';
-/* import { Button, Modal } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom'; */
+
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const DisplayVideo = ({ videos }) => (
@@ -19,15 +18,16 @@ const DisplayVideo = ({ videos }) => (
           <div>
             <StarRating videoId={video._id} moyenne={video.notes.length !== 0 ? video.notes.reduce(reducer) / (video.notes.length - 1) : 3} />
             <div className="nbVote">
-              avis :
-              {video.notes.length - 1}
               <div>
                 moyenne :
                 {(video.notes.length !== 0)
                   ? Math.round(video.notes.reduce(reducer) / (video.notes.length - 1) * 100) / 100
                   : '2.5'}
-                <ModalRating />
               </div>
+              <button type="button">
+                avis :
+                {video.notes.length - 1}
+              </button>
             </div>
           </div>
           <iframe

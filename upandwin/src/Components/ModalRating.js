@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import StarRating from './StarRating';
 
 
 class ModalRating extends React.Component {
@@ -20,14 +21,15 @@ class ModalRating extends React.Component {
     const { show } = this.state;
     return (
       <div>
-        <Modal id="modalAlerte" show={show} onHide={this.handleClose}>
+        <Modal id="modalRating" show={show} onHide={this.handleClose}>
           <Modal.Header id="modalHeader" closeButton>
             <Modal.Title><p id="victory">Donnez votre avis</p></Modal.Title>
           </Modal.Header>
           <Modal.Body id="modalBody">
-            <div>
-              coucou les enfants
-            </div>
+            <StarRating />
+            <span>
+            Merci pour votre vote !
+            </span>
           </Modal.Body>
           <Modal.Footer id="modalFoot">
             <NavLink to="./">
