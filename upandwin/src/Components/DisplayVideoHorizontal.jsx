@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -10,8 +11,7 @@ const DisplayVideo = ({ videos }) => (
   <div className="container-fluid">
     <div className="videoDisplayHorizontal">
       {videos.map(video => (
-
-        <div key={video.titre} className="scrollHori">
+        <div key={video._id} className="scrollHori">
           <h3>{video.titre}</h3>
           <div>
             <StarRating moyenne={(video.notes.length !== 0) ? video.notes.reduce(reducer) / (video.notes.length - 1) : 3} />
@@ -39,9 +39,6 @@ const DisplayVideo = ({ videos }) => (
       ))}
     </div>
   </div>
-
-
 );
-
 
 export default DisplayVideo;
