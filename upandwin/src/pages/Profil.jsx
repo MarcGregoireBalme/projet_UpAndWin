@@ -13,22 +13,12 @@ class Profil extends Component {
     super(props);
     this.state = {
       profils: [],
-      fileSelected: '',
     };
-
-    this.fileSelectedhandler = this.fileSelectedhandler.bind(this);
-  }
-
-  fileSelectedhandler = (event) => {
-    this.setState({
-      fileSelected: URL.createObjectURL(event.target.files[0]),
-    });
   }
 
   render() {
     const { user } = this.props;
     const { profils } = this.state;
-    const { fileSelected } = this.state;
     return (
       <div className="profil">
         <Topnav />
@@ -39,17 +29,14 @@ class Profil extends Component {
           {user ? user.alias : 'Guest'}
         </div>
         <DisplayQuizz />
-        <div>
-          <img alt="avatar" src={fileSelected} />
-        </div>
         <BottomNav />
       </div>
     );
   }
 }
 
-const mstp = state => ({
-  ...state,
-});
+const mstp = function users(state) {
+  return { ...state };
+};
 
 export default connect(mstp)(Profil);
