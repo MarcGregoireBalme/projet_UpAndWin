@@ -3,6 +3,7 @@ import '../App.css';
 import './Profil.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
 
