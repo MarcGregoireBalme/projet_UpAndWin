@@ -39,6 +39,7 @@ export default class VideoForm extends React.Component {
     });
   };
 
+
   handleClose = () => {
     this.setState({ show: false });
   }

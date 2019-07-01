@@ -1,26 +1,3 @@
-/* import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import axios from 'axios';
-
-const Displayquiz = () => (
-
-  const [value, setValue] = React.useState('female');
-
-  function handleChange(event) {
-    setValue(event.target.value);
-  }
-return( <div className="container-fluid">
-    <div className="row quizDisplay">
-      <h2>Quiz n°1</h2>
-      <h3>Combien de fois as-tu joué ce champion ?</h3>
-
-    </div>
-  </div>
-);
-)
-
-export default Displayquiz; */
-
 import React, { useState, useEffect } from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -31,7 +8,7 @@ import axios from 'axios';
 
 
 export default function DisplayQuiz() {
-  const [value, setValue] = useState('female');
+  const [value, setValue] = useState('');
   const [quizs, setquizs] = useState('');
 
   useEffect(() => {
@@ -51,9 +28,11 @@ export default function DisplayQuiz() {
       <FormControl component="fieldset">
         {quizs && quizs.map((quiz, index) => (
           <div>
-            <h1>{quiz.titre}</h1>
-            <FormLabel component="legend" color="inherit" key={quiz._id}>{quiz.question1}</FormLabel>
+            <h1 key={quiz._id}>{quiz.titre}</h1>
+
+            <FormLabel component="legend" color="inherit">{quiz.question1}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
+
               {quiz.answer1.map(qa => (
                 <FormControlLabel
                   value={qa}
@@ -63,7 +42,8 @@ export default function DisplayQuiz() {
                 />
               ))}
             </RadioGroup>
-            <FormLabel component="legend" color="inherit" key={quiz._id}>{quiz.question2}</FormLabel>
+
+            <FormLabel component="legend" color="primary">{quiz.question2}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
 
               {quiz.answer2.map(qa => (
@@ -75,7 +55,8 @@ export default function DisplayQuiz() {
                 />
               ))}
             </RadioGroup>
-            <FormLabel component="legend" color="inherit" key={quiz._id}>{quiz.question3}</FormLabel>
+
+            <FormLabel component="legend" color="primary">{quiz.question3}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
 
               {quiz.answer3.map(qa => (
@@ -87,7 +68,8 @@ export default function DisplayQuiz() {
                 />
               ))}
             </RadioGroup>
-            <FormLabel component="legend" color="inherit" key={quiz._id}>{quiz.question4}</FormLabel>
+
+            <FormLabel component="legend" color="primary">{quiz.question4}</FormLabel>
             <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange} row>
 
               {quiz.answer4.map(qa => (
@@ -136,20 +118,3 @@ export default function DisplayQuiz() {
     </div>
   );
 }
-
-
-/*  <div className="container-fluid">
-    <div className="row quizDisplay">
-      {quizs.map(quiz => (
-        <div key={quiz.titre} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
-          <h3>{quiz.titre}</h3>
-          <iframe
-            title={quiz.title}
-            width="100%"
-            height="250px"
-            src={quiz.lien}
-          />
-        </div>
-      ))}
-    </div>
-  </div> */
