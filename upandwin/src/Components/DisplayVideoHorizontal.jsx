@@ -12,7 +12,7 @@ const DisplayVideo = ({ videos }) => (
     <div className="videoDisplayHorizontal">
       {videos.map(video => (
         <div key={video._id} className="scrollHori">
-          <h3 className="overflow-clip">{video.titre}</h3>
+          <h4 className="overflow-clip">{video.titre}</h4>
           <div>
             <StarRating videoId={video._id} moyenne={video.notes.length !== 0 ? video.notes.reduce(reducer) / (video.notes.length - 1) : 3} />
             <div className="nbVote">
