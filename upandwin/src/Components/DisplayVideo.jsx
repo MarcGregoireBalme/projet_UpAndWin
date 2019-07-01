@@ -4,7 +4,6 @@ import React from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import StarRating from './StarRating';
-import ModalRating from './ModalRating';
 
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -13,8 +12,8 @@ const DisplayVideo = ({ videos }) => (
   <div className="container-fluid">
     <div className="row videoDisplay">
       {videos.map(video => (
-        <div key={video.titre} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
-          <h3>{video.titre}</h3>
+        <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
+          <h3 className="overflow-clip">{video.titre}</h3>
           <div>
             <StarRating videoId={video._id} moyenne={video.notes.length !== 0 ? video.notes.reduce(reducer) / (video.notes.length - 1) : 3} />
             <div className="nbVote">

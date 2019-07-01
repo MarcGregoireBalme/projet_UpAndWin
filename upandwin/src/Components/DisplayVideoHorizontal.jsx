@@ -11,8 +11,8 @@ const DisplayVideo = ({ videos }) => (
   <div className="container-fluid">
     <div className="videoDisplayHorizontal">
       {videos.map(video => (
-        <div key={video.titre} className="scrollHori">
-          <h3>{video.titre}</h3>
+        <div key={video._id} className="scrollHori">
+          <h3 className="overflow-clip">{video.titre}</h3>
           <div>
             <StarRating videoId={video._id} moyenne={video.notes.length !== 0 ? video.notes.reduce(reducer) / (video.notes.length - 1) : 3} />
             <div className="nbVote">
@@ -39,9 +39,6 @@ const DisplayVideo = ({ videos }) => (
       ))}
     </div>
   </div>
-
-
 );
-
 
 export default DisplayVideo;
