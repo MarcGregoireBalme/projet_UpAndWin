@@ -364,6 +364,16 @@ myRouter.route('/users/:alias')
     });
   });
 
+myRouter.route('/usersquizztodo/:id')
+  .get(function (req, res) {
+    User.find({ _id: req.params.id }, function (err, users) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(users[0].quizz_idTodo);
+    });
+  });
+
 myRouter.route('/user/:userId')
   .put(function (req, res) {
     User.findByIdAndUpdate(req.params.userId, req.body, function (err, user) {
