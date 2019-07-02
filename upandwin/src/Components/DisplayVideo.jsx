@@ -2,102 +2,20 @@
 import React, { useState } from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import YouTube from 'react-youtube';
-import StarRating from './StarRating';
-
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
+import Video from './Video';
 
 
-const opts = {
-  height: 250,
-  width: '100%',
-  playerVars: {
-    autoplay: 0,
-  },
-};
-
-const DisplayVideo = ({ videos }) => {
-  const [a, setA] = useState('hello');
-
-  const onPlayerReady = (event) => {
-    event.target.pauseVideo();
-  };
-
-  const videoOnPlay = (event) => {
-    const player = event.target;
-    if (player.getDuration() - player.getCurrentTime() < 20) {
-      setA('quiz');
-    } else {
-      setA('Noquiz');
-    }
-
-    console.log(player.getCurrentTime(), a);
-    console.log(player.getDuration(), 'durée');
-  };
-
-  const videoOnEnd = (event) => {
-    const player = event.target;
-    setA('New Quiz');
-
-    console.log(player.getCurrentTime(), a);
-    console.log(player.getDuration(), 'durée');
-  };
-
-  const getVideoId = (url) => {
-    if (url.includes('embed')) {
-      return url.split('/')[4];
-    } if (url.includes('watch')) {
-      return url.split('=')[1];
-    }
-    return url;
-  };
-
-  return (
-    <div className="container-fluid">
-      <div className="row videoDisplay">
-        {videos/* .filter((x, id) => id < 4) */.map(video => (
-          <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
-            <h3>{video.titre}</h3>
-            <h1>{a}</h1>
-            <div>
-              <StarRating moyenne={video.notes[0]
-                ? video.notes.reduce(reducer) / (video.notes.length - 1)
-                : 3}
-              />
-              <div className="nbVote">
-                avis :
-                {video.notes.length - 1}
-                <div>
-                  moyenne :
-                  {video.notes[0]
-                    ? video.notes.reduce(reducer) / (video.notes.length - 1)
-                    : '2.5'}
-                </div>
-              </div>
-            </div>
-            <YouTube
-              videoId={getVideoId(video.lien)}
-              opts={opts}
-              onReady={onPlayerReady}
-              onPlay={videoOnPlay}
-              onEnd={videoOnEnd}
-            />
-
-            {/* <iframe
-            title={video.titre}
-            width="100%"
-            height="250px"
-            src={video.lien}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          /> */}
-          </div>
-        ))}
-      </div>
+const DisplayVideo = ({ videos }) => (
+  <div className="container-fluid">
+    <div className="row videoDisplay">
+      {videos/* .filter((x, id) => id < 4) */.map(video => (
+        <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
+          <Video video={video} />
+        </div>
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 
 export default DisplayVideo;
