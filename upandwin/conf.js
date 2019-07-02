@@ -35,7 +35,6 @@ db.once('open', function () {
   console.log('Connexion à la base OK');
 });
 
-
 // Body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -268,11 +267,18 @@ myRouter.route('/videosnotes/:video_id')
     });
   })
   .put(function (req, res) {
-    Video.findById(req.params.videonotes, function (err) {
+    Video.findById(req.params.video_id, function (err, video) {
       if (err) {
         res.send(err);
       }
-      res.json = [req.body.notes];
+      video.notes.push(req.body.note);
+      video.save(function (error) {
+        if (error) {
+          res.send(error);
+        } else {
+          res.json({ status: 'ok', finalNotes: video.notes });
+        }
+      });
     });
   });
 
@@ -353,6 +359,16 @@ myRouter.route('/users/:alias')
         res.send(err);
       }
       res.json(users);
+    });
+  });
+
+myRouter.route('/user/:userId')
+  .put(function (req, res) {
+    User.findByIdAndUpdate(req.params.userId, req.body, function (err, user) {
+      if (err) {
+        res.send(err);
+      }
+      res.json({ status: 'ok', updatedUser: user });
     });
   });
 
