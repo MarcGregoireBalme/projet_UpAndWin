@@ -17,16 +17,17 @@ class Profil extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { users } = this.props;
     const { profils } = this.state;
+    console.log(users);
     return (
       <div className="profil">
         <Topnav />
         <div>
-          <h1 style={{ paddingTop: '10vh' }}>{user ? user.alias : profils[0]}</h1>
+          <h1 style={{ paddingTop: '10vh' }}>{users ? users.user.alias : profils[0]}</h1>
         </div>
         <div>
-          {user ? user.alias : 'Guest'}
+          {users ? users.user.alias : 'Guest'}
         </div>
         <DisplayQuizz />
         <BottomNav />
@@ -35,7 +36,8 @@ class Profil extends Component {
   }
 }
 
-const mstp = function users(state) {
+const mstp = function users(...state) {
+  console.log('mstp', ...state);
   return { ...state };
 };
 
