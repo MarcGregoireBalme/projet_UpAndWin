@@ -297,7 +297,7 @@ const userSchema = mongoose.Schema({
   viewed_videos: [mongoose.Schema.Types.ObjectId],
   fav_videos: Array,
   badges: Array,
-  quizz_idToDo: [mongoose.Schema.Types.ObjectId],
+  quizz_idTodo: [mongoose.Schema.Types.ObjectId],
   quizz_id: [mongoose.Schema.Types.ObjectId],
   quizzAnswers: Array,
   friends: Array,
@@ -398,7 +398,7 @@ myRouter.route('/userreceivequizz/:user_id')
       if (err) {
         res.send(err);
       }
-      // user.quizz_idTodo.push(req.body.quizz_idTodo);
+      user.quizz_idTodo.push(req.body.quizz_id);
       user.viewed_videos.push(req.body.video_id);
       user.save(function (error) {
         if (error) {

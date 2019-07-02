@@ -26,13 +26,17 @@ const Video = ({ video }) => {
     event.target.pauseVideo();
   };
 
+  console.log(sessionStorage.getItem('user_id'), 'userID');
+
+
   const videoOnPlay = (event) => {
     const player = event.target;
     if (player.getDuration() - player.getCurrentTime() < 20) {
       const userId = sessionStorage.getItem('user_id');
       axios
         .put(`http://localhost:3005/userreceivequizz/${userId}`, {
-          viewed_videos: video._id,
+          video_id: video._id,
+          quizz_id: video.quizz_id,
         });
       setA('quiz');
     } else {
