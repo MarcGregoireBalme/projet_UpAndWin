@@ -18,10 +18,6 @@ const opts = {
 
 
 const DisplayVideo = ({ videos }) => {
-  /* const _onReady = (event) => {
-    event.target.pauseVideo();
-  }; */
-
   const [a, setA] = useState('hello');
 
   const onPlayerReady = (event) => {
@@ -56,7 +52,7 @@ const DisplayVideo = ({ videos }) => {
   const getVideoId = (url) => {
     if (url.includes('embed')) {
       return url.split('/')[4];
-    } if (url.includes('embed')) {
+    } if (url.includes('watch')) {
       return url.split('=')[1];
     }
     return url;
@@ -65,7 +61,7 @@ const DisplayVideo = ({ videos }) => {
   return (
     <div className="container-fluid">
       <div className="row videoDisplay">
-        {videos.filter((x, id) => id < 4).map(video => (
+        {videos/* .filter((x, id) => id < 4) */.map(video => (
           <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
             <h3>{video.titre}</h3>
             <h1>{a}</h1>
