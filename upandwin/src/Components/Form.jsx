@@ -26,18 +26,21 @@ class subForm extends Component {
     } = this.props;
     return (
       <div>
-        <Form onSubmit={handleSubmit}>
+        <div className="Logomodal" />
+        <Form onSubmit={handleSubmit} className="wholeform">
           <FormGroup>
-            <Label for="pseudo">Pseudo</Label>
+            <Label for="alias" className="fieldtitle">Pseudo</Label>
+            {' '}
             <Field
-              name="pseudo"
+              name="alias"
               component="input"
               type="text"
-              placeholder="Pseudo"
+              placeholder="alias"
             />
           </FormGroup>
           <FormGroup>
-            <Label for="email">Email</Label>
+            <Label for="email" className="fieldtitle">Email</Label>
+            {' '}
             <Field
               name="email"
               component="input"
@@ -46,8 +49,9 @@ class subForm extends Component {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="mainlane">Main Lane</Label>
-            <Field name="favoriteColor" component="select">
+            <Label for="mainlane" className="fieldtitle">Main Lane</Label>
+            {' '}
+            <Field name="mainlane" component="select">
               <option value="top">Top</option>
               <option value="mid">Mid</option>
               <option value="jungle">Jungle</option>
@@ -55,7 +59,9 @@ class subForm extends Component {
               <option value="support">Support</option>
             </Field>
           </FormGroup>
-          <Button type="submit" disabled={pristine || submitting}>Register</Button>
+          <FormGroup>
+            <Button type="submit" disabled={pristine || submitting}>Register</Button>
+          </FormGroup>
         </Form>
       </div>
     );

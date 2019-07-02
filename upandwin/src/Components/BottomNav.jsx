@@ -1,16 +1,20 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
+import { NavLink, Link } from 'react-router-dom';
+import {
+  Stars,
+  Home,
+  Search,
+} from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
-import Stars from '@material-ui/icons/Stars';
-import Home from '@material-ui/icons/Home';
-import SearchIcon from '@material-ui/icons/Search';
+import {
+  makeStyles,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Menu,
+  MenuItem,
+} from '@material-ui/core';
 import './BottomNav.css';
-
 
 const useStyles = makeStyles(({
   appBar: {
@@ -26,30 +30,63 @@ const useStyles = makeStyles(({
 
 function BottomNav() {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  function handleClick(event) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleClose() {
+    setAnchorEl(null);
+  }
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton color="inherit">
-            <NavLink to="/"><Home color="dark" /></NavLink>
-          </IconButton>
-          <div className={classes.grow} />
-          <IconButton color="inherit">
-            <NavLink to="/Fav"><Stars color="dark" /></NavLink>
-          </IconButton>
-          <div className={classes.grow} />
-          <IconButton color="inherit">
-            <NavLink to="/Search"><SearchIcon /></NavLink>
-          </IconButton>
-          <div className={classes.grow} />
-          <IconButton edge="start" color="inherit">
-            <NavLink to="/Profil"><MenuIcon /></NavLink>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-    </React.Fragment>
+    <div>
+
+      <div />
+
+      <React.Fragment>
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+
+            <IconButton color="inherit">
+              <NavLink to="/"><Home color="inherit" /></NavLink>
+            </IconButton>
+            <div className={classes.grow} />
+            <IconButton color="inherit">
+              <NavLink to="/Fav"><Stars color="inherit" /></NavLink>
+            </IconButton>
+            <div className={classes.grow} />
+            <IconButton color="inherit">
+              <NavLink to="/Search"><Search /></NavLink>
+            </IconButton>
+            <div className={classes.grow} />
+            <IconButton
+              aria-controls="burger-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+              edge="start"
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+
+            <Menu
+              id="burger-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
+              <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
+            </Menu>
+
+          </Toolbar>
+        </AppBar>
+      </React.Fragment>
+
+    </div>
   );
 }
 

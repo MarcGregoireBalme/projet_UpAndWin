@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './Topnav.css';
+import './FilterNav.css';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 
-class Topnav extends Component {
+class FilterNav extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,9 +23,9 @@ class Topnav extends Component {
     const { prevScrollpos } = this.state;
     const currentScrollPos = window.pageYOffset;
     if (prevScrollpos > currentScrollPos) {
-      document.getElementById('Top-nav').style.top = '0';
+      document.getElementById('FilterNav').style.top = '84px';
     } else {
-      document.getElementById('Top-nav').style.top = '-84px';
+      document.getElementById('FilterNav').style.top = '0px';
     }
     this.setState({
       prevScrollpos: currentScrollPos,
@@ -44,15 +44,14 @@ class Topnav extends Component {
       return <Redirect to={game} />;
     }
     return (
-      <div id="Top-nav">
+      <div id="FilterNav">
 
-        <div className="Top-nav-left">
+        <div className="FilterNav-left">
           <NavLink to="/">
             <div className="Logo" />
           </NavLink>
           <div className="Game-selection">
             <select
-              id="pet-select"
               onChange={e => this.handleGameChange(e.target.value)}
             >
               <option value="">Jeux</option>
@@ -61,18 +60,20 @@ class Topnav extends Component {
             </select>
           </div>
         </div>
-        <div className="Top-nav-right">
-          <Link to="/Connexion">
-            <div className="connexionbutton">
-              <button type="button" className="Button">
-                Connexion
-              </button>
+        <div className="FilterNav-right">
+          <Link to="/GamerStatistics">
+            <div className="XP">
+              <span className="Bold">
+                2 456
+              </span>
+              &nbsp;xp
             </div>
           </Link>
         </div>
+
       </div>
     );
   }
 }
 
-export default Topnav;
+export default FilterNav;

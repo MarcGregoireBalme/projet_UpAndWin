@@ -5,6 +5,7 @@
   color: white;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+  min-height: 100vh;
 }
 
 .Semi-bold-Italic {
@@ -35,4 +36,10 @@
   cursor: pointer;
   background-image: linear-gradient(45deg, #eb1a0f, #eb1a0f);
   transition: 0.5s;
+}
+
+.Page {
+  padding-top: 108px;
+  padding-bottom: 108px;
+  min-height: 100vh;
 }
