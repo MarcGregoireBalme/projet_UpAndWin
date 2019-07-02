@@ -36,7 +36,6 @@ export default function DisplayQuizz() {
         quizzAnswer: localStorage,
         quizz_id: quizzes[0]._id,
       });
-    console.log(quizzes[0]._id, 'qID');
     setredirect(true);
   };
 
