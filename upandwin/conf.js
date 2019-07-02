@@ -35,7 +35,6 @@ db.once('open', function () {
   console.log('Connexion à la base OK');
 });
 
-
 // Body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
