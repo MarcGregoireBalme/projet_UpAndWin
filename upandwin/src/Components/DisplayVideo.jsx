@@ -12,10 +12,9 @@ const opts = {
   height: 250,
   width: '100%',
   playerVars: {
-    autoplay: 1,
+    autoplay: 0,
   },
 };
-
 
 const DisplayVideo = ({ videos }) => {
   const [a, setA] = useState('hello');
@@ -23,11 +22,6 @@ const DisplayVideo = ({ videos }) => {
   const onPlayerReady = (event) => {
     event.target.pauseVideo();
   };
-
-  /* const videoStateChange = (event) => {
-    const player = event.target;
-    console.log(player.getCurrentTime(), 'state');
-  }; */
 
   const videoOnPlay = (event) => {
     const player = event.target;
