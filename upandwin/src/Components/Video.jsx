@@ -19,6 +19,7 @@ const opts = {
 
 const Video = ({ video }) => {
   const [a, setA] = useState('hello');
+  const [inDB, setInDB] = useState(null);
   const [quizzExists, setQuizzExists] = useState([]);
 
 
@@ -47,8 +48,9 @@ const Video = ({ video }) => {
     const userId = sessionStorage.getItem('user_id');
     if (
       player.getDuration() - player.getCurrentTime() < 20
-      && !quizzExists.includes(video.quizz_id)
+      && !quizzExists.includes(video.quizz_id) && !inDB
     ) {
+      setInDB(1);
       axios.put(`http://localhost:3005/userreceivequizz/${userId}`, {
         video_id: video._id,
         quizz_id: video.quizz_id,
@@ -58,6 +60,7 @@ const Video = ({ video }) => {
       setA('Noquiz');
     }
     console.log(video._id, 'vid');
+    console.log(video._id, 'quiz');
     console.log(player.getCurrentTime(), a);
     console.log(player.getDuration(), 'durée');
   };
@@ -66,7 +69,7 @@ const Video = ({ video }) => {
     const player = event.target;
     const userId = sessionStorage.getItem('user_id');
     if (
-      quizzExists.includes(video.quizz_id) !== true
+      !quizzExists.includes(video.quizz_id) && !inDB
     ) {
       axios.put(`http://localhost:3005/userreceivequizz/${userId}`, {
         video_id: video._id,
