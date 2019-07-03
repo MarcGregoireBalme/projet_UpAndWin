@@ -22,7 +22,7 @@ const opts = {
 const Video = ({ video }) => {
   const [a, setA] = useState('hello');
   const [inDB, setInDB] = useState(null);
-  const [quizzExists, setQuizzExists] = useState([]);
+  const [quizzExists, setQuizzExists] = useState(['unEmpty']);
   const [quizzButton, setQuizzButton] = useState('none');
 
 
@@ -47,23 +47,21 @@ const Video = ({ video }) => {
   console.log(quizzButton, 'qb');
 
   const showQuizzButton = () => {
-    if (quizzExists.includes(video.quizz_id)) {
+    if (quizzExists && quizzExists.includes(video.quizz_id)) {
       setQuizzButton('inline');
     }
   };
 
-
   useEffect(() => {
     showQuizzButton();
   });
-
 
   const videoOnPlay = (event) => {
     const player = event.target;
     const userId = sessionStorage.getItem('user_id');
     if (
       player.getDuration() - player.getCurrentTime() < 20
-      && !quizzExists.includes(video.quizz_id) && !inDB
+      && (!quizzExists.includes(video.quizz_id) || quizzExists.length === 0) && !inDB
     ) {
       setInDB(1);
       setQuizzButton('inline');
@@ -101,14 +99,14 @@ const Video = ({ video }) => {
     sessionStorage.setItem('quizz_id', video.quizz_id);
   };
 
-  const getVideoId = (url) => {
-    if (url.includes('embed')) {
-      return url.split('/')[4];
+  const getVideoId = (lien) => {
+    if (lien.includes('embed')) {
+      return lien.split('/')[4];
     }
-    if (url.includes('watch')) {
-      return url.split('=')[1];
+    if (lien.includes('watch')) {
+      return lien.split('=')[1];
     }
-    return url;
+    return lien;
   };
 
   return (
@@ -150,7 +148,7 @@ const Video = ({ video }) => {
         videoId={getVideoId(video.lien)}
         opts={opts}
         onReady={onPlayerReady}
-        onPlay={videoOnPlay}
+        onPause={videoOnPlay}
         onEnd={videoOnEnd}
       />
     </div>
