@@ -4,7 +4,7 @@ import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import YouTube from 'react-youtube';
 import axios from 'axios';
-import { Link, NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import StarRating from './StarRating';
 
 
@@ -66,6 +66,7 @@ const Video = ({ video }) => {
       && !quizzExists.includes(video.quizz_id) && !inDB
     ) {
       setInDB(1);
+      setQuizzButton('inline');
       axios.put(`http://localhost:3005/userreceivequizz/${userId}`, {
         video_id: video._id,
         quizz_id: video.quizz_id,
@@ -90,6 +91,7 @@ const Video = ({ video }) => {
         video_id: video._id,
         quizz_id: video.quizz_id,
       });
+      showQuizzButton();
     } else {
       console.log('Quizz déjà en BDD');
     }
@@ -128,17 +130,17 @@ const Video = ({ video }) => {
               {video.notes.length !== 0
                 ? Math.round(
                   (video.notes.reduce(reducer) / (video.notes.length - 1))
-                      * 100,
+                  * 100,
                 ) / 100
                 : '2.5'}
             </div>
             <button type="button">
-avis :
+              avis :
               {video.notes.length - 1}
             </button>
             <button type="button" onClick={handleClick} style={{ display: quizzButton }}>
               <NavLink to={`/quizz/${video.quizz_id}`}>
-              Quizz
+                Quizz
               </NavLink>
             </button>
           </div>
