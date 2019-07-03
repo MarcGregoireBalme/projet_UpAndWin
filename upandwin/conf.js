@@ -3,6 +3,8 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable func-names */
+
+
 const express = require('express');
 
 const app = express();
@@ -17,6 +19,9 @@ const port = 3005;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
+require('dotenv').config();
+
 
 app.use(cors());
 
@@ -62,14 +67,6 @@ app.use(bodyParser.json());
 }); */
 
 // Schema collection quizzs
-const quizzSchema = mongoose.Schema({
-  titre: String,
-  question: Array,
-  score: Number,
-  video_id: mongoose.Schema.Types.ObjectId,
-
-});
-const Quizz = mongoose.model('Quizz', quizzSchema);
 // Route /
 myRouter.route('/')
   .all(function (req, res) {
@@ -79,27 +76,14 @@ myRouter.route('/')
 // Route collection Quizzs
 myRouter.route('/quizzs')
   .get(function (req, res) {
-    Quizz.find(function (err, quizzs) {
+    quizzes.find(function (err, quizzes) {
       if (err) {
         res.send(err);
       }
-      res.json(quizzs);
-    });
-  })
-
-  .post(function (req, res) {
-    const quizzs = new Quizz();
-    quizzs.titre = req.body.titre;
-    quizzs.question = [req.body.question];
-    quizzs.score = req.body.score;
-    quizzs.video_id = req.body.video_id;
-    quizzs.save(function (err) {
-      if (err) {
-        res.send(err);
-      }
-      res.json({ message: 'le quizz est maintenant stockée en base de données' });
+      res.json(quizzes);
     });
   });
+
 
 // route quizzs avec fonction delete
 myRouter.route('/quizzs/:quizz_id')
@@ -130,7 +114,6 @@ const videoSchema = mongoose.Schema({
 });
 
 const Video = mongoose.model('Video', videoSchema);
-
 myRouter.route('/videos')
   .get(function (req, res) {
     Video.find(function (err, videos) {
@@ -154,11 +137,11 @@ myRouter.route('/videos')
     videos.difficulte = req.body.difficulte;
     videos.commentaires = [];
     videos.objectifs = [req.body.objectifs];
-    videos.save(function (err) {
+    videos.save(function (err, doc) {
       if (err) {
         res.send(err);
       }
-      res.json({ message: 'Bravo, la video est maintenant stockée en base de données' });
+      res.json(doc.id);
     });
   });
 
@@ -232,7 +215,6 @@ myRouter.route('/videosnotes/:video_id')
       res.json = [req.body.notes];
     });
   });
-
 // schema collection users
 const userSchema = mongoose.Schema({
   email: String,
@@ -328,6 +310,31 @@ myRouter.route('/sendFile')
         }
       });
   });
+
+const quizzesSchema = mongoose.Schema({
+  titre: String,
+  qa: Array,
+  score: Number,
+  video_id: mongoose.Schema.Types.ObjectId,
+});
+const Quizze = mongoose.model('Quizze', quizzesSchema);
+
+myRouter.route('/save-quiz')
+  .post(function (req, res) {
+    // const Quiz = mongoose.model('Quiz', Quizzes);
+    // const { quizzes: quizData } = req.body;
+    // submit quiz to database
+    const quizzes = new Quizze();
+    quizzes.questions = req.body.questions;
+    quizzes.video_id = req.body.video_id;
+
+    quizzes.save((err) => {
+      if (err) throw err;
+
+      res.status(201).send('submission success!');
+    });
+  });
+
 
 app.use(myRouter);
 app.listen(port, hostname, function () {

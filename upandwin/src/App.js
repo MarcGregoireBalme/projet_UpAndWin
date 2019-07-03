@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Store from './Redux/Store';
 import subForm from './Components/Form';
+import Create from './containers/Create';
 import Lol from './pages/Lol';
 import Wow from './pages/Wow';
 import Search from './pages/Search';
@@ -16,11 +17,11 @@ import ModalSuccess from './Components/ModalSuccess';
 import ConnexionForm from './Components/ConnexionForm';
 import RegisterForm from './Components/RegisterForm';
 
-
 function App() {
   return (
     <div className="App">
       <Switch>
+
         <Provider store={Store}>
           <Route exact path="/" component={Home} />
           <Route path="/form/" component={subForm} />
@@ -33,8 +34,10 @@ function App() {
           <Route path="/GamerStatistics" component={GamerStatistics} />
           <Route path="/Fav" component={Fav} />
           <Route path="/Admin" component={Admin} />
+          <Route path="/Create" name="Create" component={Create} />
           <ModalSuccess />
         </Provider>
+
       </Switch>
     </div>
   );
