@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './LoLFilter.css';
 
-class LoLFilter extends Component {
+class LoLFilterComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       prevScrollpos: window.pageYOffset,
+      ChoisirLane: false,
       TopLane: false,
       MidLane: false,
       BotLane: false,
@@ -36,17 +38,24 @@ class LoLFilter extends Component {
   }
 
   handleCheck = (event) => {
+    const { dispatch } = this.props;
     const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const { name } = target;
     this.setState({
       [name]: value,
+    },
+    () => {
+      dispatch({
+        type: 'HANDLE_CHECK',
+        lolFilter: this.state,
+      });
     });
   }
 
   render() {
     const { videos } = this.props;
-    const filters = ['BotLane', 'Jungle', 'MidLane', 'Support', 'TopLane'];
+    const filters = ['ChoisirLane', 'BotLane', 'Jungle', 'MidLane', 'Support', 'TopLane'];
     return (
       <div id="Filter-nav">
         <div className="Top-nav-left">
@@ -80,5 +89,11 @@ class LoLFilter extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  lolFilter: state.lolFilter,
+});
+
+const LoLFilter = connect(mapStateToProps)(LoLFilterComponent);
 
 export default LoLFilter;

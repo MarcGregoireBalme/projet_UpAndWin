@@ -1,45 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import RatingStar from './StarRating';
 
-class LolVideos extends Component {
+class LolVideosComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   filteredVideos = (videos) => {
-    const lolFilters = this.props;
-    // for (let i = 0; i < Object.keys(filters).length; i += 1) {
-    //   if (filters[Object.keys(filters)[i]] === true) {
-    //      v.filter(video => video.lane.includes(String(Object.keys(filters)[i])));
-    //   }
-    //   // return v;
-    // }
-
+    const { lolFilter } = this.props;
     let filtered = [];
-    Object.entries(lolFilters).forEach(([key, value]) => {
-      console.log('loop', key, value);
+    Object.entries(lolFilter).forEach(([key, value]) => {
       if (value === true) {
         filtered = [...filtered, ...videos.filter(video => video.lane.includes(key))];
       }
     });
+    if (filtered.length === 0) {
+      return [...videos.filter(video => video)];
+    }
     return filtered;
-
-    // let output = [];
-    // Object.entries(filters).forEach((key, value) => {
-    //   if (value) {
-    //     output = [...output, v.filter(video => video.lane.includes(key))];
-    //   }
-    // });
-
-    // return output;
   };
 
   render() {
     const { videos } = this.props;
-    console.log(videos, this.filteredVideos(videos));
+    console.log(this.filteredVideos(videos));
     return (
       <div className="container-fluid">
         <div className="row videoDisplay">
@@ -70,5 +57,12 @@ class LolVideos extends Component {
     );
   }
 }
+
+
+const mapStateToProps = state => ({
+  lolFilter: state.lolFilter,
+});
+
+const LolVideos = connect(mapStateToProps)(LolVideosComponent);
 
 export default LolVideos;
