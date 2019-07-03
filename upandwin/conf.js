@@ -312,7 +312,7 @@ myRouter.route('/sendFile')
   });
 
 const quizzesSchema = mongoose.Schema({
-  titre: String,
+  title: String,
   qa: Array,
   score: Number,
   video_id: mongoose.Schema.Types.ObjectId,
@@ -325,7 +325,9 @@ myRouter.route('/save-quiz')
     // const { quizzes: quizData } = req.body;
     // submit quiz to database
     const quizzes = new Quizze();
-    quizzes.questions = req.body.questions;
+    quizzes.title = req.body.title;
+    quizzes.score = req.body.score;
+    quizzes.qa = req.body.qa;
     quizzes.video_id = req.body.video_id;
 
     quizzes.save((err) => {
