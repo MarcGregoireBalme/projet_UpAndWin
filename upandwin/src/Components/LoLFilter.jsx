@@ -6,11 +6,11 @@ class LoLFilter extends Component {
     super(props);
     this.state = {
       prevScrollpos: window.pageYOffset,
-      TopLaneCheckbox: false,
-      MidLaneCheckbox: false,
-      BotLaneCheckbox: false,
-      JungleCheckbox: false,
-      SupportCheckbox: false,
+      TopLane: false,
+      MidLane: false,
+      BotLane: false,
+      Jungle: false,
+      Support: false,
     };
   }
 
@@ -45,12 +45,8 @@ class LoLFilter extends Component {
   }
 
   render() {
-    const {
-      TopLaneCheckbox, MidLaneCheckbox, BotLaneCheckbox, JungleCheckbox, SupportCheckbox,
-    } = this.state;
     const { videos } = this.props;
-    const filters = ['TopLane', 'MidLane', 'BotLane', 'Jungle', 'Support'];
-    console.log(this.state);
+    const filters = ['BotLane', 'Jungle', 'MidLane', 'Support', 'TopLane'];
     return (
       <div id="Filter-nav">
         <div className="Top-nav-left">
@@ -60,15 +56,15 @@ class LoLFilter extends Component {
 
           {filters
             .map(filter => (
-              <div>
+              <div key={filter}>
                 {filter}
                 &nbsp;(
                 {(videos.filter(video => video.lane.includes(filter)).length)}
                 ) &nbsp;
                 <input
-                  name={`${filter}Checkbox`}
+                  name={filter}
                   type="checkbox"
-                  checked={window[`${filter}Checkbox`]}
+                  checked={window[filter]}
                   onChange={this.handleCheck}
                 />
                 <br />

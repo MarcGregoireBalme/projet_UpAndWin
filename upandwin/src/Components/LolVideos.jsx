@@ -3,20 +3,49 @@ import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import RatingStar from './StarRating';
 
-class DisplayVideo extends Component {
+class LolVideos extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
+  filteredVideos = (videos) => {
+    const lolFilters = this.props;
+    // for (let i = 0; i < Object.keys(filters).length; i += 1) {
+    //   if (filters[Object.keys(filters)[i]] === true) {
+    //      v.filter(video => video.lane.includes(String(Object.keys(filters)[i])));
+    //   }
+    //   // return v;
+    // }
+
+    let filtered = [];
+    Object.entries(lolFilters).forEach(([key, value]) => {
+      console.log('loop', key, value);
+      if (value === true) {
+        filtered = [...filtered, ...videos.filter(video => video.lane.includes(key))];
+      }
+    });
+    return filtered;
+
+    // let output = [];
+    // Object.entries(filters).forEach((key, value) => {
+    //   if (value) {
+    //     output = [...output, v.filter(video => video.lane.includes(key))];
+    //   }
+    // });
+
+    // return output;
+  };
+
   render() {
     const { videos } = this.props;
+    console.log(videos, this.filteredVideos(videos));
     return (
       <div className="container-fluid">
         <div className="row videoDisplay">
-          {videos
+          {this.filteredVideos(videos)
             .map(video => (
-              <div key={video.titre} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
+              <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
                 <h3>{video.titre}</h3>
                 <div>
                   <RatingStar />
@@ -42,4 +71,4 @@ class DisplayVideo extends Component {
   }
 }
 
-export default DisplayVideo;
+export default LolVideos;
