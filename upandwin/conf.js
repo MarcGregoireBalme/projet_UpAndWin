@@ -294,10 +294,11 @@ const userSchema = mongoose.Schema({
   age: Number,
   registration_date: Date,
   games: Array,
-  viewed_videos: Array,
+  viewed_videos: [mongoose.Schema.Types.ObjectId],
   fav_videos: Array,
   badges: Array,
-  quizz_id: Array,
+  quizz_idTodo: [mongoose.Schema.Types.ObjectId],
+  quizz_id: [mongoose.Schema.Types.ObjectId],
   quizzAnswers: Array,
   friends: Array,
   wins: Number,
@@ -331,6 +332,7 @@ myRouter.route('/users')
     users.viewed_videos = [req.body.viewed_videos];
     users.video_favs = [req.body.video_favs];
     users.badges = [req.body.badges];
+    users.quizz_idTodo = [req.body.quizz_idTodo];
     users.quizz_id = [req.body.quizz_id];
     users.quizzAnswers = [];
     users.friends = [req.body.friends];
@@ -362,6 +364,16 @@ myRouter.route('/users/:alias')
     });
   });
 
+myRouter.route('/usersquizztodo/:id')
+  .get(function (req, res) {
+    User.find({ _id: req.params.id }, function (err, users) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(users[0].quizz_idTodo);
+    });
+  });
+
 myRouter.route('/user/:userId')
   .put(function (req, res) {
     User.findByIdAndUpdate(req.params.userId, req.body, function (err, user) {
@@ -380,6 +392,24 @@ myRouter.route('/usersubmitquizz/:user_id')
       }
       user.quizzAnswers.push(req.body.quizzAnswer);
       user.quizz_id.push(req.body.quizz_id);
+      user.save(function (error) {
+        if (error) {
+          res.send(error);
+        } else {
+          res.json({ status: 'ok', MODIF: req.body });
+        }
+      });
+    });
+  });
+
+myRouter.route('/userreceivequizz/:user_id')
+  .put(function (req, res) {
+    User.findById(req.params.user_id, function (err, user) {
+      if (err) {
+        res.send(err);
+      }
+      user.quizz_idTodo.push(req.body.quizz_id);
+      user.viewed_videos.push(req.body.video_id);
       user.save(function (error) {
         if (error) {
           res.send(error);
