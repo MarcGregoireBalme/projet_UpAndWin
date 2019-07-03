@@ -4,7 +4,9 @@ import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import YouTube from 'react-youtube';
 import axios from 'axios';
+import { Link, NavLink, Redirect } from 'react-router-dom';
 import StarRating from './StarRating';
+
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
@@ -21,6 +23,7 @@ const Video = ({ video }) => {
   const [a, setA] = useState('hello');
   const [inDB, setInDB] = useState(null);
   const [quizzExists, setQuizzExists] = useState([]);
+  const [quizzButton, setQuizzButton] = useState('none');
 
 
   const onPlayerReady = (event) => {
@@ -41,6 +44,18 @@ const Video = ({ video }) => {
   }, []);
 
   console.log(quizzExists);
+  console.log(quizzButton, 'qb');
+
+  const showQuizzButton = () => {
+    if (quizzExists.includes(video.quizz_id)) {
+      setQuizzButton('inline');
+    }
+  };
+
+
+  useEffect(() => {
+    showQuizzButton();
+  });
 
 
   const videoOnPlay = (event) => {
@@ -80,6 +95,10 @@ const Video = ({ video }) => {
     }
   };
 
+  const handleClick = () => {
+    sessionStorage.setItem('quizz_id', video.quizz_id);
+  };
+
   const getVideoId = (url) => {
     if (url.includes('embed')) {
       return url.split('/')[4];
@@ -94,7 +113,7 @@ const Video = ({ video }) => {
     <div>
       <div className="marginVideo">
         <h4 className="overflow-clip">{video.titre}</h4>
-        <h1>{a}</h1>
+        <h5>{a}</h5>
         <div>
           <StarRating
             moyenne={
@@ -116,6 +135,11 @@ const Video = ({ video }) => {
             <button type="button">
 avis :
               {video.notes.length - 1}
+            </button>
+            <button type="button" onClick={handleClick} style={{ display: quizzButton }}>
+              <NavLink to={`/quizz/${video.quizz_id}`}>
+              Quizz
+              </NavLink>
             </button>
           </div>
         </div>

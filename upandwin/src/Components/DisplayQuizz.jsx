@@ -20,9 +20,10 @@ export default function DisplayQuizz() {
   const classes = useStyles();
 
   useEffect(() => {
+    const quizzId = sessionStorage.getItem('quizz_id');
     const fetchData = async () => {
       const res = await axios.get(
-        'http://localhost:3005/quizzes/5d08ef30e3dfb9241fb360f7',
+        `http://localhost:3005/quizzes/${quizzId}`,
       );
       setquizzes(res.data);
     };
