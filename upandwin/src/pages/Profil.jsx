@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
+import DisplayQuizz from '../Components/DisplayQuizz';
 
 class Profil extends Component {
   constructor(props) {
@@ -15,17 +16,6 @@ class Profil extends Component {
     };
 
     this.fileSelectedhandler = this.fileSelectedhandler.bind(this);
-  }
-
-  componentDidMount() {
-    if (!localStorage.getItem('user')) {
-      const { user } = this.props;
-      const userString = JSON.stringify(user.alias);
-      localStorage.setItem('user', userString);
-    }
-    const { profils } = this.state;
-    profils.push(JSON.parse(localStorage.getItem('user')));
-    this.setState({ profils });
   }
 
   fileSelectedhandler = (event) => {
@@ -44,17 +34,10 @@ class Profil extends Component {
         <div>
           <h1 style={{ paddingTop: '10vh' }}>{user ? user.alias : profils[0]}</h1>
         </div>
-        <form method="POST" encType="multipart/form-data" action="sendFile">
-          <input
-            type="file"
-            name="myFile"
-            onChange={this.fileSelectedhandler}
-          />
-          <button type="button">Upload</button>
-        </form>
         <div>
-          {user ? user.alias : 'guest'}
+          {user ? user.alias : 'Guest'}
         </div>
+        <DisplayQuizz />
         <div>
           <img alt="avatar" src={fileSelected} />
         </div>

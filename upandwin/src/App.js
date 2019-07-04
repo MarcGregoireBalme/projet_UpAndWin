@@ -13,7 +13,6 @@ import Profil from './pages/Profil';
 import GamerStatistics from './pages/GamerStatistics';
 import Fav from './pages/Fav';
 import Admin from './pages/Admin';
-import ModalSuccess from './Components/ModalSuccess';
 import ConnexionForm from './Components/ConnexionForm';
 import RegisterForm from './Components/RegisterForm';
 
@@ -35,7 +34,6 @@ function App() {
           <Route path="/Fav" component={Fav} />
           <Route path="/Admin" component={Admin} />
           <Route path="/Create" name="Create" component={Create} />
-          <ModalSuccess />
         </Provider>
 
       </Switch>

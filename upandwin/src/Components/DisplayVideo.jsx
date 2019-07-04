@@ -1,44 +1,20 @@
-import React from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { useState } from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import StarRating from './StarRating';
+import Video from './Video';
 
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
 const DisplayVideo = ({ videos }) => (
-
   <div className="container-fluid">
     <div className="row videoDisplay">
-      {videos.map(video => (
-        <div key={video.titre} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
-          <h3>{video.titre}</h3>
-          <div>
-            <StarRating moyenne={video.notes[0] ? video.notes.reduce(reducer) / (video.notes.length - 1) : 3} />
-            <div className="nbVote">
-              avis :
-              {video.notes.length - 1}
-              <div>
-                moyenne :
-                {video.notes[0]
-                  ? video.notes.reduce(reducer) / (video.notes.length - 1)
-                  : '2.5'}
-              </div>
-            </div>
-          </div>
-          <iframe
-            title={video.titre}
-            width="100%"
-            height="250px"
-            src={video.lien}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+      {videos/* .filter((x, id) => id < 4) */.map(video => (
+        <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
+          <Video video={video} />
         </div>
       ))}
     </div>
   </div>
-
-
 );
 
 

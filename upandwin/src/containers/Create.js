@@ -1,6 +1,6 @@
-/* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -257,7 +257,7 @@ class Create extends Component {
         <input
           type="text"
           // eslint-disable-next-line no-sequences
-          name={'answer_', { ans }}
+          name={`answer_${ans}`}
           placeholder="Enter an Answer and Press Tab to Add Another"
           value={answers[idx]}
           onChange={this.handleOption.bind(this, idx)}
