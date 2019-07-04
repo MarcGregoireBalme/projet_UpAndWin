@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
-import DisplayQuizz from '../Components/DisplayQuizz';
 
 class Profil extends Component {
   constructor(props) {
@@ -35,9 +34,6 @@ class Profil extends Component {
         </div>
         <div>
           {users ? users.user.alias : 'Guest'}
-        </div>
-        <div>
-          <img alt="avatar" src={fileSelected} />
         </div>
         <BottomNav />
       </div>
