@@ -40,6 +40,10 @@ function BottomNav() {
     setAnchorEl(null);
   }
 
+  function clearSessionStorage() {
+    sessionStorage.clear();
+  }
+
   return (
     <div>
 
@@ -78,6 +82,13 @@ function BottomNav() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
+              {
+                sessionStorage.getItem('user_id') !== null ? (
+                  <MenuItem onClick={clearSessionStorage}>Déconnexion</MenuItem>
+                ) : (
+                  null
+                )
+              }
               <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
               <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
             </Menu>

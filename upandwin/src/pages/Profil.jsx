@@ -12,14 +12,7 @@ class Profil extends Component {
     super(props);
     this.state = {
       profils: [],
-      id: '',
     };
-  }
-
-  componentWillMount() {
-    this.setState({
-      id: localStorage.getItem('id'),
-    });
   }
 
   render() {
