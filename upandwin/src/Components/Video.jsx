@@ -60,7 +60,7 @@ const Video = ({ video }) => {
     const player = event.target;
     const userId = sessionStorage.getItem('user_id');
     if (
-      player.getDuration() - player.getCurrentTime() < 20
+      player.getDuration() - player.getCurrentTime() < 40
       && (!quizzExists.includes(video.quizz_id) || quizzExists.length === 0) && !inDB
     ) {
       setInDB(1);

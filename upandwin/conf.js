@@ -422,16 +422,6 @@ myRouter.route('/userreceivequizz/:user_id')
     });
   });
 
-/* myRouter.route('/usersubmitquizz/:userId')
-  .put(function (req, res) {
-    User.findByIdAndUpdate(req.params.userId, User.quizzAnswers.push(req.body.quizzAnswers), function (err, user) {
-      if (err) {
-        res.send(err);
-      }
-      res.json({ status: 'ok', MODIF: req.body });
-    });
-  }); */
-
 myRouter.route('/')
   .get(function (req, res) {
     res.sendFile(path.join(`${__dirname}/Profil.jsx`));
