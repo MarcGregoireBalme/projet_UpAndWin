@@ -12,6 +12,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
+    "clsx": "^1.0.4",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
@@ -68,18 +69,7 @@
       "react/prop-types": "off"
     }
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": {},
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.1",
     "husky": "^2.7.0",

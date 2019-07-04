@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import '../App.css';
-import './Home.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import Topnav from '../Components/Topnav';
-import Addvertising from '../Components/Addvertising';
-import DisplayVideo from '../Components/DisplayVideo';
+import LoLFilter from '../Components/LoLFilter';
+import LolVideos from '../Components/LolVideos';
 import BottomNav from '../Components/BottomNav';
 
 class Lol extends Component {
@@ -28,9 +27,9 @@ class Lol extends Component {
     return (
       <div>
         <Topnav />
-        <h1 style={{ paddingTop: '10vh' }}>League of Legends</h1>
-        <Addvertising />
-        <DisplayVideo videos={videos} />
+        <LoLFilter videos={videos} />
+        <div style={{ paddingTop: '40vh' }} />
+        <LolVideos videos={videos} />
         <BottomNav />
       </div>
     );

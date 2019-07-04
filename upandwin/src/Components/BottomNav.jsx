@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import {
-  Stars,
+  Star,
   Home,
   Search,
 } from '@material-ui/icons';
@@ -20,7 +20,7 @@ const useStyles = makeStyles(({
   appBar: {
     top: 'auto',
     bottom: 0,
-    backgroundColor: '#353535',
+    backgroundColor: '#272727',
     justifyContent: 'space-around',
   },
   grow: {
@@ -40,6 +40,10 @@ function BottomNav() {
     setAnchorEl(null);
   }
 
+  function clearSessionStorage() {
+    sessionStorage.clear();
+  }
+
   return (
     <div>
 
@@ -54,7 +58,7 @@ function BottomNav() {
             </IconButton>
             <div className={classes.grow} />
             <IconButton color="inherit">
-              <NavLink to="/Fav"><Stars color="inherit" /></NavLink>
+              <NavLink to="/Fav"><Star color="inherit" /></NavLink>
             </IconButton>
             <div className={classes.grow} />
             <IconButton color="inherit">
@@ -78,6 +82,13 @@ function BottomNav() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
+              {
+                sessionStorage.getItem('user_id') !== null ? (
+                  <MenuItem onClick={clearSessionStorage}>Déconnexion</MenuItem>
+                ) : (
+                  null
+                )
+              }
               <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
               <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
             </Menu>

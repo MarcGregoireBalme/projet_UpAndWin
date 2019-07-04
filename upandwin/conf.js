@@ -150,6 +150,7 @@ const videoSchema = mongoose.Schema({
   categorie: String,
   commentaires: Array,
   objectifs: Array,
+  lane: Array,
   quizz_id: mongoose.Schema.Types.ObjectId,
 });
 
@@ -177,6 +178,7 @@ myRouter.route('/videos')
     videos.difficulte = req.body.difficulte;
     videos.commentaires = [];
     videos.objectifs = [req.body.objectifs];
+    videos.lane = [req.body.lane];
     videos.save(function (err, doc) {
       if (err) {
         res.send(err);
