@@ -384,6 +384,7 @@ myRouter.route('/user/:userId')
     });
   });
 
+
 myRouter.route('/usersubmitquizz/:user_id')
   .put(function (req, res) {
     User.findById(req.params.user_id, function (err, user) {
@@ -392,6 +393,7 @@ myRouter.route('/usersubmitquizz/:user_id')
       }
       user.quizzAnswers.push(req.body.quizzAnswer);
       user.quizz_id.push(req.body.quizz_id);
+      user.quizz_idTodo = req.body.quizz_idTodo;
       user.save(function (error) {
         if (error) {
           res.send(error);
@@ -419,16 +421,6 @@ myRouter.route('/userreceivequizz/:user_id')
       });
     });
   });
-
-/* myRouter.route('/usersubmitquizz/:userId')
-  .put(function (req, res) {
-    User.findByIdAndUpdate(req.params.userId, User.quizzAnswers.push(req.body.quizzAnswers), function (err, user) {
-      if (err) {
-        res.send(err);
-      }
-      res.json({ status: 'ok', MODIF: req.body });
-    });
-  }); */
 
 myRouter.route('/')
   .get(function (req, res) {
