@@ -150,6 +150,7 @@ const videoSchema = mongoose.Schema({
   categorie: String,
   commentaires: Array,
   objectifs: Array,
+  quizz_id: mongoose.Schema.Types.ObjectId,
 });
 
 const Video = mongoose.model('Video', videoSchema);
@@ -261,6 +262,24 @@ myRouter.route('/videosnotes/:video_id')
       });
     });
   });
+
+/* myRouter.route('/addQuizzId/:videoId')
+  .put(function (req, res) {
+    Video.findById(req.params.video_id, function (err, video) {
+      if (err) {
+        res.send(err);
+      }
+      video.quizz_id = req.body.quizz_id;
+      video.save(function (error) {
+        if (error) {
+          res.send(error);
+        } else {
+          res.json({ status: 'ok', MODIF: req.body });
+        }
+      });
+    });
+  }); */
+
 // schema collection users
 const userSchema = mongoose.Schema({
   email: String,
@@ -362,7 +381,6 @@ myRouter.route('/user/:userId')
       res.json({ status: 'ok', updatedUser: user });
     });
   });
-
 
 myRouter.route('/usersubmitquizz/:user_id')
   .put(function (req, res) {
