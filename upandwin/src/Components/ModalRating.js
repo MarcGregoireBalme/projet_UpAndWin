@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import RatingStar from './StarRating';
+import StarRating from './StarRating';
 
 
-class ModalSuccess extends React.Component {
+class ModalRating extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -21,20 +21,20 @@ class ModalSuccess extends React.Component {
     const { show } = this.state;
     return (
       <div>
-        <Modal id="modalAlerte" show={show} onHide={this.handleClose}>
-          <Modal.Header id="sasa" closeButton>
-            <Modal.Title><p id="victory">Sucess !</p></Modal.Title>
+        <Modal id="modalRating" show={show} onHide={this.handleClose}>
+          <Modal.Header id="modalHeader" closeButton>
+            <Modal.Title><p id="victory">Donnez votre avis</p></Modal.Title>
           </Modal.Header>
           <Modal.Body id="modalBody">
-            <div>
-              coucou
-            </div>
-            <RatingStar />
+            <StarRating />
+            <span>
+            Merci pour votre vote !
+            </span>
           </Modal.Body>
           <Modal.Footer id="modalFoot">
             <NavLink to="./">
               <Button onClick={this.handleClose}>
-                <NavLink to="/Profil">Je vote</NavLink>
+                <NavLink to="./">Je vote</NavLink>
               </Button>
             </NavLink>
           </Modal.Footer>
@@ -44,4 +44,4 @@ class ModalSuccess extends React.Component {
   }
 }
 
-export default ModalSuccess;
+export default ModalRating;

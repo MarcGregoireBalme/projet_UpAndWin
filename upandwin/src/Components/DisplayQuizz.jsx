@@ -16,25 +16,41 @@ const useStyles = makeStyles(theme => ({
 
 export default function DisplayQuizz() {
   const [quizzes, setquizzes] = useState('');
+  const [quizzesTodo, setquizzesTodo] = useState('');
   const [redirect, setredirect] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
+    const quizzId = sessionStorage.getItem('quizz_id');
+    const userId = sessionStorage.getItem('user_id');
     const fetchData = async () => {
       const res = await axios.get(
-        'http://localhost:3005/quizzes/5d08ef30e3dfb9241fb360f7',
+        `http://localhost:3005/quizzes/${quizzId}`,
+      );
+      const resTodo = await axios.get(
+        `http://localhost:3005/usersquizztodo/${userId}`,
       );
       setquizzes(res.data);
+      setquizzesTodo(resTodo.data);
     };
     fetchData();
   }, []);
 
+  function arrayRemove(arr, value) {
+    return arr.filter(ele => ele !== value);
+  }
+
+  console.log(quizzesTodo, 'qtd');
+  console.log(quizzesTodo && arrayRemove(quizzesTodo, sessionStorage.getItem('quizz_id')));
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const userId = sessionStorage.getItem('user_id');
     axios
-      .put('http://localhost:3005/usersubmitquizz/5d0399938c849e032612f5f0', {
+      .put(`http://localhost:3005/usersubmitquizz/${userId}`, {
         quizzAnswer: localStorage,
         quizz_id: quizzes[0]._id,
+        quizz_idTodo: quizzesTodo && arrayRemove(quizzesTodo, sessionStorage.getItem('quizz_id')),
       });
     setredirect(true);
   };
