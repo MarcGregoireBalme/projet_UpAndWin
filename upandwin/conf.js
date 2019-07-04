@@ -6,6 +6,12 @@
 const express = require('express');
 
 const app = express();
+const multer = require('multer');
+
+const upload = multer({ dest: 'tmp/' });
+const fs = require('fs');
+const path = require('path');
+
 const hostname = 'localhost';
 const port = 3005;
 const mongoose = require('mongoose');
@@ -29,10 +35,65 @@ db.once('open', function () {
   console.log('Connexion à la base OK');
 });
 
-
 // Body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+/* app.use(function (req, res, next) {
+  // Get auth header value
+  const bearerHeader = req.headers.authorization;
+  // Check if bearer is undefined
+  if (typeof bearerHeader !== 'undefined') {
+    // Split at the space
+    const bearer = bearerHeader.split(' ');
+    // Get token from array
+    const bearerToken = bearer[1];
+    // Set the token
+    // req.token = bearerToken;
+    req.user = jwt.verify(bearerToken, 'monsecret');
+    // Next middleware
+    console.log(req.user);
+    next();
+  } else {
+    // Forbidden
+    res.sendStatus(403);
+  }
+}); */
+
+// Schema collection quizzs
+const quizzesSchema = mongoose.Schema({
+  titre: String,
+  qa: Array,
+  score: Number,
+  video_id: mongoose.Schema.Types.ObjectId,
+});
+const Quizzes = mongoose.model('Quizzes', quizzesSchema);
+// Route /
+myRouter.route('/')
+  .all(function (req, res) {
+    res.json({ message: "Bienvenue sur l'API upandwin ", methode: req.method });
+  });
+
+// Route collection Quizzs
+myRouter.route('/quizzes')
+  .get(function (req, res) {
+    Quizzes.find(function (err, quizzes) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(quizzes);
+    });
+  });
+
+myRouter.route('/quizzes/:quizz_id')
+  .get(function (req, res) {
+    Quizzes.find({ _id: req.params.quizz_id }, function (err, quizzes) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(quizzes);
+    });
+  });
 
 
 // Schema collection quizzs
@@ -41,13 +102,12 @@ const quizzSchema = mongoose.Schema({
   question: Array,
   score: Number,
   video_id: mongoose.Schema.Types.ObjectId,
-
 });
 const Quizz = mongoose.model('Quizz', quizzSchema);
 // Route /
 myRouter.route('/')
   .all(function (req, res) {
-    res.json({ message: "Bienvenue sur 'API upandwin ", methode: req.method });
+    res.json({ message: "Bienvenue sur l'API upandwin ", methode: req.method });
   });
 
 // Route collection Quizzs
@@ -78,6 +138,14 @@ myRouter.route('/quizzs')
 // route quizzs avec fonction delete
 myRouter.route('/quizzs/:quizz_id')
 
+  .get(function (req, res) {
+    Quizz.find({ _id: req.params.quizz_id }, function (err, quizzs) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(quizzs);
+    });
+  })
   .delete(function (req, res) {
     Quizz.remove({ _id: req.params.quizz_id }, function (err) {
       if (err) {
@@ -95,7 +163,7 @@ const videoSchema = mongoose.Schema({
   lien: String,
   duree: String,
   nbVue: Number,
-  notes: Array,
+  notes: [Number],
   jeu: String,
   difficulte: String,
   categorie: String,
@@ -124,10 +192,10 @@ myRouter.route('/videos')
     videos.lien = req.body.lien;
     videos.duree = req.body.duree;
     videos.nbVue = req.body.nbVue;
-    videos.notes = [req.body.notes];
+    videos.notes = [];
     videos.jeu = req.body.jeu;
     videos.difficulte = req.body.difficulte;
-    videos.commentaires = [req.body.commentaires];
+    videos.commentaires = [];
     videos.objectifs = [req.body.objectifs];
     videos.lane = [req.body.lane];
     videos.save(function (err) {
@@ -150,13 +218,14 @@ myRouter.route('/videos/:jeu')
 
 myRouter.route('/videosid/:video_id')
   .get(function (req, res) {
-    Video.find({ _id: req.params.video_id }, function (err, videos) {
+    Video.find({ _id: req.params.videos_id }, function (err, videos) {
       if (err) {
         res.send(err);
       }
       res.json(videos);
     });
   })
+
   .delete(function (req, res) {
     Video.remove({ _id: req.params.video_id }, function (err) {
       if (err) {
@@ -176,16 +245,41 @@ myRouter.route('/videosid/:video_id')
       videos.lien = req.body.lien;
       videos.duree = req.body.duree;
       videos.nbVue = req.body.nbVue;
-      videos.notes = [req.body.notes];
+      videos.notes = [];
       videos.jeu = req.body.jeu;
       videos.difficulte = req.body.difficulte;
-      videos.commentaires = [req.body.commentaires];
+      videos.commentaires = [];
       videos.objectifs = [req.body.objectifs];
       videos.save(function (errs) {
         if (errs) {
           res.send(errs);
         }
         res.json({ message: 'Bravo, mise à jour des données OK' });
+      });
+    });
+  });
+
+myRouter.route('/videosnotes/:video_id')
+  .get(function (req, res) {
+    Video.find({ _id: req.params.video_id }, function (err, videos) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(videos[0].notes);
+    });
+  })
+  .put(function (req, res) {
+    Video.findById(req.params.video_id, function (err, video) {
+      if (err) {
+        res.send(err);
+      }
+      video.notes.push(req.body.note);
+      video.save(function (error) {
+        if (error) {
+          res.send(error);
+        } else {
+          res.json({ status: 'ok', finalNotes: video.notes });
+        }
       });
     });
   });
@@ -198,13 +292,16 @@ const userSchema = mongoose.Schema({
   alias: String,
   password: String,
   confpassword: String,
+  avatar: String,
   age: Number,
   registration_date: Date,
   games: Array,
-  viewed_videos: Array,
+  viewed_videos: [mongoose.Schema.Types.ObjectId],
   fav_videos: Array,
   badges: Array,
-  quizz_id: Array,
+  quizz_idTodo: [mongoose.Schema.Types.ObjectId],
+  quizz_id: [mongoose.Schema.Types.ObjectId],
+  quizzAnswers: Array,
   friends: Array,
   wins: Number,
 });
@@ -229,6 +326,7 @@ myRouter.route('/users')
     users.alias = req.body.alias;
     users.password = req.body.password;
     users.confpassword = req.body.confpassword;
+    users.avatar = req.body.avatar;
     users.age = req.body.age;
     users.registration_date = req.body.registration_date;
     users.games = [req.body.games];
@@ -236,14 +334,25 @@ myRouter.route('/users')
     users.viewed_videos = [req.body.viewed_videos];
     users.video_favs = [req.body.video_favs];
     users.badges = [req.body.badges];
+    users.quizz_idTodo = [req.body.quizz_idTodo];
     users.quizz_id = [req.body.quizz_id];
+    users.quizzAnswers = [];
     users.friends = [req.body.friends];
     users.wins = req.body.wins;
     users.save(function (err) {
       if (err) {
         res.send(err);
       }
-      res.json({ message: 'Bravo, la video est maintenant stockée en base de données' });
+      res.json({ message: "Bravo, l'utilisateur est maintenant stockée en base de données" });
+    });
+  })
+
+  .put(function (req, res) {
+    User.find(function (err, users) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(users);
     });
   });
 
@@ -255,6 +364,90 @@ myRouter.route('/users/:alias')
       }
       res.json(users);
     });
+  });
+
+myRouter.route('/usersquizztodo/:id')
+  .get(function (req, res) {
+    User.find({ _id: req.params.id }, function (err, users) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(users[0].quizz_idTodo);
+    });
+  });
+
+myRouter.route('/user/:userId')
+  .put(function (req, res) {
+    User.findByIdAndUpdate(req.params.userId, req.body, function (err, user) {
+      if (err) {
+        res.send(err);
+      }
+      res.json({ status: 'ok', updatedUser: user });
+    });
+  });
+
+myRouter.route('/usersubmitquizz/:user_id')
+  .put(function (req, res) {
+    User.findById(req.params.user_id, function (err, user) {
+      if (err) {
+        res.send(err);
+      }
+      user.quizzAnswers.push(req.body.quizzAnswer);
+      user.quizz_id.push(req.body.quizz_id);
+      user.save(function (error) {
+        if (error) {
+          res.send(error);
+        } else {
+          res.json({ status: 'ok', MODIF: req.body });
+        }
+      });
+    });
+  });
+
+myRouter.route('/userreceivequizz/:user_id')
+  .put(function (req, res) {
+    User.findById(req.params.user_id, function (err, user) {
+      if (err) {
+        res.send(err);
+      }
+      user.quizz_idTodo.push(req.body.quizz_id);
+      user.viewed_videos.push(req.body.video_id);
+      user.save(function (error) {
+        if (error) {
+          res.send(error);
+        } else {
+          res.json({ status: 'ok', MODIF: req.body });
+        }
+      });
+    });
+  });
+
+/* myRouter.route('/usersubmitquizz/:userId')
+  .put(function (req, res) {
+    User.findByIdAndUpdate(req.params.userId, User.quizzAnswers.push(req.body.quizzAnswers), function (err, user) {
+      if (err) {
+        res.send(err);
+      }
+      res.json({ status: 'ok', MODIF: req.body });
+    });
+  }); */
+
+myRouter.route('/')
+  .get(function (req, res) {
+    res.sendFile(path.join(`${__dirname}/Profil.jsx`));
+  });
+
+myRouter.route('/sendFile')
+  .put(function (req, res) {
+    upload.single('myFile');
+    fs.rename(req.file.path, `public/images/${req.file.originalname}`,
+      function (err) {
+        if (err) {
+          res.send("Problème durant l'upload du fichier");
+        } else {
+          res.send('Fichier uploadé avec succès');
+        }
+      });
   });
 
 app.use(myRouter);

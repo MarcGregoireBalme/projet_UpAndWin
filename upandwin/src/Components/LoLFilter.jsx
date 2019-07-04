@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import LolDrawer from './LolDrawer';
 import './LoLFilter.css';
 
 class LoLFilterComponent extends Component {
@@ -7,12 +8,12 @@ class LoLFilterComponent extends Component {
     super(props);
     this.state = {
       prevScrollpos: window.pageYOffset,
-      ChoisirLane: false,
-      TopLane: false,
-      MidLane: false,
-      BotLane: false,
-      Jungle: false,
-      Support: false,
+      // ChoisirLane: false,
+      // TopLane: false,
+      // MidLane: false,
+      // BotLane: false,
+      // Jungle: false,
+      // Support: false,
     };
   }
 
@@ -37,33 +38,32 @@ class LoLFilterComponent extends Component {
     });
   }
 
-  handleCheck = (event) => {
-    const { dispatch } = this.props;
-    const { target } = event;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const { name } = target;
-    this.setState({
-      [name]: value,
-    },
-    () => {
-      dispatch({
-        type: 'HANDLE_CHECK',
-        lolFilter: this.state,
-      });
-    });
-  }
+  // handleCheck = (event) => {
+  //   const { dispatch } = this.props;
+  //   const { target } = event;
+  //   const value = target.type === 'checkbox' ? target.checked : target.value;
+  //   const { name } = target;
+  //   this.setState({
+  //     [name]: value,
+  //   },
+  //   () => {
+  //     dispatch({
+  //       type: 'HANDLE_CHECK',
+  //       lolFilter: this.state,
+  //     });
+  //   });
+  // }
 
   render() {
     const { videos } = this.props;
-    const filters = ['ChoisirLane', 'BotLane', 'Jungle', 'MidLane', 'Support', 'TopLane'];
+    // const filters = ['ChoisirLane', 'BotLane', 'Jungle', 'MidLane', 'Support', 'TopLane'];
     return (
       <div id="Filter-nav">
         <div className="Top-nav-left">
           <div className="Filter-logo" />
         </div>
         <div>
-
-          {filters
+          {/* {filters
             .map(filter => (
               <div key={filter}>
                 {filter}
@@ -79,11 +79,10 @@ class LoLFilterComponent extends Component {
                 <br />
               </div>
             ))
-          }
-
+          } */}
         </div>
         <div className="Top-nav-right">
-          <div className="Filter-button" />
+          <LolDrawer videos={videos} />
         </div>
       </div>
     );

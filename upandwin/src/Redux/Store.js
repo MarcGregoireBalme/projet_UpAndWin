@@ -1,10 +1,12 @@
 import { combineReducers, createStore } from 'redux';
 import userReducer from './Reducers';
 import LolFilterReducer from './LolFilterReducer';
+import answersReducers from './answersReducers';
 
 const reducers = combineReducers({
   users: userReducer,
   lolFilter: LolFilterReducer,
+  answers: answersReducers,
 });
 
 const store = createStore(

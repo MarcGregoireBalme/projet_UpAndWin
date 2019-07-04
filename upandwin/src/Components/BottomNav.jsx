@@ -20,7 +20,7 @@ const useStyles = makeStyles(({
   appBar: {
     top: 'auto',
     bottom: 0,
-    backgroundColor: '#353535',
+    backgroundColor: '#272727',
     justifyContent: 'space-around',
   },
   grow: {
