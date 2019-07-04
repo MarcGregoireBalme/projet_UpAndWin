@@ -4,7 +4,9 @@ import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import YouTube from 'react-youtube';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 import StarRating from './StarRating';
+
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
@@ -20,7 +22,8 @@ const opts = {
 const Video = ({ video }) => {
   const [a, setA] = useState('hello');
   const [inDB, setInDB] = useState(null);
-  const [quizzExists, setQuizzExists] = useState([]);
+  const [quizzExists, setQuizzExists] = useState(['unEmpty']);
+  const [quizzButton, setQuizzButton] = useState('none');
 
 
   const onPlayerReady = (event) => {
@@ -41,16 +44,27 @@ const Video = ({ video }) => {
   }, []);
 
   console.log(quizzExists);
+  console.log(quizzButton, 'qb');
 
+  const showQuizzButton = () => {
+    if (quizzExists && quizzExists.includes(video.quizz_id)) {
+      setQuizzButton('inline');
+    }
+  };
+
+  useEffect(() => {
+    showQuizzButton();
+  });
 
   const videoOnPlay = (event) => {
     const player = event.target;
     const userId = sessionStorage.getItem('user_id');
     if (
-      player.getDuration() - player.getCurrentTime() < 20
-      && !quizzExists.includes(video.quizz_id) && !inDB
+      player.getDuration() - player.getCurrentTime() < 40
+      && (!quizzExists.includes(video.quizz_id) || quizzExists.length === 0) && !inDB
     ) {
       setInDB(1);
+      setQuizzButton('inline');
       axios.put(`http://localhost:3005/userreceivequizz/${userId}`, {
         video_id: video._id,
         quizz_id: video.quizz_id,
@@ -75,26 +89,31 @@ const Video = ({ video }) => {
         video_id: video._id,
         quizz_id: video.quizz_id,
       });
+      showQuizzButton();
     } else {
       console.log('Quizz déjà en BDD');
     }
   };
 
-  const getVideoId = (url) => {
-    if (url.includes('embed')) {
-      return url.split('/')[4];
+  const handleClick = () => {
+    sessionStorage.setItem('quizz_id', video.quizz_id);
+  };
+
+  const getVideoId = (lien) => {
+    if (lien.includes('embed')) {
+      return lien.split('/')[4];
     }
-    if (url.includes('watch')) {
-      return url.split('=')[1];
+    if (lien.includes('watch')) {
+      return lien.split('=')[1];
     }
-    return url;
+    return lien;
   };
 
   return (
     <div>
       <div className="marginVideo">
         <h4 className="overflow-clip">{video.titre}</h4>
-        <h1>{a}</h1>
+        <h5>{a}</h5>
         <div>
           <StarRating
             moyenne={
@@ -109,13 +128,18 @@ const Video = ({ video }) => {
               {video.notes.length !== 0
                 ? Math.round(
                   (video.notes.reduce(reducer) / (video.notes.length - 1))
-                      * 100,
+                  * 100,
                 ) / 100
                 : '2.5'}
             </div>
             <button type="button">
-avis :
+              avis :
               {video.notes.length - 1}
+            </button>
+            <button type="button" onClick={handleClick} style={{ display: quizzButton }}>
+              <NavLink to={`/quizz/${video.quizz_id}`}>
+                Quizz
+              </NavLink>
             </button>
           </div>
         </div>
@@ -124,7 +148,7 @@ avis :
         videoId={getVideoId(video.lien)}
         opts={opts}
         onReady={onPlayerReady}
-        onPlay={videoOnPlay}
+        onPause={videoOnPlay}
         onEnd={videoOnEnd}
       />
     </div>
