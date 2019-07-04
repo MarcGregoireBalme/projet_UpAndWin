@@ -422,7 +422,8 @@ myRouter.route('/userreceivequizz/:user_id')
 
 /* myRouter.route('/usersubmitquizz/:userId')
   .put(function (req, res) {
-    User.findByIdAndUpdate(req.params.userId, User.quizzAnswers.push(req.body.quizzAnswers), function (err, user) {
+    User.findByIdAndUpdate(req.params.userId, User.quizzAnswers.push(req.body.quizzAnswers),
+     function (err, user) {
       if (err) {
         res.send(err);
       }
