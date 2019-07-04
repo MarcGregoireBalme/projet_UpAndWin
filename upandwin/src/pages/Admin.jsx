@@ -3,6 +3,8 @@ import '../App.css';
 // import './Admin.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import VideoForm from '../Components/VideoForm';
+import BottomNav from '../Components/BottomNav';
+import Topnav from '../Components/Topnav';
 
 
 class Admin extends Component {
@@ -16,8 +18,12 @@ class Admin extends Component {
   render() {
     return (
       <div className="Admin">
-        <h1>Admin page</h1>
-        <VideoForm />
+        <Topnav />
+        <h1>admin</h1>
+        <div style={{ marginBottom: '80px' }}>
+          <VideoForm />
+        </div>
+        <BottomNav />
       </div>
     );
   }

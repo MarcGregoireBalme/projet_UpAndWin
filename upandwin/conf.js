@@ -383,6 +383,7 @@ myRouter.route('/user/:userId')
     });
   });
 
+
 myRouter.route('/usersubmitquizz/:user_id')
   .put(function (req, res) {
     User.findById(req.params.user_id, function (err, user) {
@@ -391,6 +392,7 @@ myRouter.route('/usersubmitquizz/:user_id')
       }
       user.quizzAnswers.push(req.body.quizzAnswer);
       user.quizz_id.push(req.body.quizz_id);
+      user.quizz_idTodo = req.body.quizz_idTodo;
       user.save(function (error) {
         if (error) {
           res.send(error);

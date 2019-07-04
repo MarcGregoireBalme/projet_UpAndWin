@@ -5,7 +5,6 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Store from './Redux/Store';
 import subForm from './Components/Form';
-import Create from './containers/Create';
 import Lol from './pages/Lol';
 import Wow from './pages/Wow';
 import Search from './pages/Search';
@@ -15,6 +14,7 @@ import Fav from './pages/Fav';
 import Admin from './pages/Admin';
 import ConnexionForm from './Components/ConnexionForm';
 import RegisterForm from './Components/RegisterForm';
+import DisplayQuizz from './Components/DisplayQuizz';
 
 function App() {
   return (
@@ -32,8 +32,8 @@ function App() {
           <Route path="/Profil" component={Profil} />
           <Route path="/GamerStatistics" component={GamerStatistics} />
           <Route path="/Fav" component={Fav} />
-          <Route path="/Admin" component={Admin} />
-          <Route path="/Create" name="Create" component={Create} />
+          <Route path="/aa" component={Admin} />
+          <Route path="/quizz/:id" component={DisplayQuizz} />
         </Provider>
 
       </Switch>
