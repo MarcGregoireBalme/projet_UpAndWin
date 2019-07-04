@@ -23,8 +23,8 @@ export default function Displayquestions({ ans, ind }) {
             <div>
               <FormControlLabel
                 style={{ color: 'white' }}
-                key={answer.id}
-                value={`${answer}`}
+                key={answer}
+                value={`${ans.questionTitle}/${answer}`}
                 control={<Radio color="secondary" />}
                 label={answer}
                 labelPlacement="start"

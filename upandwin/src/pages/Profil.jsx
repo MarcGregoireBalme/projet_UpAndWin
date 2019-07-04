@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
-import DisplayQuizz from '../Components/DisplayQuizz';
+import DisplayQuizzcopy from '../Components/DisplayQuizzcopy';
 
 class Profil extends Component {
   constructor(props) {
@@ -40,6 +40,7 @@ class Profil extends Component {
         <div>
           <img alt="avatar" src={fileSelected} />
         </div>
+        {/*<DisplayQuizzcopy /> */}
         <BottomNav />
       </div>
     );
