@@ -61,15 +61,21 @@ class Topnav extends Component {
             </select>
           </div>
         </div>
-        <div className="Top-nav-right">
-          <Link to="/Connexion">
-            <div className="connexionbutton">
-              <button type="button" className="Button">
-                Connexion
-              </button>
+        {
+          sessionStorage.getItem('user_id') !== null ? (
+            null
+          ) : (
+            <div className="Top-nav-right">
+              <Link to="/Connexion">
+                <div className="connexionbutton">
+                  <button type="button" className="Button">
+                      Connexion
+                  </button>
+                </div>
+              </Link>
             </div>
-          </Link>
-        </div>
+          )
+        }
       </div>
     );
   }
