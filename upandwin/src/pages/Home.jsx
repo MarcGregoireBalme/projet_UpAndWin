@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../App.css';
-import './Home.css';
 import axios from 'axios';
 import Topnav from '../Components/Topnav';
 import Addvertising from '../Components/Addvertising';
