@@ -47,7 +47,7 @@ const Video = ({ video }) => {
   console.log(quizzButton, 'qb');
 
   const showQuizzButton = () => {
-    if (quizzExists && quizzExists.includes(video.quizz_id)) {
+    if (quizzExists.length > 0 && quizzExists.includes(video.quizz_id)) {
       setQuizzButton('inline');
     }
   };
