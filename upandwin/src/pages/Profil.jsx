@@ -36,7 +36,9 @@ class Profil extends Component {
         <div>
           {users ? users.user.alias : 'Guest'}
         </div>
-        <DisplayQuizz />
+        <div>
+          <img alt="avatar" src={fileSelected} />
+        </div>
         <BottomNav />
       </div>
     );
