@@ -3,6 +3,8 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable func-names */
+
+
 const express = require('express');
 
 const app = express();
@@ -17,6 +19,9 @@ const port = 3005;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
+require('dotenv').config();
+
 
 app.use(cors());
 
@@ -39,36 +44,32 @@ db.once('open', function () {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-/* app.use(function (req, res, next) {
-  // Get auth header value
-  const bearerHeader = req.headers.authorization;
-  // Check if bearer is undefined
-  if (typeof bearerHeader !== 'undefined') {
-    // Split at the space
-    const bearer = bearerHeader.split(' ');
-    // Get token from array
-    const bearerToken = bearer[1];
-    // Set the token
-    // req.token = bearerToken;
-    req.user = jwt.verify(bearerToken, 'monsecret');
-    // Next middleware
-    console.log(req.user);
-    next();
-  } else {
-    // Forbidden
-    res.sendStatus(403);
-  }
-}); */
 
 // Schema collection quizzs
 const quizzesSchema = mongoose.Schema({
-  titre: String,
+  title: String,
   qa: Array,
   score: Number,
   video_id: mongoose.Schema.Types.ObjectId,
 });
-const Quizzes = mongoose.model('Quizzes', quizzesSchema);
+const Quizze = mongoose.model('Quizzes', quizzesSchema);
 // Route /
+
+myRouter.route('/save-quiz')
+  .post(function (req, res) {
+    const quizzes = new Quizze();
+    quizzes.title = req.body.title;
+    quizzes.score = req.body.score;
+    quizzes.qa = req.body.qa;
+    quizzes.video_id = req.body.video_id;
+
+    quizzes.save((err) => {
+      if (err) throw err;
+
+      res.status(201).send('submission success!');
+    });
+  });
+
 myRouter.route('/')
   .all(function (req, res) {
     res.json({ message: "Bienvenue sur l'API upandwin ", methode: req.method });
@@ -77,7 +78,7 @@ myRouter.route('/')
 // Route collection Quizzs
 myRouter.route('/quizzes')
   .get(function (req, res) {
-    Quizzes.find(function (err, quizzes) {
+    Quizze.find(function (err, quizzes) {
       if (err) {
         res.send(err);
       }
@@ -87,7 +88,7 @@ myRouter.route('/quizzes')
 
 myRouter.route('/quizzes/:quizz_id')
   .get(function (req, res) {
-    Quizzes.find({ _id: req.params.quizz_id }, function (err, quizzes) {
+    Quizze.find({ _id: req.params.quizz_id }, function (err, quizzes) {
       if (err) {
         res.send(err);
       }
@@ -97,13 +98,6 @@ myRouter.route('/quizzes/:quizz_id')
 
 
 // Schema collection quizzs
-const quizzSchema = mongoose.Schema({
-  titre: String,
-  question: Array,
-  score: Number,
-  video_id: mongoose.Schema.Types.ObjectId,
-});
-const Quizz = mongoose.model('Quizz', quizzSchema);
 // Route /
 myRouter.route('/')
   .all(function (req, res) {
@@ -113,33 +107,20 @@ myRouter.route('/')
 // Route collection Quizzs
 myRouter.route('/quizzs')
   .get(function (req, res) {
-    Quizz.find(function (err, quizzs) {
+    Quizze.find(function (err, quizzes) {
       if (err) {
         res.send(err);
       }
-      res.json(quizzs);
-    });
-  })
-
-  .post(function (req, res) {
-    const quizzs = new Quizz();
-    quizzs.titre = req.body.titre;
-    quizzs.question = [req.body.question];
-    quizzs.score = req.body.score;
-    quizzs.video_id = req.body.video_id;
-    quizzs.save(function (err) {
-      if (err) {
-        res.send(err);
-      }
-      res.json({ message: 'le quizz est maintenant stockée en base de données' });
+      res.json(quizzes);
     });
   });
+
 
 // route quizzs avec fonction delete
 myRouter.route('/quizzs/:quizz_id')
 
   .get(function (req, res) {
-    Quizz.find({ _id: req.params.quizz_id }, function (err, quizzs) {
+    Quizze.find({ _id: req.params.quizz_id }, function (err, quizzs) {
       if (err) {
         res.send(err);
       }
@@ -147,7 +128,7 @@ myRouter.route('/quizzs/:quizz_id')
     });
   })
   .delete(function (req, res) {
-    Quizz.remove({ _id: req.params.quizz_id }, function (err) {
+    Quizze.remove({ _id: req.params.quizz_id }, function (err) {
       if (err) {
         res.send(err);
       }
@@ -172,7 +153,6 @@ const videoSchema = mongoose.Schema({
 });
 
 const Video = mongoose.model('Video', videoSchema);
-
 myRouter.route('/videos')
   .get(function (req, res) {
     Video.find(function (err, videos) {
@@ -196,11 +176,11 @@ myRouter.route('/videos')
     videos.difficulte = req.body.difficulte;
     videos.commentaires = [];
     videos.objectifs = [req.body.objectifs];
-    videos.save(function (err) {
+    videos.save(function (err, doc) {
       if (err) {
         res.send(err);
       }
-      res.json({ message: 'Bravo, la video est maintenant stockée en base de données' });
+      res.json(doc.id);
     });
   });
 
@@ -281,7 +261,6 @@ myRouter.route('/videosnotes/:video_id')
       });
     });
   });
-
 // schema collection users
 const userSchema = mongoose.Schema({
   email: String,

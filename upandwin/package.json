@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@blueprintjs/core": "^3.15.1",
-    "@material-ui/core": "^4.0.0-rc.0",
-    "@material-ui/icons": "^4.0.0-rc.0",
+    "@blueprintjs/core": "^3.17.1",
+    "@material-ui/core": "^4.1.3",
+    "@material-ui/icons": "^4.2.1",
     "axios": "^0.18.0",
     "blueprint": "^2.1.5",
     "blueprint-css": "^3.0.0-beta.0",
@@ -13,10 +13,12 @@
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
     "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.2.6",
-    "mongoose": "^5.5.12",
+    "mongoose": "^5.6.3",
     "multer": "^1.4.1",
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
@@ -25,6 +27,7 @@
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
+    "react-router": "^5.0.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
     "react-select": "^3.0.4",
@@ -32,8 +35,10 @@
     "react-youtube": "^7.9.0",
     "reactstrap": "^8.0.0",
     "redux": "^4.0.1",
-    "redux-form": "^8.2.4",
-    "router": "^1.3.3"
+    "redux-form": "^8.2.3",
+    "router": "^1.3.3",
+    "uuid": "^3.3.2",
+    "uuidv4": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -76,8 +81,8 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^17.1.0",
-    "husky": "^2.3.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "husky": "^2.7.0",
     "nodemon": "^1.19.1"
   }
 }
