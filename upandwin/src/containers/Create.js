@@ -4,7 +4,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import history from '../History';
 
 
 class Create extends Component {
@@ -47,7 +46,7 @@ class Create extends Component {
   }
 
   componentDidMount() {
-    history.push('/');
+    // history.push('/');
     window.addEventListener('keydown', this.handleKeyPress);
   }
 
@@ -257,7 +256,7 @@ class Create extends Component {
         <input
           type="text"
           // eslint-disable-next-line no-sequences
-          name={`answer_${ans}`}
+          name={'answer_', { ans }}
           placeholder="Enter an Answer and Press Tab to Add Another"
           value={answers[idx]}
           onChange={this.handleOption.bind(this, idx)}

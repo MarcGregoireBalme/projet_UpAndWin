@@ -32,7 +32,7 @@ function App() {
           <Route path="/Profil" component={Profil} />
           <Route path="/GamerStatistics" component={GamerStatistics} />
           <Route path="/Fav" component={Fav} />
-          <Route path="/aa" component={Admin} />
+          <Route path="/Admin" component={Admin} />
           <Route path="/quizz/:id" component={DisplayQuizz} />
         </Provider>
 

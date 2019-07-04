@@ -44,26 +44,6 @@ db.once('open', function () {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-/* app.use(function (req, res, next) {
-  // Get auth header value
-  const bearerHeader = req.headers.authorization;
-  // Check if bearer is undefined
-  if (typeof bearerHeader !== 'undefined') {
-    // Split at the space
-    const bearer = bearerHeader.split(' ');
-    // Get token from array
-    const bearerToken = bearer[1];
-    // Set the token
-    // req.token = bearerToken;
-    req.user = jwt.verify(bearerToken, 'monsecret');
-    // Next middleware
-    console.log(req.user);
-    next();
-  } else {
-    // Forbidden
-    res.sendStatus(403);
-  }
-}); */
 
 // Schema collection quizzs
 const quizzesSchema = mongoose.Schema({
