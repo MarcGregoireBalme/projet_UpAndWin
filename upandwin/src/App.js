@@ -16,11 +16,11 @@ import ConnexionForm from './Components/ConnexionForm';
 import RegisterForm from './Components/RegisterForm';
 import DisplayQuizzcopy from './Components/DisplayQuizzcopy';
 
-
 function App() {
   return (
     <div className="App">
       <Switch>
+
         <Provider store={Store}>
           <Route exact path="/" component={Home} />
           <Route path="/form/" component={subForm} />
@@ -35,6 +35,7 @@ function App() {
           <Route path="/Admin" component={Admin} />
           <Route path="/quizz/:id" component={DisplayQuizzcopy} />
         </Provider>
+
       </Switch>
     </div>
   );

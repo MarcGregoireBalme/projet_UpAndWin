@@ -29,7 +29,6 @@ class SearchBar extends Component {
 
   render() {
     const { videos, searchtext } = this.state;
-    console.log(videos.filter(video => (video.titre) === searchtext));
 
     return (
       <div>
