@@ -10,7 +10,7 @@ import Topnav from './Topnav';
 import BottomNav from './BottomNav';
 import './Form.css';
 // eslint-disable-next-line import/named
-import { dispatch } from '../actions/actions';
+import { login } from '../actions/actions';
 
 class ConnexionForm extends Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class ConnexionForm extends Component {
       password: '',
       redirect: false,
       errmsg: '',
+      user_id: '',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -28,17 +29,16 @@ class ConnexionForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
+    const { login } = this.props;
     const { alias, password } = this.state;
     // eslint-disable-next-line no-shadow
-    const { dispatch } = this.props;
-    dispatch(this.state);
     axios
       .get(`http://localhost:3005/users/${alias}`)
       .then((res) => {
         if (res.data[0].alias === alias && res.data[0].password === password) {
           this.setState({ redirect: true });
           sessionStorage.setItem('user_id', res.data[0]._id);
+          login({ ...this.state, user_id: res.data[0]._id });
         } else {
           this.setState({ errmsg: 'Pseudo or password invalid' });
         }
@@ -122,4 +122,8 @@ const mapStateToProps = state => ({
   state,
 });
 
-export default connect(mapStateToProps, { dispatch })(ConnexionForm);
+const mdtp = dispatch => ({
+  login: value => dispatch(login(value)),
+});
+
+export default connect(mapStateToProps, mdtp)(ConnexionForm);
