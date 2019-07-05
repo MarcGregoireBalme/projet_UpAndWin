@@ -33,16 +33,14 @@ class SearchBar extends Component {
     return (
       <div>
         <div>
-          <h1>
-            <Paper className="Winroot">
-              <InputBase
-                onChange={e => this.handleChange(e)}
-                className="Wininput"
-                placeholder="Rechercher une vidéo"
-                inputProps={{ 'aria-label': 'Search' }}
-              />
-            </Paper>
-          </h1>
+          <div className="WinInputContainer">
+            <input
+              onChange={e => this.handleChange(e)}
+              className="WinInput"
+              placeholder="Rechercher une vidéo"
+              inputProps={{ 'aria-label': 'Search' }}
+            />
+          </div>
           <div className="container-fluid">
             <div className="row videoDisplay">
               {videos.filter(

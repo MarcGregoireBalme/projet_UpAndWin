@@ -66,10 +66,10 @@ function SwipeableTemporaryDrawerComponent({ dispatch, videos }) {
         </p>
       </div>
       <List>
-        <div className="FiltersList">
+        <div>
           {filters
             .map(filter => (
-              <div key={filter}>
+              <div key={filter} className="FiltersList">
                 {filter}
                 <span className="FiltersNumber">
                   (
@@ -77,6 +77,7 @@ function SwipeableTemporaryDrawerComponent({ dispatch, videos }) {
                   )
                 </span>
                 <input
+                  className="FiltersCheckes"
                   name={filter}
                   type="checkbox"
                   checked={window[filter]}

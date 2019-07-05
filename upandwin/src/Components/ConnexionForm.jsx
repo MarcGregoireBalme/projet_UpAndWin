@@ -83,7 +83,7 @@ class ConnexionForm extends Component {
             />
           </FormGroup>
           <FormGroup controlid="password">
-            <Label>Password</Label>
+            <Label>Mot de passe</Label>
             <Input
               name="password"
               checked={password}
@@ -101,14 +101,15 @@ class ConnexionForm extends Component {
             {errmsg}
           </FormGroup>
           <FormGroup>
-            <Button
+            <button
               block
               disabled={!this.validateForm()}
               type="submit"
               value="Submit"
+              className="Button"
             >
               Login
-            </Button>
+            </button>
           </FormGroup>
         </Form>
         <BottomNav />
