@@ -14,6 +14,10 @@
 }
 
 .FiltersList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
   color: rgba(255, 255, 255, 1);
   margin: 24px;
   text-align: right;
@@ -23,6 +27,10 @@
 .FiltersNumber {
   color: #EB220F;
   margin: 6px;
+}
+
+.FiltersCheckes {
+  min-width: 1% !important;
 }
 
 .FiltersTitle {
