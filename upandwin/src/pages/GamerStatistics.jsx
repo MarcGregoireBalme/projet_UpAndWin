@@ -41,21 +41,21 @@ class GamerStatistics extends Component {
                       <Paper className="WinPaper">
                         <div className="Number">{user.wins}</div>
                         <br />
-                        <p>wins</p>
+                        <p className="WhiteText">wins</p>
                       </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Paper className="WinPaper">
                         <div className="Number">{user.viewed_videos.length}</div>
                         <br />
-                        <p>vidéos vues</p>
+                        <p className="WhiteText">vidéos vues</p>
                       </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                       <Paper className="WinPaper">
                         <div className="Number">{user.friends.length}</div>
                         <br />
-                        <p>amis</p>
+                        <p className="WhiteText">amis</p>
                       </Paper>
                     </Grid>
                   </Grid>

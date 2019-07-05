@@ -84,15 +84,16 @@ function BottomNav({ dispatch }) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
+              <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
+              <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
+              <MenuItem onClick={handleClose}><Link to="/Admin">Admin</Link></MenuItem>
               {
                 sessionStorage.getItem('user_id') !== null ? (
-                  <MenuItem onClick={clearSessionStorageLogOut} className="deco">Déconnexion</MenuItem>
+                  <MenuItem onClick={clearSessionStorageLogOut} className="Deconnexion">Déconnexion</MenuItem>
                 ) : (
                   null
                 )
               }
-              <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
-              <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
             </Menu>
 
           </Toolbar>
