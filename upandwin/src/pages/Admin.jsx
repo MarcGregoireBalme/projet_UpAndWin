@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import '../App.css';
-// import './Admin.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import VideoForm from '../Components/VideoForm';
 import BottomNav from '../Components/BottomNav';
@@ -17,11 +15,12 @@ class Admin extends Component {
 
   render() {
     return (
-      <div className="Admin">
+      <div>
         <Topnav />
-        <h1>admin</h1>
-        <div style={{ marginBottom: '80px' }}>
-          <VideoForm />
+        <div className="Page">
+          <div>
+            <VideoForm />
+          </div>
         </div>
         <BottomNav />
       </div>
