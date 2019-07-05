@@ -11,7 +11,7 @@ class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profils: {},
+      // profils: {},
       // alias: '',
     };
   }
@@ -29,11 +29,12 @@ class Profil extends Component {
   } */
 
   render() {
-    const { users } = this.props;
+    // const { users } = this.props;
     // const { profils } = this.state;
     return (
-      <div className="profil">
+      <div className="Page">
         <Topnav />
+        <h1>Mon profil</h1>
         <BottomNav />
       </div>
     );

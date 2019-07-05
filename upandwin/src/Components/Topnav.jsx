@@ -42,7 +42,6 @@ class Topnav extends Component {
   render() {
     const { game } = this.state;
     const { userId } = this.props;
-    console.log(userId);
     if (game) {
       return <Redirect to={game} />;
     }
