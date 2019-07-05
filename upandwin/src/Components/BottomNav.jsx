@@ -91,6 +91,7 @@ function BottomNav() {
               }
               <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
               <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
+              <MenuItem onClick={handleClose}><Link to="/Admin">Admin</Link></MenuItem>
             </Menu>
 
           </Toolbar>
