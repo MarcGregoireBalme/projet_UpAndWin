@@ -18,7 +18,7 @@ export default function Displayquestions({ quizz }) {
             >
               {ques.question}
             </FormLabel>
-            <DisplayAnswers ans={ques} />
+            <DisplayAnswers ans={ques} ind={id} />
           </div>
         ))}
     </div>
