@@ -1,9 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from 'react';
+import React from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Video from './Video';
-
 
 const DisplayVideo = ({ videos }) => (
   <div className="container-fluid">

@@ -3,51 +3,46 @@ import '../App.css';
 import './Profil.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
+// import axios from 'axios';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
-import DisplayQuizz from '../Components/DisplayQuizz';
 
 class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profils: [],
-      fileSelected: '',
+      // profils: {},
+      // alias: '',
     };
-
-    this.fileSelectedhandler = this.fileSelectedhandler.bind(this);
   }
 
-  fileSelectedhandler = (event) => {
-    this.setState({
-      fileSelected: URL.createObjectURL(event.target.files[0]),
-    });
-  }
+  /* componentWillMount() {
+    const { alias } = this.state;
+    axios
+      .get(`http://localhost:3005/users/${alias}`)
+      .then((res) => {
+        console.log(res.data);
+          this.setState({
+          profils: res.data.users,
+        });
+      });
+  } */
 
   render() {
-    const { user } = this.props;
-    const { profils } = this.state;
-    const { fileSelected } = this.state;
+    // const { users } = this.props;
+    // const { profils } = this.state;
     return (
-      <div className="profil">
+      <div className="Page">
         <Topnav />
-        <div>
-          <h1 style={{ paddingTop: '10vh' }}>{user ? user.alias : profils[0]}</h1>
-        </div>
-        <div>
-          {user ? user.alias : 'Guest'}
-        </div>
-        <div>
-          <img alt="avatar" src={fileSelected} />
-        </div>
+        <h1>Mon profil</h1>
         <BottomNav />
       </div>
     );
   }
 }
 
-const mstp = state => ({
-  ...state,
-});
+function mstp(state) {
+  return { ...state };
+}
 
 export default connect(mstp)(Profil);

@@ -3,7 +3,7 @@ import FormControl from '@material-ui/core/FormControl'; import axios from 'axio
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom';
-import Displayquestion from './DisplayQuestion';
+import Displayquestioncopy from './DisplayQuestioncopy';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -43,9 +43,6 @@ export default function DisplayQuizz() {
     return arr.filter(ele => ele !== value);
   }
 
-  console.log(quizzesTodo, 'qtd');
-  console.log(quizzesTodo && arrayRemove(quizzesTodo, sessionStorage.getItem('quizz_id')));
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const userId = sessionStorage.getItem('user_id');
@@ -67,7 +64,7 @@ export default function DisplayQuizz() {
           {quizzes && quizzes.map(quizz => (
             <div key={quizz._id}>
               <h1>{quizz.title}</h1>
-              <Displayquestion quizz={quizz} />
+              <Displayquestioncopy quizz={quizz} />
             </div>
           ))}
         </FormControl>

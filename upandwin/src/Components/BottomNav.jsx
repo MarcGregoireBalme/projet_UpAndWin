@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import {
-  Stars,
+  Star,
   Home,
   Search,
 } from '@material-ui/icons';
@@ -20,7 +21,7 @@ const useStyles = makeStyles(({
   appBar: {
     top: 'auto',
     bottom: 0,
-    backgroundColor: '#353535',
+    backgroundColor: '#272727',
     justifyContent: 'space-around',
   },
   grow: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles(({
   },
 }));
 
-function BottomNav() {
+function BottomNav({ dispatch }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -38,6 +39,11 @@ function BottomNav() {
 
   function handleClose() {
     setAnchorEl(null);
+  }
+
+  function clearSessionStorageLogOut() {
+    sessionStorage.clear();
+    dispatch({ type: 'LOGOUT', user_id: null });
   }
 
   return (
@@ -54,7 +60,7 @@ function BottomNav() {
             </IconButton>
             <div className={classes.grow} />
             <IconButton color="inherit">
-              <NavLink to="/Fav"><Stars color="inherit" /></NavLink>
+              <NavLink to="/Fav"><Star color="inherit" /></NavLink>
             </IconButton>
             <div className={classes.grow} />
             <IconButton color="inherit">
@@ -80,6 +86,14 @@ function BottomNav() {
             >
               <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
               <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
+              <MenuItem onClick={handleClose}><Link to="/Admin">Admin</Link></MenuItem>
+              {
+                sessionStorage.getItem('user_id') !== null ? (
+                  <MenuItem onClick={clearSessionStorageLogOut} className="Deconnexion">Déconnexion</MenuItem>
+                ) : (
+                  null
+                )
+              }
             </Menu>
 
           </Toolbar>
@@ -90,4 +104,8 @@ function BottomNav() {
   );
 }
 
-export default BottomNav;
+function mstp({ users }) {
+  return { userId: users.user_id };
+}
+
+export default connect(mstp)(BottomNav);

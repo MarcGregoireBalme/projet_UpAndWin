@@ -16,7 +16,6 @@ import ConnexionForm from './Components/ConnexionForm';
 import RegisterForm from './Components/RegisterForm';
 import DisplayQuizz from './Components/DisplayQuizz';
 
-
 function App() {
   return (
     <div className="App">
