@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Topnav.css';
 import { Link, NavLink, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class Topnav extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class Topnav extends Component {
 
   render() {
     const { game } = this.state;
+    const { userId } = this.props;
     if (game) {
       return <Redirect to={game} />;
     }
@@ -62,18 +64,18 @@ class Topnav extends Component {
           </div>
         </div>
         {
-          sessionStorage.getItem('user_id') !== null ? (
-            null
-          ) : (
+          !userId ? (
             <div className="Top-nav-right">
               <Link to="/Connexion">
                 <div className="connexionbutton">
                   <button type="button" className="Button">
-                      Connexion
+                    Connexion
                   </button>
                 </div>
               </Link>
             </div>
+          ) : (
+            null
           )
         }
       </div>
@@ -81,4 +83,8 @@ class Topnav extends Component {
   }
 }
 
-export default Topnav;
+function mstp({ users }) {
+  return { userId: users.user_id };
+}
+
+export default connect(mstp)(Topnav);

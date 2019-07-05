@@ -1,7 +1,11 @@
 a {
-  color: #EB220F;
+  color: #FFF;
 }
 
 a:hover {
   color: #EB4D0F;
+}
+
+.Deconnexion {
+  color: #EB220F !important;
 }

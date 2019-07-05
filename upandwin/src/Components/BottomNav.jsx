@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import {
   Star,
   Home,
@@ -28,7 +29,7 @@ const useStyles = makeStyles(({
   },
 }));
 
-function BottomNav() {
+function BottomNav({ dispatch }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -40,8 +41,9 @@ function BottomNav() {
     setAnchorEl(null);
   }
 
-  function clearSessionStorage() {
+  function clearSessionStorageLogOut() {
     sessionStorage.clear();
+    dispatch({ type: 'LOGOUT', user_id: null });
   }
 
   return (
@@ -82,15 +84,16 @@ function BottomNav() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
+              <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
+              <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
+              <MenuItem onClick={handleClose}><Link to="/Admin">Admin</Link></MenuItem>
               {
                 sessionStorage.getItem('user_id') !== null ? (
-                  <MenuItem onClick={clearSessionStorage}>Déconnexion</MenuItem>
+                  <MenuItem onClick={clearSessionStorageLogOut} className="Deconnexion">Déconnexion</MenuItem>
                 ) : (
                   null
                 )
               }
-              <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
-              <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
             </Menu>
 
           </Toolbar>
@@ -101,4 +104,8 @@ function BottomNav() {
   );
 }
 
-export default BottomNav;
+function mstp({ users }) {
+  return { userId: users.user_id };
+}
+
+export default connect(mstp)(BottomNav);
