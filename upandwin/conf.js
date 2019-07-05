@@ -372,7 +372,7 @@ myRouter.route('/usersquizztodo/:id')
       if (err) {
         res.send(err);
       }
-      res.json(users[0].quizz_idTodo);
+      res.json(users && users[0].quizz_idTodo);
     });
   });
 
