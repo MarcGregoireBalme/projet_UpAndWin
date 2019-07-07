@@ -24,7 +24,6 @@ const Video = ({ video }) => {
   const [quizzExists, setQuizzExists] = useState(['unEmpty']);
   const [quizzButton, setQuizzButton] = useState('none');
 
-
   const onPlayerReady = (event) => {
     event.target.pauseVideo();
   };
