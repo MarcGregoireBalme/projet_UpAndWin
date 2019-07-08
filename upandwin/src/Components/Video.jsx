@@ -7,7 +7,6 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import StarRating from './StarRating';
 
-
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
 const opts = {
@@ -113,7 +112,6 @@ const Video = ({ video }) => {
     <div>
       <div className="marginVideo">
         <h4 className="overflow-clip">{video.titre}</h4>
-        <h5>{a}</h5>
         <div>
           <StarRating
             moyenne={
@@ -136,15 +134,16 @@ const Video = ({ video }) => {
               avis :
               {video.notes.length - 1}
             </button>
-            <button type="button" onClick={handleClick} style={{ display: quizzButton }}>
+            <button className="quizzButton" type="button" onClick={handleClick} style={{ display: quizzButton }}>
               <NavLink to={`/quizz/${video.quizz_id}`}>
-                Quizz
+                Q
               </NavLink>
             </button>
           </div>
         </div>
       </div>
       <YouTube
+        className="yt"
         videoId={getVideoId(video.lien)}
         opts={opts}
         onReady={onPlayerReady}

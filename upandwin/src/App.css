@@ -55,7 +55,7 @@ button:focus {
 }
 
 .Page {
-  padding: 108px 24px 108px 24px;
+  padding: 108px 0px 108px 0px;
   min-height: 100vh;
 }
 
