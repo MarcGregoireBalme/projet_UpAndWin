@@ -24,6 +24,7 @@ class Create extends Component {
       questionTitle: '',
       answers: [''],
       submission: false,
+      quizz_id: '',
     };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.setQuizTitle = this.setQuizTitle.bind(this);
@@ -238,11 +239,7 @@ class Create extends Component {
         video_id: videoId,
         score: 10,
       })
-      .then(res => axios
-        .put(`http://localhost:3005/addQuizzId/${videoId}`, {
-          quizz_id: res.data,
-        }),
-      this.setState({
+      .then(this.setState({
         review: false,
         submission: true,
       }));

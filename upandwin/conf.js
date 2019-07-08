@@ -63,11 +63,10 @@ myRouter.route('/save-quiz')
     quizzes.qa = req.body.qa;
     quizzes.video_id = req.body.video_id;
 
-    quizzes.save(function (err, doc) {
-      if (err) {
-        res.send(err);
-      }
-      res.json(doc._id);
+    quizzes.save((err) => {
+      if (err) throw err;
+
+      res.status(201).send('submission success!');
     });
   });
 
@@ -176,7 +175,6 @@ myRouter.route('/videos')
     videos.nbVue = req.body.nbVue;
     videos.notes = [];
     videos.jeu = req.body.jeu;
-    videos.quizz_id = req.body.quizz_id;
     videos.difficulte = req.body.difficulte;
     videos.commentaires = [];
     videos.objectifs = [req.body.objectifs];
@@ -267,9 +265,9 @@ myRouter.route('/videosnotes/:video_id')
     });
   });
 
-myRouter.route('/addQuizzId/:videoId')
+/* myRouter.route('/addQuizzId/:videoId')
   .put(function (req, res) {
-    Video.findById(req.params.videoId, function (err, video) {
+    Video.findById(req.params.video_id, function (err, video) {
       if (err) {
         res.send(err);
       }
@@ -282,7 +280,7 @@ myRouter.route('/addQuizzId/:videoId')
         }
       });
     });
-  });
+  }); */
 
 // schema collection users
 const userSchema = mongoose.Schema({
@@ -372,7 +370,7 @@ myRouter.route('/usersquizztodo/:id')
       if (err) {
         res.send(err);
       }
-      res.json(users && users[0].quizz_idTodo);
+      res.json(users[0].quizz_idTodo);
     });
   });
 
