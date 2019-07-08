@@ -20,6 +20,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const Chatkit = require('@pusher/chatkit-server');
+
+const chatkit = new Chatkit.default({
+  instanceLocator: 'v1:us1:6619e0b2-a522-446b-b5a2-010b103f70fc',
+  key: 'e825e90c-e237-4807-9b65-1db015f89161:SwAVLXfamIHPNT5g4VUJ70WoIpBxTWS8n2RO4UuMOac=',
+});
+
+
 require('dotenv').config();
 
 
@@ -339,12 +347,15 @@ myRouter.route('/users')
     users.quizzAnswers = [];
     users.friends = [req.body.friends];
     users.wins = req.body.wins;
-    users.save(function (err) {
-      if (err) {
-        res.send(err);
-      }
-      res.json({ message: "Bravo, l'utilisateur est maintenant stockée en base de données" });
-    });
+    users.save()
+      .then(() => {
+        chatkit.createUser({
+          id: users.alias,
+          name: users.alias,
+        });
+      })
+      .then(() => res.status(201))
+      .catch(() => res.status(500));
   })
 
   .put(function (req, res) {
@@ -355,6 +366,34 @@ myRouter.route('/users')
       res.json(users);
     });
   });
+
+// chatbox routes
+
+/* myRouter.route('/users/userschatbox')
+  .post(function (req, res) {
+    const { username } = req.body;
+    chatkit
+      .createUser({
+        id: username,
+        name: username,
+      })
+      .then(() => res.sendStatus(201))
+      .catch((error) => {
+        if (error.error === 'services/chatkit/user_already_exists') {
+          res.sendStatus(200);
+        } else {
+          res.status(error.status).json(error);
+        }
+      });
+  }); */
+
+myRouter.route('/authenticate')
+  .post(function (req, res) {
+    const authData = chatkit.authenticate({ userId: req.query.user_id });
+    res.status(authData.status).send(authData.body);
+  });
+
+// fin chatbox routes
 
 myRouter.route('/users/:alias')
   .get(function (req, res) {
