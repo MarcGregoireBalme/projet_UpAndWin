@@ -38,6 +38,10 @@
   transition: 0.5s;
 }
 
+button:focus {
+  outline: none !important;
+}
+
 .SecondButton {
   min-width: 100%;
   background-color: #84250B;
@@ -53,4 +57,9 @@
 .Page {
   padding: 108px 24px 108px 24px;
   min-height: 100vh;
+}
+
+.Orange {
+  font-weight: bold;
+  color: #EB1A0F;
 }
