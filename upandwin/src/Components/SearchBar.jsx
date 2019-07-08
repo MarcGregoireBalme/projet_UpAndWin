@@ -4,6 +4,7 @@ import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import RatingStar from './StarRating';
+import Video from './Video';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -48,17 +49,7 @@ class SearchBar extends Component {
               )
                 .map(video => (
                   <div key={video.titre} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
-                    <h3>{video.titre}</h3>
-                    <RatingStar />
-                    <iframe
-                      title={video.titre}
-                      width="100%"
-                      height="250px"
-                      src={video.lien}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+                    <Video video={video} />
                   </div>
                 ))}
             </div>
