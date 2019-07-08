@@ -14,6 +14,7 @@ export default class VideoForm extends React.Component {
     jeu: '',
     show: false,
     newVidId: '',
+    quizz_id: '5d08ef30e3dfb9241fb360f7',
   };
 
   handleChange = (e) => {
@@ -23,7 +24,7 @@ export default class VideoForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const {
-      titre, auteur, lien, duree, categorie, jeu,
+      titre, auteur, lien, duree, categorie, jeu, quizz_id,
     } = this.state;
 
     axios
@@ -34,6 +35,7 @@ export default class VideoForm extends React.Component {
         duree,
         categorie,
         jeu,
+        quizz_id,
       })
       .then(res => this.setState({
         newVidId: res.data,
