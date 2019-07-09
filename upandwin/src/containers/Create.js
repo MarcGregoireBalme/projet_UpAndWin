@@ -24,7 +24,6 @@ class Create extends Component {
       questionTitle: '',
       answers: [''],
       submission: false,
-      quizz_id: '',
     };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.setQuizTitle = this.setQuizTitle.bind(this);
@@ -239,7 +238,11 @@ class Create extends Component {
         video_id: videoId,
         score: 10,
       })
-      .then(this.setState({
+      .then(res => axios
+        .put(`http://localhost:3005/addQuizzId/${videoId}`, {
+          quizz_id: res.data,
+        }),
+      this.setState({
         review: false,
         submission: true,
       }));
@@ -252,7 +255,7 @@ class Create extends Component {
       questionTitle, message, editQuizTitleState, editQuizTitle, quiz,
     } = this.state;
     const renderAnswers = answers.map((ans, idx) => (
-      <div className="answerContainer" key={idx}>
+      <div className="Row" key={idx}>
 
         <input
           type="text"
@@ -277,64 +280,74 @@ class Create extends Component {
         {!title && !review
           && (
             <div>
-              <h1>Create a Quiz</h1>
-              <p className="subtitle">You can create a new quiz here. Add as many questions as you want, you can always edit them later! However, after submission you cannot edit the quiz.</p>
-              <p className="inputTitles">Enter a Title for Your Quiz:</p>
-              <input
-                type="text"
-                name="quizTitle"
-                placeholder="Enter a Title"
-                value={quizTitle}
-                onChange={this.handleInput}
-                className="questionTitle"
-              />
-              <button
-                type="submit"
-                className="addOption"
-                onClick={this.setQuizTitle}
-              >
-                Submit Title and Add Questions
-              </button>
+              <h3>Ajouter un quizz à cette vidéo</h3>
+              <div className="Row">
+                Titre
+                <input
+                  type="text"
+                  name="quizTitle"
+                  placeholder="Titre"
+                  value={quizTitle}
+                  onChange={this.handleInput}
+                  className="questionTitle"
+                />
+              </div>
+              <div className="RowButton">
+                <button
+                  type="submit"
+                  className="Button"
+                  onClick={this.setQuizTitle}
+                >
+                  Étape suivante
+                </button>
+              </div>
             </div>
           )}
 
         {title && !review && !submission
           && (
             <div className="createQuizContainer">
-              <h1>Add Questions for Your Quiz:</h1>
-              <p className="inputTitles">Question:</p>
-              <input
-                type="text"
-                name="questionTitle"
-                placeholder="Enter a Question"
-                value={questionTitle}
-                onChange={this.handleInput}
-                className="questionTitle"
-              />
-              <p className="inputTitles">Answers:</p>
-              {renderAnswers}
-              <button
-                type="submit"
-                className="addOption"
-                onClick={this.addAnswerOption}
-              >
-                Add Another Option
-              </button>
-              <div className="proceedWrapper">
+              <h3>Ajouter des questions</h3>
+              <div className="Row">
+                Question
+                <input
+                  type="text"
+                  name="questionTitle"
+                  placeholder="Question ?"
+                  value={questionTitle}
+                  onChange={this.handleInput}
+                  className="questionTitle"
+                />
+              </div>
+              <div className="Row">
+                Réponses
+                {renderAnswers}
+              </div>
+              <div className="RowButton">
                 <button
                   type="submit"
-                  className="proceedBtn"
+                  className="Button"
+                  onClick={this.addAnswerOption}
+                >
+                  Ajouter une réponse
+                </button>
+              </div>
+              <div className="RowButton">
+                <button
+                  type="submit"
+                  className="Button"
                   onClick={this.submitAndContinue}
                 >
-                  Submit and Add Another
-
+                  Ajouter une question
                 </button>
+              </div>
+              <div className="RowButton">
                 <button
                   type="submit"
-                  className="proceedBtn"
+                  className="Button"
                   onClick={this.submitAndReview}
                 >
-                  Submit and Review
+                  Valider le quizz
                 </button>
               </div>
             </div>
@@ -347,7 +360,7 @@ class Create extends Component {
           && (
             <div>
 
-              <h1 className="review">Review Your Quiz</h1>
+              <h1 className="review">Review Your Quizz</h1>
 
               {!editQuizTitleState
 
@@ -461,8 +474,20 @@ class Create extends Component {
               {quiz.questions.length === 0 && <h2 className="errorMsg">You have to enter some questions to submit a new quiz!</h2>}
 
               <div className="reviewBtnControl">
-                <button type="submit" className="reviewAddBtn" onClick={this.reviewAddQuestion}>Add Another Question</button>
-                <button type="submit" className="saveBtn" onClick={this.saveQuiz}>Save and Submit Your Quiz</button>
+                <button
+                  type="submit"
+                  className="Button"
+                  onClick={this.saveQuiz}
+                >
+                  Ajouter le quizz
+                </button>
+                <button
+                  type="submit"
+                  className="SecondButton"
+                  onClick={this.reviewAddQuestion}
+                >
+                  Modifier le quizz
+                </button>
               </div>
 
             </div>

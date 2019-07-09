@@ -1,4 +1,4 @@
-const users = (state = {}, action) => {
+const users = (state = { user_id: null }, action) => {
   switch (action.type) {
     case 'CREATE_USER':
       return {
@@ -7,10 +7,19 @@ const users = (state = {}, action) => {
         email: action.email,
         password: action.password,
       };
-    case 'CHECK_USER':
+    // case 'CHECK_USER':
+    //   return {
+    //     ...state,
+    //     ...action.payload,
+    //   };
+    case 'LOGIN':
       return {
         ...state,
-        user: action.payload,
+        ...action.payload,
+      };
+    case 'LOGOUT':
+      return {
+        user_id: null,
       };
     default:
       return state;

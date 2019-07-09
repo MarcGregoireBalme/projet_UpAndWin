@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap);
 
 .App {
-  background-color: #1d1d1d;
+  background-color: #000;
   color: white;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
@@ -38,8 +38,28 @@
   transition: 0.5s;
 }
 
+button:focus {
+  outline: none !important;
+}
+
+.SecondButton {
+  min-width: 100%;
+  background-color: #84250B;
+  border-style: none;
+  border-radius: 50px;
+  padding: 12px 24px 12px;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+}
+
 .Page {
-  padding-top: 108px;
-  padding-bottom: 108px;
+  padding: 108px 0px 108px 0px;
   min-height: 100vh;
+}
+
+.Orange {
+  font-weight: bold;
+  color: #EB1A0F;
 }

@@ -13,16 +13,28 @@ class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profils: [],
+      // profils: {},
+      // alias: '',
     };
   }
+
+  /* componentWillMount() {
+    const { alias } = this.state;
+    axios
+      .get(`http://localhost:3005/users/${alias}`)
+      .then((res) => {
+        console.log(res.data);
+          this.setState({
+          profils: res.data.users,
+        });
+      });
+  } */
 
   render() {
     const { users } = this.props;
     const { profils } = this.state;
-    console.log(users);
     return (
-      <div className="profil">
+      <div className="Page">
         <Topnav />
         <div>
           <h1 style={{ paddingTop: '10vh' }}>{users ? users.user.alias : profils[0]}</h1>
@@ -51,9 +63,8 @@ class Profil extends Component {
   }
 }
 
-const mstp = function users(...state) {
-  console.log('mstp', ...state);
+function mstp(state) {
   return { ...state };
-};
+}
 
 export default connect(mstp)(Profil);

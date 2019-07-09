@@ -1,15 +1,23 @@
 .WinRoot {
-    align-items: 'center';
-    width: 100;
-    display: flex;
+  align-items: 'center';
+  width: 100;
+  display: flex;
+}
 
+.WinInputContainer {
+  padding: 24px;
 }
 
 .WinInput {
-    margin-left: 8;
-    flex: 1;
+  min-width: 100%;
+  background-color: white;
+  border-style: none;
+  border-radius: 50px;
+  padding: 12px 24px 12px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
 }
 
 .searchbar {
-    padding-top: 5em;
+  padding-top: 5em;
 }
