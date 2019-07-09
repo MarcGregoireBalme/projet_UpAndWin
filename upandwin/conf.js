@@ -144,7 +144,7 @@ const videoSchema = mongoose.Schema({
   date: Date,
   lien: String,
   duree: String,
-  nbVue: Number,
+  nbVues: Number,
   notes: [Number],
   jeu: String,
   difficulte: String,
@@ -173,7 +173,7 @@ myRouter.route('/videos')
     videos.date = req.body.date;
     videos.lien = req.body.lien;
     videos.duree = req.body.duree;
-    videos.nbVue = req.body.nbVue;
+    videos.nbVues = 0;
     videos.notes = [];
     videos.jeu = req.body.jeu;
     videos.quizz_id = req.body.quizz_id;
@@ -227,7 +227,7 @@ myRouter.route('/videosid/:video_id')
       videos.date = req.body.date;
       videos.lien = req.body.lien;
       videos.duree = req.body.duree;
-      videos.nbVue = req.body.nbVue;
+      videos.nbVues = req.body.nbVues;
       videos.notes = [];
       videos.jeu = req.body.jeu;
       videos.difficulte = req.body.difficulte;
@@ -363,6 +363,32 @@ myRouter.route('/users/:alias')
         res.send(err);
       }
       res.json(users);
+    });
+  });
+
+myRouter.route('/nbvues/:videosId')
+  .get(function (req, res) {
+    Video.find({ _id: req.params.videosId }, function (err, videos) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(videos[0].nbVues);
+    });
+  })
+
+  .put(function (req, res) {
+    Video.find({ _id: req.params.videosId }, function (err, video) {
+      if (err) {
+        res.send(err);
+      }
+      video[0].nbVues += 1;
+      video[0].save(function (error) {
+        if (error) {
+          res.send(error);
+        } else {
+          res.json({ status: 'ok', Vues: video[0].nbVues });
+        }
+      });
     });
   });
 

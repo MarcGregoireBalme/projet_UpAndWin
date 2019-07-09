@@ -38,7 +38,7 @@ h1 {
   height: 55px;
 }
 
-.marginVideo{
+.marginVideo {
   margin-bottom: 20px;
 }
 
@@ -46,8 +46,10 @@ h1 {
   border-radius: 100px;
   width: 40px;
   height: 40px;
+  position: absolute;
+  right: 30px;
+  top: 70px;
   background-color: #EB220F;
-  margin-left: 80%;
   font-weight: bold;
   font-size: 1.4em; 
 }
