@@ -6,6 +6,17 @@ a {
   color: #EB220F !important;
 }
 
+h1 {
+  text-align: left;
+  font-size: 1.4em !important;
+  font-weight: 700 !important;
+}
+h4 {
+  text-align: left;
+  font-size: 1.4em !important;
+  font-weight: 300 !important;
+}
+
 .App {
   background-color: #000;
   color: white;
@@ -61,7 +72,7 @@ button:focus {
 
 .Page {
   margin: 24px;
-  padding: 108px 0px 60px 0px;
+  padding: 86px 0px 60px 0px;
   min-height: 100vh;
 }
 

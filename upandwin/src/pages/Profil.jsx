@@ -1,47 +1,53 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../App.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
 // import axios from 'axios';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
 
-class Profil extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // profils: {},
-      // alias: '',
-    };
+
+function Profil({ dispatch }) {
+  function clearSessionStorageLogOut() {
+    sessionStorage.clear();
+    dispatch({ type: 'LOGOUT', user_id: null });
   }
 
-  /* componentWillMount() {
-    const { alias } = this.state;
-    axios
-      .get(`http://localhost:3005/users/${alias}`)
-      .then((res) => {
-        console.log(res.data);
-          this.setState({
-          profils: res.data.users,
-        });
-      });
-  } */
-
-  render() {
-    // const { users } = this.props;
-    // const { profils } = this.state;
-    return (
+  // const { users } = this.props;
+  // const { profils } = this.state;
+  return (
+    <div>
+      <Topnav />
       <div className="Page">
-        <Topnav />
         <h1>Mon profil</h1>
-        <BottomNav />
+        {
+          sessionStorage.getItem('user_id') !== null ? (
+            <button
+              type="button"
+              onClick={clearSessionStorageLogOut}
+              className="SecondButton"
+            >
+              Déconnexion
+            </button>
+          ) : (
+            null
+          )
+        }
+
+        {/* <Link to="/Profil">Mon profil</Link>
+        <Link to="/GamerStatistics">Mes statistiques</Link>
+        <Link to="/Admin">Admin</Link>
+          */}
       </div>
-    );
-  }
+      <BottomNav />
+    </div>
+  );
 }
 
 function mstp(state) {
-  return { ...state };
+  return {
+    ...state,
+    userId: state.users.user_id,
+  };
 }
 
 export default connect(mstp)(Profil);

@@ -134,7 +134,12 @@ const Video = ({ video }) => {
               avis :
               {video.notes.length - 1}
             </button>
-            <button className="quizzButton" type="button" onClick={handleClick} style={{ display: quizzButton }}>
+            <button
+              className="quizzButton"
+              type="button"
+              onClick={handleClick}
+              style={{ display: quizzButton }}
+            >
               <NavLink to={`/quizz/${video.quizz_id}`}>
                 Q
               </NavLink>

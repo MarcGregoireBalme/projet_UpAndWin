@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   Home,
@@ -7,14 +7,11 @@ import {
   Search,
   Person,
 } from '@material-ui/icons';
-import MenuIcon from '@material-ui/icons/Menu';
 import {
   makeStyles,
   AppBar,
   Toolbar,
   IconButton,
-  Menu,
-  MenuItem,
 } from '@material-ui/core';
 
 const useStyles = makeStyles(({
@@ -31,15 +28,6 @@ const useStyles = makeStyles(({
 
 function BottomNav({ dispatch }) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  function handleClick(event) {
-    setAnchorEl(event.currentTarget);
-  }
-
-  function handleClose() {
-    setAnchorEl(null);
-  }
 
   function clearSessionStorageLogOut() {
     sessionStorage.clear();
