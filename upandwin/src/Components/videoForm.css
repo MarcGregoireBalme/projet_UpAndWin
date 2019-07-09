@@ -6,10 +6,6 @@
   height: 25vh;
 }
 
-.Divider {
-  border-bottom: solid 3px rgba(255, 255, 255, 0.66);
-}
-
 .Row {
   margin-bottom: 12px;
 }

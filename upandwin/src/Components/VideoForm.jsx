@@ -55,7 +55,7 @@ export default class VideoForm extends React.Component {
     return (
       <div>
 
-        <div className="VideoFormContainer">
+        <div>
           <h3 style={{ textAlign: 'left' }}>Ajouter une vidéo</h3>
           <form onSubmit={this.handleSubmit}>
             <div className="Row">

@@ -2,9 +2,10 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
-  Star,
   Home,
+  Star,
   Search,
+  Person,
 } from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import {
@@ -15,7 +16,6 @@ import {
   Menu,
   MenuItem,
 } from '@material-ui/core';
-import './BottomNav.css';
 
 const useStyles = makeStyles(({
   appBar: {
@@ -67,34 +67,9 @@ function BottomNav({ dispatch }) {
               <NavLink to="/Search"><Search /></NavLink>
             </IconButton>
             <div className={classes.grow} />
-            <IconButton
-              aria-controls="burger-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-              edge="start"
-              color="inherit"
-            >
-              <MenuIcon />
+            <IconButton color="inherit">
+              <NavLink to="/Profil"><Person /></NavLink>
             </IconButton>
-
-            <Menu
-              id="burger-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
-              <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
-              <MenuItem onClick={handleClose}><Link to="/Admin">Admin</Link></MenuItem>
-              {
-                sessionStorage.getItem('user_id') !== null ? (
-                  <MenuItem onClick={clearSessionStorageLogOut} className="Deconnexion">Déconnexion</MenuItem>
-                ) : (
-                  null
-                )
-              }
-            </Menu>
 
           </Toolbar>
         </AppBar>

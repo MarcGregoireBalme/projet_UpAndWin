@@ -1,5 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap);
 
+a {
+  color: #FFF !important;
+} a:hover {
+  color: #EB220F !important;
+}
+
 .App {
   background-color: #000;
   color: white;
@@ -31,8 +37,7 @@
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
   font-size: 1em;
-}
-.Button:hover {
+} .Button:hover {
   cursor: pointer;
   background-image: linear-gradient(45deg, #eb1a0f, #eb1a0f);
   transition: 0.5s;
@@ -55,11 +60,16 @@ button:focus {
 }
 
 .Page {
-  padding: 108px 0px 108px 0px;
+  margin: 24px;
+  padding: 108px 0px 60px 0px;
   min-height: 100vh;
 }
 
 .Orange {
   font-weight: bold;
   color: #EB1A0F;
+}
+
+.Divider {
+  border-bottom: solid 3px rgba(255, 255, 255, 0.66);
 }
