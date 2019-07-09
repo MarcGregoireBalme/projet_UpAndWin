@@ -12,7 +12,7 @@ ReactFC.fcRoot(FusionCharts, Charts);
 const dataSource = {
   chart: {
     caption: 'Skill Analysis of Harry',
-    subcaption: 'Scale: 1 (low) to 5 (high)',
+    subcaption: 'Scale: 0 (low) to 100 (high)',
     theme: 'fusion',
     showlegend: '0',
     showdivlinevalues: '0',

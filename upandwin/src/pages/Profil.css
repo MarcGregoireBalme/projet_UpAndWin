@@ -6,7 +6,12 @@
 
 .comp{
   font-size: 0.8rem;
-  margin-left: -80px;
+  margin-left: 80px;
   color: rgb(102, 176, 245);
   margin-top: 10px;
+}
+
+.submitProfil{
+  position: relative;
+  left: 40%;
 }

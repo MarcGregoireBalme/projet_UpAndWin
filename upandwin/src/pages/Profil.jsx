@@ -13,8 +13,8 @@ class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profils: {},
-      alias: '',
+      // profils: {},
+      // alias: '',
     };
   }
 
@@ -31,17 +31,11 @@ class Profil extends Component {
   } */
 
   render() {
-    const { users } = this.props;
-    const { profils } = this.state;
+    // const { users } = this.props;
+    // const { profils } = this.state;
     return (
       <div className="Page">
         <Topnav />
-        <div>
-          <h1 style={{ paddingTop: '10vh' }}>{users ? users.user.alias : profils[0]}</h1>
-        </div>
-        <div>
-          {users ? users.user.alias : 'Guest'}
-        </div>
         <br />
         <div className="comp">Teamplay</div>
         <InputSlider id="Slider1" />
@@ -56,7 +50,7 @@ class Profil extends Component {
         <div className="comp">Prise d’initiative</div>
         <InputSlider id="Slider6" />
 
-        <button type="button">Soumettre</button>
+        <button type="button" className="submitProfil">Soumettre</button>
         <BottomNav />
       </div>
     );
