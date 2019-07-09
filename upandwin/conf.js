@@ -397,8 +397,9 @@ myRouter.route('/usersquizztodo/:id')
     User.find({ _id: req.params.id }, function (err, users) {
       if (err) {
         res.send(err);
+      } else if (users) {
+        res.json(users[0].quizz_idTodo);
       }
-      res.json(users[0].quizz_idTodo);
     });
   });
 
@@ -418,8 +419,8 @@ myRouter.route('/usersubmitquizz/:user_id')
       if (err) {
         res.send(err);
       }
-      user.quizzAnswers.push(req.body.quizzAnswer);
-      user.quizz_id.push(req.body.quizz_id);
+      user.quizzAnswers.addToSet(req.body.quizzAnswer);
+      user.quizz_id.addToSet(req.body.quizz_id);
       user.quizz_idTodo = req.body.quizz_idTodo;
       user.save(function (error) {
         if (error) {
@@ -437,8 +438,8 @@ myRouter.route('/userreceivequizz/:user_id')
       if (err) {
         res.send(err);
       }
-      user.quizz_idTodo.push(req.body.quizz_id);
-      user.viewed_videos.push(req.body.video_id);
+      user.quizz_idTodo.addToSet(req.body.quizz_id);
+      user.viewed_videos.addToSet(req.body.video_id);
       user.save(function (error) {
         if (error) {
           res.send(error);
