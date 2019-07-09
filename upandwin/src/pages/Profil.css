@@ -3,3 +3,10 @@
   text-align: center;
   color: white;
 }
+
+.comp{
+  font-size: 0.8rem;
+  margin-left: -80px;
+  color: rgb(102, 176, 245);
+  margin-top: 10px;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import './displayVideo.css';
@@ -6,7 +7,6 @@ import YouTube from 'react-youtube';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import StarRating from './StarRating';
-
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
