@@ -1,10 +1,13 @@
 import React from 'react';
-// import fusioncharts from 'fusioncharts';
-import charts from 'fusioncharts/fusioncharts.charts';
-import ReactFusioncharts from 'react-fusioncharts';
+// import ReactDOM from 'react-dom';
+import FusionCharts from 'fusioncharts';
+import Charts from 'fusioncharts/fusioncharts.charts';
+import ReactFC from 'react-fusioncharts';
+
+ReactFC.fcRoot(FusionCharts, Charts);
 
 // Resolves charts dependancy
-charts(FusionCharts);
+// charts(FusionCharts);
 
 const dataSource = {
   chart: {
@@ -69,10 +72,11 @@ const dataSource = {
   ],
 };
 
+// eslint-disable-next-line react/prefer-stateless-function
 class MyComponent extends React.Component {
   render() {
     return (
-      <ReactFusioncharts
+      <ReactFC
         type="radar"
         width="100%"
         height="100%"

@@ -13,8 +13,8 @@ class Profil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // profils: {},
-      // alias: '',
+      profils: {},
+      alias: '',
     };
   }
 
