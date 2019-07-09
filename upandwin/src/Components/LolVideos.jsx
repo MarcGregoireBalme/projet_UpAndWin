@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import RatingStar from './StarRating';
+import AddToFav from './AddToFav';
 
 class LolVideosComponent extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class LolVideosComponent extends Component {
                 <h3>{video.titre}</h3>
                 <div>
                   <RatingStar />
+                  <AddToFav />
                   <span className="nbVote">
                     votes :
                     {video.notes.length - 1}
