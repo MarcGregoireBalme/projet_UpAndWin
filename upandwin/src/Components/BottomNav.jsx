@@ -1,21 +1,21 @@
-import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import {
-  Star,
   Home,
+  Favorite,
   Search,
+  ChatBubble,
+  Person,
+  Publish,
 } from '@material-ui/icons';
-import MenuIcon from '@material-ui/icons/Menu';
 import {
   makeStyles,
   AppBar,
   Toolbar,
   IconButton,
-  Menu,
-  MenuItem,
 } from '@material-ui/core';
-import './BottomNav.css';
 
 const useStyles = makeStyles(({
   appBar: {
@@ -29,80 +29,66 @@ const useStyles = makeStyles(({
   },
 }));
 
-function BottomNav({ dispatch }) {
+function BottomNav() {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [users, setUsers] = useState({ users: [] });
 
-  function handleClick(event) {
-    setAnchorEl(event.currentTarget);
-  }
-
-  function handleClose() {
-    setAnchorEl(null);
-  }
-
-  function clearSessionStorageLogOut() {
-    sessionStorage.clear();
-    dispatch({ type: 'LOGOUT', user_id: null });
-  }
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios(
+        'http://localhost:3005/users',
+      );
+      setUsers(result.data);
+    }
+    fetchData();
+  }, []);
 
   return (
     <div>
-
-      <div />
-
       <React.Fragment>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
-
             <IconButton color="inherit">
               <NavLink to="/"><Home color="inherit" /></NavLink>
-            </IconButton>
-            <div className={classes.grow} />
-            <IconButton color="inherit">
-              <NavLink to="/Fav"><Star color="inherit" /></NavLink>
             </IconButton>
             <div className={classes.grow} />
             <IconButton color="inherit">
               <NavLink to="/Search"><Search /></NavLink>
             </IconButton>
             <div className={classes.grow} />
-            <IconButton
-              aria-controls="burger-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-              edge="start"
-              color="inherit"
-            >
-              <MenuIcon />
+            <IconButton color="inherit">
+              <NavLink to="/chat"><ChatBubble /></NavLink>
             </IconButton>
+            <div className={classes.grow} />
+            {users[0] ? users
+              .filter(user => (
+                user._id === sessionStorage.getItem('user_id')
+              ))
+              .map(user => (
+                <div key={user._id}>
+                  {
+                    user.admin === true ? (
+                      <IconButton color="inherit">
+                        <NavLink to="/Admin"><Publish color="inherit" /></NavLink>
+                      </IconButton>
+                    ) : (
+                      <IconButton color="inherit">
+                        <NavLink to="/Fav"><Favorite color="inherit" /></NavLink>
+                      </IconButton>
+                    )
+                  }
 
-            <Menu
-              id="burger-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
-              <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
-              <MenuItem onClick={handleClose}><Link to="/chat">ChatBox</Link></MenuItem>
-              <MenuItem onClick={handleClose}><Link to="/Admin">Admin</Link></MenuItem>
-              {
-                sessionStorage.getItem('user_id') !== null ? (
-                  <NavLink to="/">
-                    <MenuItem onClick={clearSessionStorageLogOut} className="Deconnexion">Déconnexion</MenuItem>
-                  </NavLink>
-                ) : (
-                  null
-                )
-              }
-            </Menu>
-
+                </div>
+              ))
+              : null
+            }
+            <div className={classes.grow} />
+            <IconButton color="inherit">
+              <NavLink to="/Profil"><Person /></NavLink>
+            </IconButton>
           </Toolbar>
         </AppBar>
       </React.Fragment>
-
     </div>
   );
 }
