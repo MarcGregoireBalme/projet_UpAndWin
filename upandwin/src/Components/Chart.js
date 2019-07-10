@@ -11,7 +11,7 @@ ReactFC.fcRoot(FusionCharts, Charts);
 
 const dataSource = {
   chart: {
-    caption: 'Skill Analysis of Harry',
+    caption: 'Skill Analysis',
     subcaption: 'Scale: 0 (low) to 100 (high)',
     theme: 'fusion',
     showlegend: '0',
@@ -25,22 +25,22 @@ const dataSource = {
     {
       category: [
         {
-          label: 'Communication',
+          label: 'Teamplay',
         },
         {
-          label: 'Punctuality',
+          label: 'Sang-froid',
         },
         {
-          label: 'Problem Solving',
+          label: 'Analise',
         },
         {
-          label: 'Meeting Deadlines',
+          label: 'Compétitivité',
         },
         {
-          label: 'Team Player',
+          label: 'Experience',
         },
         {
-          label: 'Technical Knowledge',
+          label: 'Prise d’initiative',
         },
       ],
     },
@@ -50,7 +50,7 @@ const dataSource = {
       seriesname: 'User Ratings',
       data: [
         {
-          value: '3',
+          value: '1',
         },
         {
           value: '3',
@@ -73,7 +73,7 @@ const dataSource = {
 };
 
 // eslint-disable-next-line react/prefer-stateless-function
-class MyComponent extends React.Component {
+class Chart extends React.Component {
   render() {
     return (
       <ReactFC
@@ -87,4 +87,4 @@ class MyComponent extends React.Component {
   }
 }
 
-export default MyComponent;
+export default Chart;

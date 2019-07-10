@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
 import InputSlider from '../Components/Slider';
+import Chart from '../Components/Chart';
 
 class Profil extends Component {
   constructor(props) {
@@ -51,6 +52,8 @@ class Profil extends Component {
         <InputSlider id="Slider6" />
 
         <button type="button" className="submitProfil">Soumettre</button>
+
+        <Chart />
         <BottomNav />
       </div>
     );
