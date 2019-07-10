@@ -29,7 +29,7 @@ const Video = ({ video, state }) => {
     event.target.pauseVideo();
   };
 
-  console.log(sessionStorage.getItem('user_id'), 'userID');
+  // console.log(sessionStorage.getItem('user_id'), 'userID');
 
   useEffect(() => {
     const userId = sessionStorage.getItem('user_id');
