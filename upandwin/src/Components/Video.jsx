@@ -6,6 +6,7 @@ import YouTube from 'react-youtube';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import StarRating from './StarRating';
+import AddToFav from './AddToFav';
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
@@ -120,6 +121,7 @@ const Video = ({ video }) => {
                 : 3
             }
           />
+          <AddToFav const vId={video._id} />
           <div className="nbVote">
             <div>
               moyenne :

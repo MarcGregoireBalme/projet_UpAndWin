@@ -16,12 +16,13 @@ class Fav extends Component {
   }
 
   componentWillMount() {
-    axios.get('http://localhost:3005/videos')
-      .then((res) => {
-        this.setState({ videos: res.data });
-      });
+    const userId = sessionStorage.getItem('user_id');
+    return axios.post('http://localhost:3005/givefavs', {
+      userId,
+    }).then((res) => {
+      this.setState({ videos: res.data });
+    });
   }
-
 
   render() {
     const { videos } = this.state;

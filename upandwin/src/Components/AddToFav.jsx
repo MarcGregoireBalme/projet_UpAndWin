@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class AddToFav extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+    };
   }
 
   handleClick = () => {
-    console.log('1234');
+    const { vId } = this.props;
+    const userId = sessionStorage.getItem('user_id');
+    axios.put(`http://localhost:3005/addfav/${userId}`, {
+      video_id: vId,
+    });
   };
 
   render() {

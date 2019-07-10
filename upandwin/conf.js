@@ -6,6 +6,7 @@
 
 const express = require('express');
 
+
 const app = express();
 const multer = require('multer');
 
@@ -433,11 +434,11 @@ myRouter.route('/videos/:jeu').get(function (req, res) {
 // Add to Fav Video
 
 myRouter.route('/addfav/:user_id').get(function (req, res) {
-  Video.find({ _id: req.params.videos_id }, function (err, videos) {
+  User.find({ _id: req.params.user_id }, function (err, user) {
     if (err) {
       res.send(err);
     }
-    res.json(videos);
+    res.json(user);
   });
 });
 
@@ -446,9 +447,7 @@ myRouter.route('/addfav/:user_id').put(function (req, res) {
     if (err) {
       res.send(err);
     }
-    const x = user.fav_videos;
-    console.log(x)
-    user.fav_videos.push(req.body.video_id);
+    user.fav_videos.addToSet(req.body.video_id);
     user.save(function (error) {
       if (error) {
         res.send(error);
@@ -458,6 +457,30 @@ myRouter.route('/addfav/:user_id').put(function (req, res) {
     });
   });
 });
+
+myRouter.route('/givefav/:user_id').get(function (req, res) {
+  User.findById(req.params.user_id, function (err, user) {
+    if (err) {
+      res.send(err);
+    }
+    res.json(user.fav_videos);
+  });
+});
+
+myRouter.route('/givefavs').post(function (req, res) {
+  User.findById(req.body.userId, function (err, user) {
+    if (err) {
+      res.send(err);
+    }
+    return Video.find({ _id: { $in: user.fav_videos } }, function (err, video) {
+      if (err) {
+        res.send(err);
+      }
+      return res.json(video);
+    });
+  });
+});
+
 
 app.use(myRouter);
 app.listen(port, hostname, function () {
