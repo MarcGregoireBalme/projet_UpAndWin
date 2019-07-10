@@ -9,7 +9,6 @@ class StarRating extends React.Component {
   constructor(props) {
     super(props);
     const { video, videoId } = this.props;
-    // console.log(video.notes);
     this.state = {
       rating: video.notes[0] ? Math.round(video.notes.reduce(reducer) / (video.notes.length)) : 3,
       vId: videoId,

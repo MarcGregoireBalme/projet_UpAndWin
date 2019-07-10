@@ -305,6 +305,7 @@ const userSchema = mongoose.Schema({
   quizzAnswers: Array,
   friends: Array,
   wins: Number,
+  attribut: Array,
 });
 
 const User = mongoose.model('User', userSchema);
