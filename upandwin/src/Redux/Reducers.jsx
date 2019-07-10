@@ -7,11 +7,6 @@ const users = (state = { user_id: null }, action) => {
         email: action.email,
         password: action.password,
       };
-    // case 'CHECK_USER':
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   };
     case 'LOGIN':
       return {
         ...state,

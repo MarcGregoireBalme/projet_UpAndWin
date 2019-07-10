@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import '../App.css';
 import './GamerStatistics.css';
-import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Topnav from '../Components/Topnav';
@@ -24,7 +24,6 @@ class GamerStatistics extends Component {
   }
 
   render() {
-    console.log(sessionStorage.getItem('user_id'));
     const { users } = this.state;
     return (
       <div className="App">

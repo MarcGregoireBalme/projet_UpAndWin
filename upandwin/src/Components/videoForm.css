@@ -5,19 +5,3 @@
 .modal-content {
   height: 25vh;
 }
-
-.Row {
-  margin-bottom: 12px;
-}
-
-.RowButton {
-  margin-top: 24px;
-  margin-bottom: 24px;
-}
-
-input {
-  min-width: 100%;
-  border-style: none;
-  border-radius: 5px;
-  padding: 6px 12px 6px 12px ;
-}

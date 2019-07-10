@@ -1,43 +1,97 @@
-import React from 'react';
-import '../App.css';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import '../App.css';
 import BottomNav from '../Components/BottomNav';
 import ProfilNav from '../Components/ProfilNav';
 import Topnav from '../Components/Topnav';
 
-
 function Profil({ dispatch }) {
+  const [users, setUsers] = useState({ users: [] });
+  const [quizz, setQuizz] = useState({ quizz: [] });
+
   function clearSessionStorageLogOut() {
     sessionStorage.clear();
     dispatch({ type: 'LOGOUT', user_id: null });
   }
-  // const { users } = this.props;
-  // const { profils } = this.state;
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios(
+        'http://localhost:3005/users',
+      );
+      setUsers(result.data);
+      const quizzResult = await axios(
+        'http://localhost:3005/quizzes',
+      );
+      setQuizz(quizzResult.data);
+    }
+    fetchData();
+  }, []);
+
   return (
     <div>
       <Topnav />
       <ProfilNav />
       <div style={{ paddingTop: '72px' }} />
       <div className="Page">
-        <h1>Mon profil</h1>
+        {users[0] && quizz[0] ? users
+          .filter(user => (
+            user._id === sessionStorage.getItem('user_id')
+          ))
+          .map(user => (
+            <div key={user._id}>
+              <div className="Row36">
+                <p className="Orange">Alias</p>
+                <h1>{user.alias}</h1>
+                <div className="Divider" />
+              </div>
+              <div className="Row36">
+                <p className="Orange">E-mail</p>
+                <h1>{user.email}</h1>
+                <div className="Divider" />
+              </div>
+
+              {
+                user.quizz_idTodo.length > 0 ? (
+                  <div className="Row36">
+                    <p className="Orange">{`(${user.quizz_idTodo.length}) quizz disponibles`}</p>
+                    <div>
+                      {
+                        user.quizz_idTodo
+                          .map(quizzID => (
+                            <div className="Row" key={quizzID}>
+
+                              <h1>
+                                {(quizz
+                                  .filter(obj => (obj._id === `${quizzID}`))
+                                  .map(obj => obj.title))}
+                              </h1>
+
+                              <Link to={`/quizz/${quizzID}`}>
+                                <button
+                                  type="button"
+                                  className="Button"
+                                >
+                                  Faire le quizz
+                                </button>
+                              </Link>
+                            </div>
+                          ))
+                      }
+                    </div>
+                    <div className="Divider" />
+                  </div>
+                ) : (
+                  null
+                )
+              }
+
+            </div>
+          ))
+          : null}
         {/* <Link to="/Admin">Admin</Link> */}
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Curabitur venenatis consequat libero, euismod molestie nulla eleifend in.
-        Praesent pellentesque enim id odio pretium, quis efficitur magna semper.
-        Suspendisse cursus scelerisque tortor eget aliquet.
-        Aliquam rutrum ligula sapien, eget laoreet ante lacinia quis.
-        Aenean pharetra lorem enim, eu eleifend urna consequat sed.
-        Integer hendrerit felis non vestibulum cursus.
-        Pellentesque in sem sed ligula volutpat facilisis vitae at erat.
-        Praesent ut mi nisi. Praesent dictum, sapien quis dignissim rutrum,
-        nisi libero tempor enim, consequat fermentum lacus est in justo.
-        Maecenas malesuada lectus in libero dapibus ultrices.
-        Etiam feugiat arcu sit amet convallis mattis. Vivamus a ipsum ut arcu lacinia congue.
-        Donec malesuada nisl erat, nec tincidunt nulla dictum sit amet. Vivamus a auctor leo.
-        Ut id odio viverra, pharetra leo vel, sagittis velit.
-        Donec at eleifend velit, nec pulvinar diam.
-        </p>
         {
           sessionStorage.getItem('user_id') !== null ? (
             <button

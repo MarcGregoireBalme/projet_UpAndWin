@@ -356,9 +356,9 @@ myRouter.route('/users')
     });
   });
 
-myRouter.route('/users/:alias')
+myRouter.route('/users/:id')
   .get(function (req, res) {
-    User.find({ alias: req.params.alias }, function (err, users) {
+    User.find({ _id: req.params.id }, function (err, users) {
       if (err) {
         res.send(err);
       }
