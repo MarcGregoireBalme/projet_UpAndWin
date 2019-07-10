@@ -33,8 +33,27 @@ function Profil({ dispatch }) {
   return (
     <div>
       <Topnav />
-      <ProfilNav />
-      <div style={{ paddingTop: '72px' }} />
+      {users[0] ? users
+        .filter(user => (
+          user._id === sessionStorage.getItem('user_id')
+        ))
+        .map(user => (
+          <div key={user._id}>
+            {
+              user.admin === true ? (
+                null
+              ) : (
+                <div>
+                  <div style={{ paddingTop: '72px' }} />
+                  <ProfilNav />
+                </div>
+              )
+            }
+
+          </div>
+        ))
+        : null
+      }
       <div className="Page">
         {users[0] && quizz[0] ? users
           .filter(user => (
@@ -56,7 +75,7 @@ function Profil({ dispatch }) {
               {
                 user.quizz_idTodo.length > 0 ? (
                   <div className="Row36">
-                    <p className="Orange">{`(${user.quizz_idTodo.length}) quizz disponibles`}</p>
+                    <p className="Orange">{`(${user.quizz_idTodo.length}) quizz disponible(s)`}</p>
                     <div>
                       {
                         user.quizz_idTodo
