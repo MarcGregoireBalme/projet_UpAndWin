@@ -113,7 +113,6 @@ class ConnexionForm extends Component {
             </button>
           </FormGroup>
         </Form>
-        <BottomNav />
       </div>
     );
   }

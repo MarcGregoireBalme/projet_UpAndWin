@@ -57,7 +57,7 @@ function BottomNav() {
             </IconButton>
             <div className={classes.grow} />
             <IconButton color="inherit">
-              <NavLink to="/"><ChatBubble /></NavLink>
+              <NavLink to="/chat"><ChatBubble /></NavLink>
             </IconButton>
             <div className={classes.grow} />
             {users[0] ? users

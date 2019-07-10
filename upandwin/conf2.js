@@ -15,18 +15,12 @@ const fs = require('fs');
 const path = require('path');
 
 const hostname = 'localhost';
-const port = 3005;
+const port = 3050;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
-const Chatkit = require('@pusher/chatkit-server');
-
-const chatkit = new Chatkit.default({
-  instanceLocator: 'v1:us1:6619e0b2-a522-446b-b5a2-010b103f70fc',
-  key: 'e825e90c-e237-4807-9b65-1db015f89161:SwAVLXfamIHPNT5g4VUJ70WoIpBxTWS8n2RO4UuMOac=',
-});
-
+const { MongoClient } = require('mongodb');
+const { ObjectID } = require('mongodb');
 
 require('dotenv').config();
 
@@ -48,10 +42,58 @@ db.once('open', function () {
   console.log('Connexion à la base OK');
 });
 
+
 // Body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const url = 'mongodb+srv://projet3:DUvCXkR3nkGnitF3@upandwin-fx8ww.mongodb.net/upandwin';
+MongoClient.connect(url, function (err, dbm) {
+  if (err) throw err;
+  app.listen(3070, () => {
+    console.log('app working on 3070');
+  });
+});
+
+app.get('/user/:alias', (req, res) => {
+  MongoClient.connect(url, function (err, dbm) {
+    const dbmo = dbm.db('upandwin');
+    dbmo.collection('users').find({ alias: req.params.alias }).toArray((err, result) => {
+      if (err) throw err;
+      res.send(result);
+    });
+  });
+});
+
+app.put('/user/:alias', (req, res) => {
+  MongoClient.connect(url, function (err, dbm) {
+    if (err) throw err;
+    const dbmo = dbm.db('upandwin');
+    dbmo.collection('users').updateOne({ alias: req.params.alias }, { $addToSet: { games: req.body.games } }, function (err, result) {
+      if (err) throw err;
+      res.send(result.result);
+    });
+  });
+});
+
+app.put('/usersquizztodo/:id', (req, res) => {
+  MongoClient.connect(url, function (err, dbm) {
+    if (err) throw err;
+    const dbmo = dbm.db('upandwin');
+    const id = ObjectID(req.params.id);
+    dbmo.collection('users').updateOne({ _id: id },
+      {
+        $addToSet: {
+          viewed_videos: ObjectID(req.body.video_id),
+          quizz_idTodo: ObjectID(req.body.quizz_id),
+        },
+      },
+      function (err, result) {
+        if (err) throw err;
+        res.json({ 'nombre de modifications : ': result.result });
+      });
+  });
+});
 
 // Schema collection quizzs
 const quizzesSchema = mongoose.Schema({
@@ -152,7 +194,7 @@ const videoSchema = mongoose.Schema({
   date: Date,
   lien: String,
   duree: String,
-  nbVues: Number,
+  nbVue: Number,
   notes: [Number],
   jeu: String,
   difficulte: String,
@@ -181,7 +223,7 @@ myRouter.route('/videos')
     videos.date = req.body.date;
     videos.lien = req.body.lien;
     videos.duree = req.body.duree;
-    videos.nbVues = 0;
+    videos.nbVue = req.body.nbVue;
     videos.notes = [];
     videos.jeu = req.body.jeu;
     videos.quizz_id = req.body.quizz_id;
@@ -235,7 +277,7 @@ myRouter.route('/videosid/:video_id')
       videos.date = req.body.date;
       videos.lien = req.body.lien;
       videos.duree = req.body.duree;
-      videos.nbVues = req.body.nbVues;
+      videos.nbVue = req.body.nbVue;
       videos.notes = [];
       videos.jeu = req.body.jeu;
       videos.difficulte = req.body.difficulte;
@@ -347,15 +389,12 @@ myRouter.route('/users')
     users.quizzAnswers = [];
     users.friends = [req.body.friends];
     users.wins = req.body.wins;
-    users.save()
-      .then(() => {
-        chatkit.createUser({
-          id: users.alias,
-          name: users.alias,
-        });
-      })
-      .then(() => res.status(201))
-      .catch(() => res.status(500));
+    users.save(function (err) {
+      if (err) {
+        res.send(err);
+      }
+      res.json({ message: "Bravo, l'utilisateur est maintenant stockée en base de données" });
+    });
   })
 
   .put(function (req, res) {
@@ -367,34 +406,6 @@ myRouter.route('/users')
     });
   });
 
-// chatbox routes
-
-/* myRouter.route('/users/userschatbox')
-  .post(function (req, res) {
-    const { username } = req.body;
-    chatkit
-      .createUser({
-        id: username,
-        name: username,
-      })
-      .then(() => res.sendStatus(201))
-      .catch((error) => {
-        if (error.error === 'services/chatkit/user_already_exists') {
-          res.sendStatus(200);
-        } else {
-          res.status(error.status).json(error);
-        }
-      });
-  }); */
-
-myRouter.route('/authenticate')
-  .post(function (req, res) {
-    const authData = chatkit.authenticate({ userId: req.query.user_id });
-    res.status(authData.status).send(authData.body);
-  });
-
-// fin chatbox routes
-
 myRouter.route('/users/:alias')
   .get(function (req, res) {
     User.find({ alias: req.params.alias }, function (err, users) {
@@ -405,40 +416,13 @@ myRouter.route('/users/:alias')
     });
   });
 
-myRouter.route('/nbvues/:videosId')
-  .get(function (req, res) {
-    Video.find({ _id: req.params.videosId }, function (err, videos) {
-      if (err) {
-        res.send(err);
-      }
-      res.json(videos[0].nbVues);
-    });
-  })
-
-  .put(function (req, res) {
-    Video.find({ _id: req.params.videosId }, function (err, video) {
-      if (err) {
-        res.send(err);
-      }
-      video[0].nbVues += 1;
-      video[0].save(function (error) {
-        if (error) {
-          res.send(error);
-        } else {
-          res.json({ status: 'ok', Vues: video[0].nbVues });
-        }
-      });
-    });
-  });
-
 myRouter.route('/usersquizztodo/:id')
   .get(function (req, res) {
     User.find({ _id: req.params.id }, function (err, users) {
       if (err) {
         res.send(err);
-      } else if (users) {
-        res.json(users[0].quizz_idTodo);
       }
+      res.json(users && users[0].quizz_idTodo);
     });
   });
 
@@ -458,8 +442,8 @@ myRouter.route('/usersubmitquizz/:user_id')
       if (err) {
         res.send(err);
       }
-      user.quizzAnswers.addToSet(req.body.quizzAnswer);
-      user.quizz_id.addToSet(req.body.quizz_id);
+      user.quizzAnswers.push(req.body.quizzAnswer);
+      user.quizz_id.push(req.body.quizz_id);
       user.quizz_idTodo = req.body.quizz_idTodo;
       user.save(function (error) {
         if (error) {
@@ -477,8 +461,8 @@ myRouter.route('/userreceivequizz/:user_id')
       if (err) {
         res.send(err);
       }
-      user.quizz_idTodo.addToSet(req.body.quizz_id);
-      user.viewed_videos.addToSet(req.body.video_id);
+      user.quizz_idTodo.push(req.body.quizz_id);
+      user.viewed_videos.push(req.body.video_id);
       user.save(function (error) {
         if (error) {
           res.send(error);
