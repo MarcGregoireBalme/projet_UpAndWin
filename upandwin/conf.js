@@ -1,4 +1,12 @@
+/* eslint-disable no-multi-spaces */
+/* eslint-disable new-cap */
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable no-console */
+/* eslint-disable no-param-reassign */
+/* eslint-disable array-callback-return */
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable func-names */
+
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 /* eslint-disable array-callback-return */
@@ -19,6 +27,14 @@ const port = 3005;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
+const Chatkit = require('@pusher/chatkit-server');
+
+const chatkit = new Chatkit.default({
+  instanceLocator: 'v1:us1:6619e0b2-a522-446b-b5a2-010b103f70fc',
+  key:
+    'e825e90c-e237-4807-9b65-1db015f89161:SwAVLXfamIHPNT5g4VUJ70WoIpBxTWS8n2RO4UuMOac=',
+});
 
 require('dotenv').config();
 
@@ -181,6 +197,15 @@ myRouter
     });
   });
 
+myRouter.route('/videos/:jeu').get(function (req, res) {
+  Video.find({ jeu: req.params.jeu }, function (err, videos) {
+    if (err) {
+      res.send(err);
+    }
+    res.json(videos);
+  });
+});
+
 myRouter
   .route('/videosid/:video_id')
   .get(function (req, res) {
@@ -280,7 +305,7 @@ const userSchema = mongoose.Schema({
   registration_date: Date,
   games: Array,
   viewed_videos: [mongoose.Schema.Types.ObjectId],
-  fav_videos: [mongoose.Schema.Types.ObjectId],
+  fav_videos: Array,
   badges: Array,
   quizz_idTodo: [mongoose.Schema.Types.ObjectId],
   quizz_id: [mongoose.Schema.Types.ObjectId],
@@ -322,16 +347,17 @@ myRouter
     users.quizz_id = [req.body.quizz_id];
     users.quizzAnswers = [];
     users.friends = [req.body.friends];
-    users.wins = 0;
-    users.save(function (err) {
-      if (err) {
-        res.send(err);
-      }
-      res.json({
-        message:
-          "Bravo, l'utilisateur est maintenant stockée en base de données",
-      });
-    });
+    users.wins = req.body.wins;
+    users
+      .save()
+      .then(() => {
+        chatkit.createUser({
+          id: users.alias,
+          name: users.alias,
+        });
+      })
+      .then(() => res.status(201))
+      .catch(() => res.status(500));
   })
 
   .put(function (req, res) {
@@ -343,6 +369,33 @@ myRouter
     });
   });
 
+// chatbox routes
+
+/* myRouter.route('/users/userschatbox')
+  .post(function (req, res) {
+    const { username } = req.body;
+    chatkit
+      .createUser({
+        id: username,
+        name: username,
+      })
+      .then(() => res.sendStatus(201))
+      .catch((error) => {
+        if (error.error === 'services/chatkit/user_already_exists') {
+          res.sendStatus(200);
+        } else {
+          res.status(error.status).json(error);
+        }
+      });
+  }); */
+
+myRouter.route('/authenticate').post(function (req, res) {
+  const authData = chatkit.authenticate({ userId: req.query.user_id });
+  res.status(authData.status).send(authData.body);
+});
+
+// fin chatbox routes
+
 myRouter.route('/users/:alias').get(function (req, res) {
   User.find({ alias: req.params.alias }, function (err, users) {
     if (err) {
@@ -352,42 +405,6 @@ myRouter.route('/users/:alias').get(function (req, res) {
   });
 });
 
-myRouter.route('/usersquizztodo/:id').get(function (req, res) {
-  User.find({ _id: req.params.id }, function (err, users) {
-    if (err) {
-      res.send(err);
-    } else if (users) {
-      res.json(users[0].quizz_idTodo);
-    }
-  });
-});
-
-myRouter.route('/user/:userId').put(function (req, res) {
-  User.findByIdAndUpdate(req.params.userId, req.body, function (err, user) {
-    if (err) {
-      res.send(err);
-    }
-    res.json({ status: 'ok', updatedUser: user });
-  });
-});
-
-myRouter.route('/usersubmitquizz/:user_id').put(function (req, res) {
-  User.findById(req.params.user_id, function (err, user) {
-    if (err) {
-      res.send(err);
-    }
-    user.quizzAnswers.addToSet(req.body.quizzAnswer);
-    user.quizz_id.addToSet(req.body.quizz_id);
-    user.quizz_idTodo = req.body.quizz_idTodo;
-    user.save(function (error) {
-      if (error) {
-        res.send(error);
-      } else {
-        res.json({ status: 'ok', MODIF: req.body });
-      }
-    });
-  });
-});
 myRouter
   .route('/nbvues/:videosId')
   .get(function (req, res) {
@@ -425,6 +442,33 @@ myRouter.route('/usersquizztodo/:id').get(function (req, res) {
   });
 });
 
+myRouter.route('/user/:userId').put(function (req, res) {
+  User.findByIdAndUpdate(req.params.userId, req.body, function (err, user) {
+    if (err) {
+      res.send(err);
+    }
+    res.json({ status: 'ok', updatedUser: user });
+  });
+});
+
+myRouter.route('/usersubmitquizz/:user_id').put(function (req, res) {
+  User.findById(req.params.user_id, function (err, user) {
+    if (err) {
+      res.send(err);
+    }
+    user.quizzAnswers.addToSet(req.body.quizzAnswer);
+    user.quizz_id.addToSet(req.body.quizz_id);
+    user.quizz_idTodo = req.body.quizz_idTodo;
+    user.save(function (error) {
+      if (error) {
+        res.send(error);
+      } else {
+        res.json({ status: 'ok', MODIF: req.body });
+      }
+    });
+  });
+});
+
 myRouter.route('/userreceivequizz/:user_id').put(function (req, res) {
   User.findById(req.params.user_id, function (err, user) {
     if (err) {
@@ -456,15 +500,6 @@ myRouter.route('/sendFile').put(function (req, res) {
     } else {
       res.send('Fichier uploadé avec succès');
     }
-  });
-});
-
-myRouter.route('/videos/:jeu').get(function (req, res) {
-  Video.find({ jeu: req.params.jeu }, function (err, videos) {
-    if (err) {
-      res.send(err);
-    }
-    res.json(videos);
   });
 });
 
