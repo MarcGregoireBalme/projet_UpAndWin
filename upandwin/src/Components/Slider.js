@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function InputSlider(props) {
+export default function InputSlider() {
   const classes = useStyles();
   const [value, setValue] = React.useState(30);
 
