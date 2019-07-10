@@ -76,9 +76,6 @@ const Video = ({ video, state }) => {
       axios.put(`http://localhost:3005/nbvues/${video._id}`, {
       });
     }
-    /* console.log(video._id, 'vid');
-    console.log(inDB, 'inDB');
-    console.log(player.getDuration(), 'durée'); */
   };
 
   const videoOnEnd = (event) => {
@@ -144,8 +141,16 @@ const Video = ({ video, state }) => {
         videoId={getVideoId(video.lien)}
         opts={opts}
         onReady={onPlayerReady}
-        onPause={videoOnPause}
-        onEnd={videoOnEnd}
+        onPause={
+          sessionStorage.getItem('user_id') !== null ? (
+            { videoOnPause }
+          ) : null
+        }
+        onEnd={
+          sessionStorage.getItem('user_id') !== null ? (
+            { videoOnEnd }
+          ) : null
+        }
       />
     </div>
   );
