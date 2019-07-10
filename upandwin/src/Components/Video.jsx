@@ -5,6 +5,7 @@ import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import YouTube from 'react-youtube';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import StarRating from './StarRating';
 
@@ -19,7 +20,7 @@ const opts = {
   },
 };
 
-const Video = ({ video }) => {
+const Video = ({ video, state }) => {
   const [inDB, setInDB] = useState(null);
   const [quizzExists, setQuizzExists] = useState(['unEmpty']);
   const [quizzButton, setQuizzButton] = useState('none');
@@ -29,7 +30,7 @@ const Video = ({ video }) => {
     event.target.pauseVideo();
   };
 
-  console.log(sessionStorage.getItem('user_id'), 'userID');
+  // console.log(sessionStorage.getItem('user_id'), 'userID');
 
   useEffect(() => {
     const userId = sessionStorage.getItem('user_id');
@@ -117,17 +118,26 @@ const Video = ({ video }) => {
       <div className="marginVideo">
         <h4 className="overflow-clip">{video.titre}</h4>
         <div>
-          <StarRating
-            video={video}
-            vue={nbVues}
-          />
-          <div className="nbVote">
-            <button className="quizzButton" type="button" onClick={handleClick} style={{ display: quizzButton }}>
-              <NavLink to={`/quizz/${video.quizz_id}`}>
-                Q
-              </NavLink>
-            </button>
-          </div>
+          {
+            sessionStorage.getItem('user_id') !== null ? (
+              <>
+                <StarRating
+                  video={video}
+                  vue={nbVues}
+                />
+                <div className="nbVote">
+                  <button className="quizzButton" type="button" onClick={handleClick} style={{ display: quizzButton }}>
+                    <NavLink to={`/quizz/${video.quizz_id}`}>
+                      Q
+                    </NavLink>
+                  </button>
+                </div>
+              </>
+            ) : (
+              null
+            )
+
+          }
         </div>
       </div>
       <YouTube
@@ -142,4 +152,8 @@ const Video = ({ video }) => {
   );
 };
 
-export default Video;
+function mstp(state) {
+  return { ...state };
+}
+
+export default connect(mstp)(Video);
