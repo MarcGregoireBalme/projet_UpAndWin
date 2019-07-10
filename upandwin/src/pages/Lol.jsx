@@ -28,7 +28,7 @@ class Lol extends Component {
       <div>
         <Topnav />
         <LoLFilter videos={videos} />
-        <div style={{ paddingTop: '40vh' }} />
+        <div style={{ paddingTop: '168px' }} />
         <LolVideos videos={videos} />
         <BottomNav />
       </div>

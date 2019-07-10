@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LolDrawer from './LolDrawer';
 import './LoLFilter.css';
 
 class LoLFilterComponent extends Component {
@@ -8,12 +7,13 @@ class LoLFilterComponent extends Component {
     super(props);
     this.state = {
       prevScrollpos: window.pageYOffset,
-      // ChoisirLane: false,
-      // TopLane: false,
-      // MidLane: false,
-      // BotLane: false,
-      // Jungle: false,
-      // Support: false,
+      ChoisirLane: false,
+      TopLane: false,
+      MidLane: false,
+      BotLane: false,
+      Jungle: false,
+      Support: false,
+      ShowFilters: false,
     };
   }
 
@@ -38,52 +38,70 @@ class LoLFilterComponent extends Component {
     });
   }
 
-  // handleCheck = (event) => {
-  //   const { dispatch } = this.props;
-  //   const { target } = event;
-  //   const value = target.type === 'checkbox' ? target.checked : target.value;
-  //   const { name } = target;
-  //   this.setState({
-  //     [name]: value,
-  //   },
-  //   () => {
-  //     dispatch({
-  //       type: 'HANDLE_CHECK',
-  //       lolFilter: this.state,
-  //     });
-  //   });
-  // }
+  handleCheck = (event) => {
+    const { dispatch } = this.props;
+    const { target } = event;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.id;
+    this.setState({
+      [name]: value,
+    },
+    () => {
+      dispatch({
+        type: 'HANDLE_CHECK',
+        lolFilter: this.state,
+      });
+    });
+  }
+
+  showFilters = () => {
+    const { ShowFilters } = this.state;
+    this.setState({
+      ShowFilters: !ShowFilters,
+    });
+  }
 
   render() {
     const { videos } = this.props;
-    // const filters = ['ChoisirLane', 'BotLane', 'Jungle', 'MidLane', 'Support', 'TopLane'];
+    const { ShowFilters } = this.state;
+    const filters = ['ChoisirLane', 'BotLane', 'Jungle', 'MidLane', 'Support', 'TopLane'];
     return (
       <div id="Filter-nav">
-        <div className="Top-nav-left">
-          <div className="Filter-logo" />
-        </div>
-        <div>
-          {/* {filters
-            .map(filter => (
-              <div key={filter}>
-                {filter}
-                &nbsp;(
-                {(videos.filter(video => video.lane.includes(filter)).length)}
-                ) &nbsp;
-                <input
-                  name={filter}
-                  type="checkbox"
-                  checked={window[filter]}
-                  onChange={this.handleCheck}
-                />
-                <br />
-              </div>
-            ))
-          } */}
-        </div>
-        <div className="Top-nav-right">
-          <LolDrawer videos={videos} />
-        </div>
+        <button
+          type="button"
+          className={ShowFilters ? 'Filter-button-off' : 'Filter-button-on'}
+          onClick={this.showFilters}
+        />
+        {ShowFilters && (
+          <div className="Filter-nav-list-container">
+            <div className="Filter-nav-list">
+              <h2>Filtrer par</h2>
+              {filters
+                .map(filter => (
+                  <div className="Filter-nav-row" key={filter}>
+                    <div>
+                      {filter}
+                      <span className="Orange">
+                        &nbsp;(
+                        {(videos.filter(video => video.lane.includes(filter)).length)}
+                        ) &nbsp;
+                      </span>
+                    </div>
+                    <label htmlFor={filter} className="switch">
+                      <input
+                        id={filter}
+                        type="checkbox"
+                        onChange={this.handleCheck}
+                        checked={this.state[filter]}
+                      />
+                      <span className="slider round" />
+                    </label>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        )}
       </div>
     );
   }

@@ -111,7 +111,6 @@ class RegisterForm extends Component {
             </div>
           </Modal.Body>
         </Modal>
-        <BottomNav />
       </div>
     );
   }

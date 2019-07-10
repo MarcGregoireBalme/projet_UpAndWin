@@ -52,16 +52,22 @@ class Topnav extends Component {
           <NavLink to="/">
             <div className="Logo" />
           </NavLink>
-          <div className="Game-selection">
-            <select
-              id="pet-select"
-              onChange={e => this.handleGameChange(e.target.value)}
-            >
-              <option value="">Jeux</option>
-              <option value="/Lol">League of Legends</option>
-              <option value="/Wow">World of Warcraft</option>
-            </select>
-          </div>
+          {
+            sessionStorage.getItem('user_id') !== null ? (
+              <div className="Game-selection">
+                <select
+                  id="pet-select"
+                  onChange={e => this.handleGameChange(e.target.value)}
+                >
+                  <option value="">Jeux</option>
+                  <option value="/Lol">League of Legends</option>
+                  <option value="/Wow">World of Warcraft</option>
+                </select>
+              </div>
+            ) : (
+              <div style={{ backgroundColor: '#272727', height: '80px' }} />
+            )
+          }
         </div>
         {
           !userId ? (
