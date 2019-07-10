@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './Topnav.css';
+import './LoLFilter.css';
 
 class LoLFilterComponent extends Component {
   constructor(props) {

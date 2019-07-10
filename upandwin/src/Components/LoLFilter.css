@@ -1,0 +1,127 @@
+#Filter-nav {
+  background-image: linear-gradient(180deg, rgba(0,0,0,1), rgba(0,0,0,0));
+  position: fixed;
+  top: 84px;
+  width: 100vw;
+  height: 84px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: top 0.6s;
+}
+
+.Filter-button-on {
+  margin: 12px 24px 24px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  background-image: url("../Images/filter.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  transition: 0.6s;
+}
+.Filter-button-off {
+  margin: 12px 24px 24px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  background-image: url("../Images/left-arrow.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  transition: 0.6s;
+}
+
+.Filter-list-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7)
+}
+
+.Filter-list {
+  padding: 12px 24px 24px 0px;
+  position: fixed;
+  left: 96px;
+  width: 100%;
+}
+
+.Filter-row {
+  color: white;
+  font-size: 1.2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 66vw;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.Filter-check {
+  min-width: auto !important;
+} 
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #666;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #fff;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%
+}
+
+input:checked + .slider {
+  background-image: linear-gradient(45deg, #eb1a0f, #eb4d0f);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}

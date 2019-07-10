@@ -3,8 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   Home,
-  Star,
+  Favorite,
   Search,
+  ChatBubble,
   Person,
 } from '@material-ui/icons';
 import {
@@ -26,29 +27,20 @@ const useStyles = makeStyles(({
   },
 }));
 
-function BottomNav({ dispatch }) {
+function BottomNav() {
   const classes = useStyles();
-
-  function clearSessionStorageLogOut() {
-    sessionStorage.clear();
-    dispatch({ type: 'LOGOUT', user_id: null });
-  }
 
   return (
     <div>
-
-      <div />
-
       <React.Fragment>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
-
             <IconButton color="inherit">
               <NavLink to="/"><Home color="inherit" /></NavLink>
             </IconButton>
             <div className={classes.grow} />
             <IconButton color="inherit">
-              <NavLink to="/Fav"><Star color="inherit" /></NavLink>
+              <NavLink to="/Fav"><Favorite color="inherit" /></NavLink>
             </IconButton>
             <div className={classes.grow} />
             <IconButton color="inherit">
@@ -56,13 +48,15 @@ function BottomNav({ dispatch }) {
             </IconButton>
             <div className={classes.grow} />
             <IconButton color="inherit">
+              <NavLink to="/"><ChatBubble /></NavLink>
+            </IconButton>
+            <div className={classes.grow} />
+            <IconButton color="inherit">
               <NavLink to="/Profil"><Person /></NavLink>
             </IconButton>
-
           </Toolbar>
         </AppBar>
       </React.Fragment>
-
     </div>
   );
 }
