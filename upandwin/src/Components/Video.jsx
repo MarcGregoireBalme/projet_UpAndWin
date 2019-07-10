@@ -78,6 +78,8 @@ const Video = ({ video, state }) => {
     }
   };
 
+  const userConnected = sessionStorage.getItem('user_id');
+
   const videoOnEnd = (event) => {
     const player = event.target;
     const userId = sessionStorage.getItem('user_id');
@@ -141,16 +143,8 @@ const Video = ({ video, state }) => {
         videoId={getVideoId(video.lien)}
         opts={opts}
         onReady={onPlayerReady}
-        onPause={
-          sessionStorage.getItem('user_id') !== null ? (
-            { videoOnPause }
-          ) : null
-        }
-        onEnd={
-          sessionStorage.getItem('user_id') !== null ? (
-            { videoOnEnd }
-          ) : null
-        }
+        onPause={videoOnPause}
+        onEnd={videoOnEnd}
       />
     </div>
   );
