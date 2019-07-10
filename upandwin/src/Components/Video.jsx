@@ -62,38 +62,40 @@ const Video = ({ video, state }) => {
   const videoOnPause = (event) => {
     const player = event.target;
     const userId = sessionStorage.getItem('user_id');
-    if (
-      player.getDuration() - player.getCurrentTime() < 40
-      && (!quizzExists.includes(video.quizz_id) || quizzExists.length === 0) && !inDB
-    ) {
-      setInDB(1);
-      setNbVues(nbVues + 1);
-      setQuizzButton('inline');
-      axios.put(`http://localhost:3005/userreceivequizz/${userId}`, {
-        video_id: video._id,
-        quizz_id: video.quizz_id,
-      });
-      axios.put(`http://localhost:3005/nbvues/${video._id}`, {
-      });
+    if (sessionStorage.getItem('user_id') !== null) {
+      if (
+        player.getDuration() - player.getCurrentTime() < 40
+        && (!quizzExists.includes(video.quizz_id) || quizzExists.length === 0) && !inDB
+      ) {
+        setInDB(1);
+        setNbVues(nbVues + 1);
+        setQuizzButton('inline');
+        axios.put(`http://localhost:3005/userreceivequizz/${userId}`, {
+          video_id: video._id,
+          quizz_id: video.quizz_id,
+        });
+        axios.put(`http://localhost:3005/nbvues/${video._id}`, {
+        });
+      }
     }
   };
-
-  const userConnected = sessionStorage.getItem('user_id');
 
   const videoOnEnd = (event) => {
     const player = event.target;
     const userId = sessionStorage.getItem('user_id');
-    if (
-      !quizzExists.includes(video.quizz_id) && !inDB
-    ) {
-      axios.put(`http://localhost:3005/userreceivequizz/${userId}`, {
-        video_id: video._id,
-        quizz_id: video.quizz_id,
-      });
-      axios.put(`http://localhost:3005/nbvues/${video._id}`, {
-      });
-      showQuizzButton();
-      setNbVues(nbVues + 1);
+    if (sessionStorage.getItem('user_id') !== null) {
+      if (
+        !quizzExists.includes(video.quizz_id) && !inDB
+      ) {
+        axios.put(`http://localhost:3005/userreceivequizz/${userId}`, {
+          video_id: video._id,
+          quizz_id: video.quizz_id,
+        });
+        axios.put(`http://localhost:3005/nbvues/${video._id}`, {
+        });
+        showQuizzButton();
+        setNbVues(nbVues + 1);
+      }
     }
   };
 
