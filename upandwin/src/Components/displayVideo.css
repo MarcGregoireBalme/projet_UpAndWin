@@ -38,9 +38,22 @@ h1 {
   height: 55px;
 }
 
-.marginVideo{
-  margin-bottom: 50px;
+.marginVideo {
+  margin-bottom: 20px;
 }
 
-/*.carousel {
-}*/
+.quizzButton {
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 30px;
+  top: 70px;
+  background-color: #EB220F;
+  font-weight: bold;
+  font-size: 1.4em; 
+}
+
+.yt {
+  margin-bottom: 20px;
+}

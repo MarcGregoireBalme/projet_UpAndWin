@@ -28,7 +28,13 @@ class Home extends Component {
         <Topnav />
         <Addvertising />
         <DisplayVideoHorizontal videos={videos} />
-        <BottomNav />
+        {
+          sessionStorage.getItem('user_id') !== null ? (
+            <BottomNav />
+          ) : (
+            <div style={{ backgroundColor: '#272727', height: '80px' }} />
+          )
+        }
       </div>
     );
   }

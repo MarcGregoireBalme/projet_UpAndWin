@@ -90,7 +90,9 @@ function BottomNav({ dispatch }) {
               <MenuItem onClick={handleClose}><Link to="/Admin">Admin</Link></MenuItem>
               {
                 sessionStorage.getItem('user_id') !== null ? (
-                  <MenuItem onClick={clearSessionStorageLogOut} className="Deconnexion">Déconnexion</MenuItem>
+                  <NavLink to="/">
+                    <MenuItem onClick={clearSessionStorageLogOut} className="Deconnexion">Déconnexion</MenuItem>
+                  </NavLink>
                 ) : (
                   null
                 )
