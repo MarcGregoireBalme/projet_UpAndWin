@@ -86,6 +86,7 @@ function BottomNav({ dispatch }) {
             >
               <MenuItem onClick={handleClose}><Link to="/Profil">Mon profil</Link></MenuItem>
               <MenuItem onClick={handleClose}><Link to="/GamerStatistics">Mes statistiques</Link></MenuItem>
+              <MenuItem onClick={handleClose}><Link to="/chat">ChatBox</Link></MenuItem>
               <MenuItem onClick={handleClose}><Link to="/Admin">Admin</Link></MenuItem>
               {
                 sessionStorage.getItem('user_id') !== null ? (
