@@ -110,35 +110,36 @@ const Video = ({ video }) => {
 
   return (
     <div>
-      <div className="marginVideo">
-        <h4 className="overflow-clip">{video.titre}</h4>
-        <div>
-          {sessionStorage.getItem('user_id') !== null ? (
-            <>
+      <div className="Row48">
+        <YouTube
+          videoId={getVideoId(video.lien)}
+          opts={opts}
+          onReady={onPlayerReady}
+          onPause={videoOnPause}
+          onEnd={videoOnEnd}
+        />
+        <h2>{video.titre}</h2>
+        {sessionStorage.getItem('user_id') !== null ? (
+          <>
+            <div className="VideoInfos">
               <StarRating video={video} vue={nbVues} />
               <AddToFav vId={video._id} />
-              <div className="nbVote">
+            </div>
+            <div>
+              <NavLink to={`/quizz/${video.quizz_id}`}>
                 <button
-                  className="quizzButton"
+                  className="QuizButton"
                   type="button"
                   onClick={handleClick}
                   style={{ display: quizzButton }}
                 >
-                  <NavLink to={`/quizz/${video.quizz_id}`}>Q</NavLink>
+                  Faire le quiz
                 </button>
-              </div>
-            </>
-          ) : null}
-        </div>
+              </NavLink>
+            </div>
+          </>
+        ) : null}
       </div>
-      <YouTube
-        className="yt"
-        videoId={getVideoId(video.lien)}
-        opts={opts}
-        onReady={onPlayerReady}
-        onPause={videoOnPause}
-        onEnd={videoOnEnd}
-      />
     </div>
   );
 };

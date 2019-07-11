@@ -60,12 +60,10 @@ class AddToFav extends Component {
   render() {
     const { testbdd } = this.state;
     return (
-      <div className="fav">
-        <Favorite
-          className={testbdd ? 'FavOn' : 'FavOff'}
-          onClick={() => this.modifFav()}
-        />
-      </div>
+      <Favorite
+        className={testbdd ? 'FavOn' : 'FavOff'}
+        onClick={() => this.modifFav()}
+      />
     );
   }
 }

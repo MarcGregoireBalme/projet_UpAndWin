@@ -11,6 +11,12 @@ h1 {
   font-size: 1.4em !important;
   font-weight: 700 !important;
 }
+h2 {
+  text-align: left;
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  margin-bottom: 0px !important;
+}
 h4 {
   text-align: left;
   font-size: 1.4em !important;
@@ -88,13 +94,14 @@ button:focus {
 .Row {
   margin-bottom: 12px;
 }
-
 .Row24 {
   margin-bottom: 24px;
 }
-
 .Row36 {
   margin-bottom: 36px;
+}
+.Row48 {
+  margin-bottom: 48px;
 }
 
 .RowButton {
@@ -107,4 +114,15 @@ input {
   border-style: none;
   border-radius: 5px;
   padding: 6px 12px 6px 12px ;
+}
+
+.VideoInfos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Info {
+  margin-left: 12px;
 }

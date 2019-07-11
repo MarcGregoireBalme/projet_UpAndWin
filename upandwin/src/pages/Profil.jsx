@@ -93,7 +93,7 @@ function Profil({ dispatch }) {
                                   type="button"
                                   className="Button"
                                 >
-                                  Faire le quizz
+                                  Faire le quiz
                                 </button>
                               </Link>
                             </div>
