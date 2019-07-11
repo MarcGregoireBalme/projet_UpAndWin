@@ -22,6 +22,7 @@ class MessagesList extends Component {
       },
       senderUsername: {
         fontWeight: 'bold',
+        color: '#eb3a0f',
       },
       message: { fontSize: 15 },
     };

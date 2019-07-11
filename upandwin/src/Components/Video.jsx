@@ -7,6 +7,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import StarRating from './StarRating';
+import AddToFav from './AddToFav';
 
 const opts = {
   height: 250,
@@ -17,7 +18,7 @@ const opts = {
   },
 };
 
-const Video = ({ video, state }) => {
+const Video = ({ video }) => {
   const [inDB, setInDB] = useState(null);
   const [quizzExists, setQuizzExists] = useState(['unEmpty']);
   const [quizzButton, setQuizzButton] = useState('none');
@@ -44,9 +45,6 @@ const Video = ({ video, state }) => {
     fetchData();
   }, []);
 
-  /* console.log(nbVues, 'vues');
-  console.log(quizzButton, 'qb'); */
-
   const showQuizzButton = () => {
     if (quizzExists.length > 0 && quizzExists.includes(video.quizz_id)) {
       setQuizzButton('inline');
@@ -63,7 +61,8 @@ const Video = ({ video, state }) => {
     if (sessionStorage.getItem('user_id') !== null) {
       if (
         player.getDuration() - player.getCurrentTime() < 40
-        && (!quizzExists.includes(video.quizz_id) || quizzExists.length === 0) && !inDB
+        && (!quizzExists.includes(video.quizz_id) || quizzExists.length === 0)
+        && !inDB
       ) {
         setInDB(1);
         setNbVues(nbVues + 1);
@@ -72,8 +71,7 @@ const Video = ({ video, state }) => {
           video_id: video._id,
           quizz_id: video.quizz_id,
         });
-        axios.put(`http://localhost:3005/nbvues/${video._id}`, {
-        });
+        axios.put(`http://localhost:3005/nbvues/${video._id}`, {});
       }
     }
   };
@@ -82,15 +80,12 @@ const Video = ({ video, state }) => {
     const player = event.target;
     const userId = sessionStorage.getItem('user_id');
     if (sessionStorage.getItem('user_id') !== null) {
-      if (
-        !quizzExists.includes(video.quizz_id) && !inDB
-      ) {
+      if (!quizzExists.includes(video.quizz_id) && !inDB) {
         axios.put(`http://localhost:3005/userreceivequizz/${userId}`, {
           video_id: video._id,
           quizz_id: video.quizz_id,
         });
-        axios.put(`http://localhost:3005/nbvues/${video._id}`, {
-        });
+        axios.put(`http://localhost:3005/nbvues/${video._id}`, {});
         showQuizzButton();
         setNbVues(nbVues + 1);
       }
@@ -116,25 +111,22 @@ const Video = ({ video, state }) => {
       <div className="marginVideo">
         <h4 className="overflow-clip">{video.titre}</h4>
         <div>
-          {
-            sessionStorage.getItem('user_id') !== null ? (
-              <>
-                <StarRating
-                  video={video}
-                  vue={nbVues}
-                />
-                <div className="nbVote">
-                  <button className="quizzButton" type="button" onClick={handleClick} style={{ display: quizzButton }}>
-                    <NavLink to={`/quizz/${video.quizz_id}`}>
-                      Q
-                    </NavLink>
-                  </button>
-                </div>
-              </>
-            ) : (
-              null
-            )
-          }
+          {sessionStorage.getItem('user_id') !== null ? (
+            <>
+              <StarRating video={video} vue={nbVues} />
+              <AddToFav vId={video._id} />
+              <div className="nbVote">
+                <button
+                  className="quizzButton"
+                  type="button"
+                  onClick={handleClick}
+                  style={{ display: quizzButton }}
+                >
+                  <NavLink to={`/quizz/${video.quizz_id}`}>Q</NavLink>
+                </button>
+              </div>
+            </>
+          ) : null}
         </div>
       </div>
       <YouTube

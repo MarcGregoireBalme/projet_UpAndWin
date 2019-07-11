@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import Chatkit from '@pusher/chatkit-client';
 import MessageList from './MessageList';
 import SendMessageForm from './SendMessageForm';
+import TypingIndicator from './TypingIndicator';
+import WhosOnlineList from './WhosOnlineList';
+import './Index.css';
 
 const styles = {
   container: {
@@ -31,21 +34,6 @@ const styles = {
   },
 };
 
-const DUMMY_DATA = [
-  {
-    senderId: 'perborgen',
-    text: 'Hey, how is it going?',
-  },
-  {
-    senderId: 'janedoe',
-    text: 'Great! How about you?',
-  },
-  {
-    senderId: 'perborgen',
-    text: 'Good to hear! I am great as well',
-  },
-];
-
 class ChatBox extends Component {
   constructor(props) {
     super(props);
@@ -53,8 +41,10 @@ class ChatBox extends Component {
       currentUser: {},
       currentRoom: {},
       messages: [],
+      usersWhoAreTyping: [],
     };
     this.sendMessage = this.sendMessage.bind(this);
+    this.sendTypingEvent = this.sendTypingEvent.bind(this);
   }
 
   componentWillMount() {
@@ -84,7 +74,7 @@ class ChatBox extends Component {
         this.setState({ currentUser });
         return currentUser.subscribeToRoom({
           roomId: '19423199',
-          messageLimit: 100,
+          messageLimit: 10,
           hooks: {
             onMessage: (message) => {
               this.setState({
@@ -92,6 +82,19 @@ class ChatBox extends Component {
               });
             },
           },
+          onUserStartedTyping: (user) => {
+            this.setState({
+              usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name],
+            });
+          },
+          onUserStoppedTyping: (user) => {
+            this.setState({
+              usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
+                username => username !== user.name,
+              ),
+            });
+          },
+          onPresenceChange: () => this.forceUpdate(),
         });
       })
       .then((currentRoom) => {
@@ -108,29 +111,32 @@ class ChatBox extends Component {
     });
   }
 
+  sendTypingEvent() {
+    this.state.currentUser
+      .isTypingIn({ roomId: this.state.currentRoom.id })
+      .catch(error => console.error('error', error));
+  }
+
   render() {
     const { userAlias } = this.props;
     const { messages } = this.state;
     console.log({ messages });
     return (
       <div>
+        <WhosOnlineList
+          currentUser={this.state.currentUser}
+          users={this.state.currentRoom.users}
+        />
+        <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
         <div>
-          <aside>
-            <h1>
-              Welcome to the chat
-              {' '}
-              {userAlias}
-              !
-            </h1>
-          </aside>
-          <section style={styles.chatListContainer}>
+          <div style={styles.chatListContainer}>
             <MessageList
               messages={messages}
             />
-          </section>
-          <section>
-            <SendMessageForm onSubmit={this.sendMessage} />
-          </section>
+          </div>
+          <div>
+            <SendMessageForm onSubmit={this.sendMessage} onChange={this.sendTypingEvent} />
+          </div>
         </div>
       </div>
     );

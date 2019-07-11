@@ -36,35 +36,44 @@ class LoLFilterComponent extends Component {
     this.setState({
       prevScrollpos: currentScrollPos,
     });
-  }
+  };
 
   handleCheck = (event) => {
     const { dispatch } = this.props;
     const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.id;
-    this.setState({
-      [name]: value,
-    },
-    () => {
-      dispatch({
-        type: 'HANDLE_CHECK',
-        lolFilter: this.state,
-      });
-    });
-  }
+    this.setState(
+      {
+        [name]: value,
+      },
+      () => {
+        dispatch({
+          type: 'HANDLE_CHECK',
+          lolFilter: this.state,
+        });
+      },
+    );
+  };
 
   showFilters = () => {
     const { ShowFilters } = this.state;
     this.setState({
       ShowFilters: !ShowFilters,
     });
-  }
+  };
 
   render() {
     const { videos } = this.props;
     const { ShowFilters } = this.state;
-    const filters = ['ChoisirLane', 'BotLane', 'Jungle', 'MidLane', 'Support', 'TopLane'];
+    const filters = [
+      'ChoisirLane',
+      'BotLane',
+      'Jungle',
+      'MidLane',
+      'Support',
+      'TopLane',
+    ];
     return (
       <div id="Filter-nav">
         <button
@@ -72,35 +81,35 @@ class LoLFilterComponent extends Component {
           className={ShowFilters ? 'Filter-button-off' : 'Filter-button-on'}
           onClick={this.showFilters}
         />
-        {
-        // if ShowFilters is true show what's next
+        {// if ShowFilters is true show what's next
         ShowFilters && (
           <div className="Filter-list-container">
             <div className="Filter-list">
               <h2>Filtrer par</h2>
-              {filters
-                .map(filter => (
-                  <div className="Filter-row" key={filter}>
-                    <div>
-                      {filter}
-                      <span className="Orange">
-                        &nbsp;(
-                        {(videos.filter(video => video.lane.includes(filter)).length)}
-                        ) &nbsp;
-                      </span>
-                    </div>
-                    <label htmlFor={filter} className="switch">
-                      <input
-                        id={filter}
-                        type="checkbox"
-                        onChange={this.handleCheck}
-                        checked={this.state[filter]}
-                      />
-                      <span className="slider round" />
-                    </label>
+              {filters.map(filter => (
+                <div className="Filter-row" key={filter}>
+                  <div>
+                    {filter}
+                    <span className="Orange">
+                      &nbsp;(
+                      {
+                        videos.filter(video => video.lane.includes(filter))
+                          .length
+                      }
+                      ) &nbsp;
+                    </span>
                   </div>
-                ))
-              }
+                  <label htmlFor={filter} className="switch">
+                    <input
+                      id={filter}
+                      type="checkbox"
+                      onChange={this.handleCheck}
+                      checked={this.state[filter]}
+                    />
+                    <span className="slider round" />
+                  </label>
+                </div>
+              ))}
             </div>
           </div>
         )}
