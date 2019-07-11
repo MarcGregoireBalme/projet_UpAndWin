@@ -6,6 +6,7 @@ import Chatkit from '@pusher/chatkit-client';
 import MessageList from './MessageList';
 import SendMessageForm from './SendMessageForm';
 import TypingIndicator from './TypingIndicator';
+import WhosOnlineList from './WhosOnlineList';
 import './Index.css';
 
 const styles = {
@@ -93,6 +94,7 @@ class ChatBox extends Component {
               ),
             });
           },
+          onPresenceChange: () => this.forceUpdate(),
         });
       })
       .then((currentRoom) => {
@@ -121,14 +123,16 @@ class ChatBox extends Component {
     console.log({ messages });
     return (
       <div>
+        <WhosOnlineList
+          currentUser={this.state.currentUser}
+          users={this.state.currentRoom.users}
+        />
+        <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
         <div>
           <div style={styles.chatListContainer}>
             <MessageList
               messages={messages}
             />
-          </div>
-          <div>
-            <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
           </div>
           <div>
             <SendMessageForm onSubmit={this.sendMessage} onChange={this.sendTypingEvent} />
