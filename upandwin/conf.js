@@ -433,11 +433,11 @@ myRouter.route('/nbvues/:videosId')
 
 myRouter.route('/usersquizztodo/:id')
   .get(function (req, res) {
-    User.find({ _id: req.params.id }, function (err, users) {
+    User.find({ _id: req.params.id }, function (err, user) {
       if (err) {
         res.send(err);
-      } else if (users) {
-        res.json(users[0].quizz_idTodo);
+      } else if (user) {
+        res.json(user[0].quizz_idTodo);
       }
     });
   });
@@ -461,6 +461,7 @@ myRouter.route('/usersubmitquizz/:user_id')
       user.quizzAnswers.addToSet(req.body.quizzAnswer);
       user.quizz_id.addToSet(req.body.quizz_id);
       user.quizz_idTodo = req.body.quizz_idTodo;
+      user.wins += 100;
       user.save(function (error) {
         if (error) {
           res.send(error);
@@ -479,6 +480,7 @@ myRouter.route('/userreceivequizz/:user_id')
       }
       user.quizz_idTodo.addToSet(req.body.quizz_id);
       user.viewed_videos.addToSet(req.body.video_id);
+      user.wins += 25;
       user.save(function (error) {
         if (error) {
           res.send(error);
