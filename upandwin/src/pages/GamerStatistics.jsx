@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import '../App.css';
 import './GamerStatistics.css';
-import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Topnav from '../Components/Topnav';
+import GamerStatisticsNav from '../Components/GamerStatisticsNav';
 import BottomNav from '../Components/BottomNav';
 
 class GamerStatistics extends Component {
@@ -27,12 +28,14 @@ class GamerStatistics extends Component {
     return (
       <div className="App">
         <Topnav />
+        <GamerStatisticsNav />
+        <div style={{ paddingTop: '72px' }} />
         <div className="Page">
-          <h1>Gamer Statistics</h1>
+          <h1>Mes stat.</h1>
           <div className="">
             {users
               .filter(user => (
-                user._id === '5d00c750c249a32854d976db'
+                user._id === sessionStorage.getItem('user_id')
               ))
               .map(user => (
                 <div className="WinRoot" key={user._id}>

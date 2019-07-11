@@ -72,13 +72,15 @@ class LoLFilterComponent extends Component {
           className={ShowFilters ? 'Filter-button-off' : 'Filter-button-on'}
           onClick={this.showFilters}
         />
-        {ShowFilters && (
-          <div className="Filter-nav-list-container">
-            <div className="Filter-nav-list">
+        {
+        // if ShowFilters is true show what's next
+        ShowFilters && (
+          <div className="Filter-list-container">
+            <div className="Filter-list">
               <h2>Filtrer par</h2>
               {filters
                 .map(filter => (
-                  <div className="Filter-nav-row" key={filter}>
+                  <div className="Filter-row" key={filter}>
                     <div>
                       {filter}
                       <span className="Orange">
