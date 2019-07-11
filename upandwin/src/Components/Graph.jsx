@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import RadarChart from 'react-svg-radar-chart';
 import 'react-svg-radar-chart/build/css/index.css';
 import Grid from '@material-ui/core/Grid';
@@ -15,49 +14,8 @@ const useStyles = makeStyles({
   },
 });
 
-/* const PrettoSlider = withStyles({
-  root: {
-    color: '#fffff',
-    height: 8,
-  },
-  thumb: {
-    height: 24,
-    width: 24,
-    backgroundColor: '#fff',
-    border: '2px solid currentColor',
-    marginTop: -2,
-    marginLeft: -12,
-    '&:focus,&:hover,&$active': {
-      boxShadow: 'inherit',
-    },
-  },
-  mark: {
-    backgroundColor: '#bfbfbf',
-    height: 8,
-    width: 1,
-    marginTop: -3,
-  },
-  active: {},
-  valueLabel: {
-    left: 'calc(-50% + 4px)',
-  },
-  track: {
-    marginTop: 8,
-    height: 4,
-    borderRadius: 4,
-  },
-  rail: {
-    marginTop: 8,
-    height: 2,
-    borderRadius: 4,
-  },
-})(Slider); */
-
 const Graph = () => {
   const classes = useStyles();
-
-  // const [attribut, setAttribut] = useState([]);
-
 
   const [Teamplay, setTeamplay] = useState(50);
   const [Patience, setPatience] = useState(50);
@@ -72,7 +30,6 @@ const Graph = () => {
       const res = await axios.get(
         `http://localhost:3005/attributs/${userId}`,
       );
-      // setAttribut(res.data);
       setTeamplay(res.data[0]);
       setPatience(res.data[1]);
       setExperience(res.data[2]);
