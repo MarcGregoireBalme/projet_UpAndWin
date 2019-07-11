@@ -8,8 +8,6 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import StarRating from './StarRating';
 
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
 const opts = {
   height: 250,
   width: '100%',
@@ -136,7 +134,6 @@ const Video = ({ video, state }) => {
             ) : (
               null
             )
-
           }
         </div>
       </div>
