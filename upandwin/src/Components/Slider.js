@@ -13,18 +13,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function InputSlider() {
+export default function InputSlider(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(30);
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
-    /* props.getAttribut(value);
+    props.getAttribut(value);
     props.getAttribut2(value);
     props.getAttribut3(value);
     props.getAttribut4(value);
     props.getAttribut5(value);
-    props.getAttribut6(value); */
+    props.getAttribut6(value);
   };
 
   const handleInputChange = (event) => {

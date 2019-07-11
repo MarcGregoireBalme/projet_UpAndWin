@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 /* eslint-disable array-callback-return */

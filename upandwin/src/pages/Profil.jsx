@@ -24,18 +24,6 @@ class Profil extends Component {
     };
   }
 
-  /* componentWillMount() {
-    const { alias } = this.state;
-    axios
-      .get(`http://localhost:3005/users/${alias}`)
-      .then((res) => {
-        console.log(res.data);
-          this.setState({
-          profils: res.data.users,
-        });
-      });
-  } */
-
   postProfil = () => {
     const { attribut } = this.state;
     console.log('tototo');
