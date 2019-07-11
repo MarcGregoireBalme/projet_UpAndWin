@@ -113,13 +113,15 @@ function Profil({ dispatch }) {
         {/* <Link to="/Admin">Admin</Link> */}
         {
           sessionStorage.getItem('user_id') !== null ? (
-            <button
-              type="button"
-              onClick={clearSessionStorageLogOut}
-              className="SecondButton"
-            >
-              Déconnexion
-            </button>
+            <Link to="/">
+              <button
+                type="button"
+                onClick={clearSessionStorageLogOut}
+                className="SecondButton"
+              >
+                Déconnexion
+              </button>
+            </Link>
           ) : (
             null
           )
