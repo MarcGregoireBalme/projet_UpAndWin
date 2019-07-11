@@ -5,23 +5,3 @@
 .modal-content {
   height: 25vh;
 }
-
-.Divider {
-  border-bottom: solid 3px rgba(255, 255, 255, 0.66);
-}
-
-.Row {
-  margin-bottom: 12px;
-}
-
-.RowButton {
-  margin-top: 24px;
-  margin-bottom: 24px;
-}
-
-input {
-  min-width: 100%;
-  border-style: none;
-  border-radius: 5px;
-  padding: 6px 12px 6px 12px ;
-}

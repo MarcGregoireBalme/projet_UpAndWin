@@ -28,11 +28,9 @@ class Fav extends Component {
     const { videos } = this.state;
     return (
       <div>
-        <div>
-          <Topnav />
-        </div>
-        <div>
-          <h1 style={{ paddingTop: '10vh' }}>Fav video</h1>
+        <Topnav />
+        <div className="Page">
+          <h1>Vidéos favorites</h1>
           <DisplayVideo videos={videos} />
         </div>
         <BottomNav />

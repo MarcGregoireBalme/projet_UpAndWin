@@ -280,7 +280,7 @@ class Create extends Component {
         {!title && !review
           && (
             <div>
-              <h3>Ajouter un quizz à cette vidéo</h3>
+              <h1>Ajouter un quizz à cette vidéo</h1>
               <div className="Row">
                 Titre
                 <input

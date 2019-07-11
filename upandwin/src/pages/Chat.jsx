@@ -15,9 +15,13 @@ class Chat extends Component {
 
   render() {
     return (
-      <div className="Page">
+      <div>
         <Topnav />
-        <ChatBox />
+        <div className="Page">
+          <div>
+            <ChatBox />
+          </div>
+        </div>
         <BottomNav />
       </div>
     );
