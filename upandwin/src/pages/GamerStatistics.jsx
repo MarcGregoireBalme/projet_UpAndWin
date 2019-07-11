@@ -32,7 +32,7 @@ class GamerStatistics extends Component {
         <div style={{ paddingTop: '72px' }} />
         <div className="Page">
           <h1>Mes stat.</h1>
-          <div className="">
+          <div>
             {users
               .filter(user => (
                 user._id === sessionStorage.getItem('user_id')

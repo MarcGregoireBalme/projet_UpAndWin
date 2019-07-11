@@ -110,7 +110,7 @@ const Video = ({ video }) => {
 
   return (
     <div>
-      <div className="Row48">
+      <div className="Video">
         <YouTube
           videoId={getVideoId(video.lien)}
           opts={opts}
