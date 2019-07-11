@@ -8,10 +8,14 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
 class StarRating extends React.Component {
   constructor(props) {
     super(props);
-    const { video, videoId } = this.props;
+    const { video } = this.props;
+    const moyenne = video.notes[0]
+      ? Math.round(video.notes.reduce(reducer) / (video.notes.length))
+      : 3;
     this.state = {
-      rating: video.notes[0] ? Math.round(video.notes.reduce(reducer) / (video.notes.length)) : 3,
-      vId: videoId,
+      rating: moyenne,
+      // eslint-disable-next-line no-underscore-dangle
+      vId: video._id,
     };
     this.onStarClick = this.onStarClick.bind(this);
     this.onStarHover = this.onStarHover.bind(this);
@@ -24,11 +28,6 @@ class StarRating extends React.Component {
   onStarHover(nextValue) {
     this.setState({ rating: nextValue });
   }
-
-  /* getMoyenne(notes) {
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    return Math.round((notes.reduce(reducer) / (video.notes.length - 1)));
-  } */
 
   handleSubmit = () => {
     const {
@@ -48,9 +47,7 @@ class StarRating extends React.Component {
 
   render() {
     const { rating } = this.state;
-    const { video, vue } = this.props; /* const moyenne = video.notes[0]
-      ? video.notes.reduce(reducer) / (video.notes.length - 1)
-      : 3; */
+    const { video, vue } = this.props;
     return (
       <div>
         <StarRatingComponent

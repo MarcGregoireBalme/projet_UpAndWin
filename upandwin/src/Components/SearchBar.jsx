@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './SearchBar.css';
 import axios from 'axios';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import RatingStar from './StarRating';
 import Video from './Video';
 
 class SearchBar extends Component {
@@ -15,7 +12,6 @@ class SearchBar extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
-
 
   componentDidMount() {
     axios.get('http://localhost:3005/videos')

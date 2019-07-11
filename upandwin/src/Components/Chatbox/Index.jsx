@@ -116,12 +116,12 @@ class ChatBox extends Component {
       <div>
         <div>
           <aside>
-            <h4>
+            <h1>
               Welcome to the chat
               {' '}
               {userAlias}
               !
-            </h4>
+            </h1>
           </aside>
           <section style={styles.chatListContainer}>
             <MessageList
