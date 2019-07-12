@@ -13,7 +13,7 @@ class AddToFav extends Component {
 
   componentWillMount = () => {
     const userId = sessionStorage.getItem('user_id');
-    axios.get(`http://localhost:3005/addfavas/${userId}`).then((res) => {
+    axios.get(`/addfavas/${userId}`).then((res) => {
       this.testBol(res.data);
       // console.log(videos);
     });
@@ -32,7 +32,7 @@ class AddToFav extends Component {
     const { vId } = this.props;
     const { testbdd } = this.state;
     const userId = sessionStorage.getItem('user_id');
-    axios.put(`http://localhost:3005/addfav/${userId}`, {
+    axios.put(`/addfav/${userId}`, {
       video_id: vId,
     });
     this.setState({ testbdd: !testbdd });
@@ -42,7 +42,7 @@ class AddToFav extends Component {
     const { vId } = this.props;
     const { testbdd } = this.state;
     const userId = sessionStorage.getItem('user_id');
-    axios.put(`http://localhost:3005/addfave/${userId}`, {
+    axios.put(`/addfave/${userId}`, {
       video_id: vId,
     });
     this.setState({ testbdd: !testbdd });

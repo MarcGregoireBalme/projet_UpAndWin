@@ -36,7 +36,7 @@ function BottomNav() {
   useEffect(() => {
     async function fetchData() {
       const result = await axios(
-        'http://localhost:3005/users',
+        '/users',
       );
       setUsers(result.data);
     }

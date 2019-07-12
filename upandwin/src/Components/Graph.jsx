@@ -28,7 +28,7 @@ const Graph = () => {
     const userId = sessionStorage.getItem('user_id');
     const fetchData = async () => {
       const res = await axios.get(
-        `http://localhost:3005/attributs/${userId}`,
+        `/attributs/${userId}`,
       );
       setTeamplay(res.data[0]);
       setPatience(res.data[1]);
@@ -91,7 +91,7 @@ const Graph = () => {
     setButtonType(!buttonType);
     const userId = sessionStorage.getItem('user_id');
     axios
-      .put(`http://localhost:3005/attributs/${userId}`, {
+      .put(`/attributs/${userId}`, {
         attributs,
       });
   };
