@@ -11,6 +11,12 @@ h1 {
   font-size: 1.4em !important;
   font-weight: 700 !important;
 }
+h2 {
+  text-align: left;
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  margin-bottom: 0px !important;
+}
 h4 {
   text-align: left;
   font-size: 1.4em !important;
@@ -74,13 +80,25 @@ button:focus {
 
 .SecondButton {
   min-width: 100%;
-  background-color: #84250B;
+  background-color: rgb(99, 26, 6);
   border-style: none;
   border-radius: 50px;
   padding: 12px 24px 12px;
   color: white;
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
+  font-size: 1em;
+}
+
+.QuizButton {
+  min-width: 100%;
+  background-image: linear-gradient(45deg, #eb1a0f, #eb4d0f);
+  border-style: none;
+  border-radius: 50px;
+  padding: 3px 6px 3px;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
   font-size: 1em;
 }
 
@@ -102,11 +120,9 @@ button:focus {
 .Row {
   margin-bottom: 12px;
 }
-
 .Row24 {
   margin-bottom: 24px;
 }
-
 .Row36 {
   margin-bottom: 36px;
 }
@@ -122,3 +138,20 @@ input {
   border-radius: 5px;
   padding: 6px 12px 6px 12px ;
 }
+
+.Video {
+  margin-bottom: 48px;
+  margin-right: 12px;
+}
+
+.VideoInfos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Info {
+  margin-left: 12px;
+}
+

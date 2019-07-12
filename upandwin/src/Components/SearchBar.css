@@ -4,10 +4,6 @@
   display: flex;
 }
 
-.WinInputContainer {
-  padding: 24px;
-}
-
 .WinInput {
   min-width: 100%;
   background-color: white;

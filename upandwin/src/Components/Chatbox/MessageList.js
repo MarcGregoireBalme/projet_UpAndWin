@@ -10,11 +10,10 @@ class MessagesList extends Component {
 
   render() {
     const styles = {
-      container: {
-        flex: 1,
-      },
       ul: {
         listStyle: 'none',
+        height: '80vw',
+        overflow: 'scroll',
       },
       li: {
         marginTop: 13,

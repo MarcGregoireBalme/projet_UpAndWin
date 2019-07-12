@@ -45,50 +45,53 @@ function BottomNav() {
 
   return (
     <div>
-      <React.Fragment>
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <IconButton color="inherit">
-              <NavLink to="/"><Home color="inherit" /></NavLink>
-            </IconButton>
-            <div className={classes.grow} />
-            <IconButton color="inherit">
-              <NavLink to="/Search"><Search /></NavLink>
-            </IconButton>
-            <div className={classes.grow} />
-            <IconButton color="inherit">
-              <NavLink to="/chat"><ChatBubble /></NavLink>
-            </IconButton>
-            <div className={classes.grow} />
-            {users[0] ? users
-              .filter(user => (
-                user._id === sessionStorage.getItem('user_id')
-              ))
-              .map(user => (
-                <div key={user._id}>
-                  {
-                    user.admin === true ? (
-                      <IconButton color="inherit">
-                        <NavLink to="/Admin"><Publish color="inherit" /></NavLink>
-                      </IconButton>
-                    ) : (
-                      <IconButton color="inherit">
-                        <NavLink to="/Fav"><Favorite color="inherit" /></NavLink>
-                      </IconButton>
-                    )
+      {
+          sessionStorage.getItem('user_id') !== null ? (
+            <React.Fragment>
+              <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar>
+                  <IconButton color="inherit">
+                    <NavLink to="/"><Home color="inherit" /></NavLink>
+                  </IconButton>
+                  <div className={classes.grow} />
+                  <IconButton color="inherit">
+                    <NavLink to="/Search"><Search /></NavLink>
+                  </IconButton>
+                  <div className={classes.grow} />
+                  <IconButton color="inherit">
+                    <NavLink to="/chat"><ChatBubble /></NavLink>
+                  </IconButton>
+                  <div className={classes.grow} />
+                  {users[0] ? users
+                    .filter(user => (
+                      user._id === sessionStorage.getItem('user_id')
+                    ))
+                    .map(user => (
+                      <div key={user._id}>
+                        {
+                          user.admin === true ? (
+                            <IconButton color="inherit">
+                              <NavLink to="/Admin"><Publish color="inherit" /></NavLink>
+                            </IconButton>
+                          ) : (
+                            <IconButton color="inherit">
+                              <NavLink to="/Fav"><Favorite color="inherit" /></NavLink>
+                            </IconButton>
+                          )
+                        }
+                      </div>
+                    ))
+                    : null
                   }
-
-                </div>
-              ))
-              : null
-            }
-            <div className={classes.grow} />
-            <IconButton color="inherit">
-              <NavLink to="/Profil"><Person /></NavLink>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      </React.Fragment>
+                  <div className={classes.grow} />
+                  <IconButton color="inherit">
+                    <NavLink to="/Profil"><Person /></NavLink>
+                  </IconButton>
+                </Toolbar>
+              </AppBar>
+            </React.Fragment>
+          ) : null
+        }
     </div>
   );
 }

@@ -32,9 +32,9 @@ class GamerStatistics extends Component {
         <GamerStatisticsNav />
         <div style={{ paddingTop: '72px' }} />
         <div className="Page">
-          <h1>Mes stats</h1>
+          <h1>Mes stat.</h1>
           <Graph />
-          <div className="">
+          <div>
             {users
               .filter(user => (
                 user._id === sessionStorage.getItem('user_id')

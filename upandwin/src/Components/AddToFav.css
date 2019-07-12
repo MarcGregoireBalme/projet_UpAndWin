@@ -1,14 +1,9 @@
 .FavOn {
   color: #eb1a0f !important;
-  transform: scale(2);
+  width: 24px !important;
 }
 
 .FavOff {
   color: white !important;
-  transform: scale(2);
-}
-
-.fav {
-  display: flex;
-  justify-content: center;
+  width: 24px !important;
 }
