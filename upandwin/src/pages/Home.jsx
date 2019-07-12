@@ -15,7 +15,7 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    axios.get('http://localhost:3005/videos')
+    axios.get('/videos')
       .then((res) => {
         this.setState({ videos: res.data });
       });

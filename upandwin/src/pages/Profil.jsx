@@ -22,11 +22,11 @@ function Profil({ dispatch }) {
   useEffect(() => {
     async function fetchData() {
       const result = await axios(
-        'http://localhost:3005/users',
+        '/users',
       );
       setUsers(result.data);
       const quizzResult = await axios(
-        'http://localhost:3005/quizzes',
+        '/quizzes',
       );
       setQuizz(quizzResult.data);
     }

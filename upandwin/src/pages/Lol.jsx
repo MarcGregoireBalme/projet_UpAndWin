@@ -16,7 +16,7 @@ class Lol extends Component {
   }
 
   componentWillMount() {
-    axios.get('http://localhost:3005/videos/Lol')
+    axios.get('/videos/Lol')
       .then((res) => {
         this.setState({ videos: res.data });
       });

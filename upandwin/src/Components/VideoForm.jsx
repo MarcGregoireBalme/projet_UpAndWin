@@ -28,7 +28,7 @@ export default class VideoForm extends React.Component {
     } = this.state;
 
     axios
-      .post('http://localhost:3005/videos', {
+      .post('/videos', {
         titre,
         auteur,
         lien,

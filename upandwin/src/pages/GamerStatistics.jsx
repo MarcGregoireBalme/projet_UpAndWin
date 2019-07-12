@@ -18,7 +18,7 @@ class GamerStatistics extends Component {
   }
 
   componentWillMount() {
-    axios.get('http://localhost:3005/users')
+    axios.get('/users')
       .then((res) => {
         this.setState({ users: res.data });
       });
