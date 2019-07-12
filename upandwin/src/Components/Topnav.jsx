@@ -70,18 +70,18 @@ class Topnav extends Component {
           }
         </div>
         {
-          !userId ? (
+          sessionStorage.getItem('user_id') !== null ? (
+            null
+          ) : (
             <div className="Top-nav-right">
               <Link to="/Connexion">
                 <div className="connexionbutton">
                   <button type="button" className="Button">
-                    Connexion
+                      Connexion
                   </button>
                 </div>
               </Link>
             </div>
-          ) : (
-            null
           )
         }
       </div>
