@@ -46,7 +46,7 @@ const options = {
   server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
   replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
 };
-const urlmongo =  'mongodb+srv://projet3:DUvCXkR3nkGnitF3@upandwin-fx8ww.mongodb.net/upandwin';
+const urlmongo = 'mongodb+srv://projet3:DUvCXkR3nkGnitF3@upandwin-fx8ww.mongodb.net/upandwin';
 mongoose.connect(urlmongo, options);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur lors de la connexion'));
@@ -71,6 +71,7 @@ const quizzesSchema = mongoose.Schema({
 });
 const Quizze = mongoose.model('Quizzes', quizzesSchema);
 // Route /
+
 
 myRouter.route('/save-quiz').post(function (req, res) {
   const quizzes = new Quizze();
@@ -187,7 +188,6 @@ myRouter
     videos.nbVues = 0;
     videos.notes = [];
     videos.jeu = req.body.jeu;
-    videos.quizz_id = req.body.quizz_id;
     videos.difficulte = req.body.difficulte;
     videos.commentaires = [];
     videos.objectifs = [req.body.objectifs];
@@ -592,5 +592,6 @@ app.use(myRouter);
 
 const port = 80; // process.env.PORT ||3005;
 app.listen(port,  function () {
+
   console.log(`Mon serveur fonctionne sur ${hostname}:${port}`);
 });

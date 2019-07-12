@@ -24,6 +24,7 @@ class Create extends Component {
       questionTitle: '',
       answers: [''],
       submission: false,
+      quizz_id: '',
     };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.setQuizTitle = this.setQuizTitle.bind(this);
