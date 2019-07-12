@@ -51,6 +51,7 @@ export default function DisplayQuizz() {
     <div>
       <Topnav />
       <div className="Page">
+        <h4>Réponds à ce petit questionnaire après avoir joué !</h4>
         <div>
           {redirect ? <Redirect to="/Fav" /> : redirect}
           <FormControl component="fieldset">

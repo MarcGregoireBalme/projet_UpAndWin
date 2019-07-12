@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import '../App.css';
+import RadarChart from 'react-svg-radar-chart';
 import BottomNav from '../Components/BottomNav';
 import ProfilNav from '../Components/ProfilNav';
 import Topnav from '../Components/Topnav';
+import 'react-svg-radar-chart/build/css/index.css';
+
 
 function Profil({ dispatch }) {
   const [users, setUsers] = useState({ users: [] });

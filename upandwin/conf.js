@@ -312,6 +312,7 @@ const userSchema = mongoose.Schema({
   quizzAnswers: Array,
   friends: Array,
   wins: Number,
+  attributs: Array,
 });
 
 const User = mongoose.model('User', userSchema);
@@ -348,8 +349,8 @@ myRouter
     users.quizzAnswers = [];
     users.friends = [req.body.friends];
     users.wins = req.body.wins;
-    users
-      .save()
+    users.attributs = [req.body.attributs];
+    users.save()
       .then(() => {
         chatkit.createUser({
           id: users.alias,
@@ -459,6 +460,7 @@ myRouter.route('/usersubmitquizz/:user_id').put(function (req, res) {
     user.quizzAnswers.addToSet(req.body.quizzAnswer);
     user.quizz_id.addToSet(req.body.quizz_id);
     user.quizz_idTodo = req.body.quizz_idTodo;
+    user.wins += 100;
     user.save(function (error) {
       if (error) {
         res.send(error);
@@ -476,6 +478,7 @@ myRouter.route('/userreceivequizz/:user_id').put(function (req, res) {
     }
     user.quizz_idTodo.addToSet(req.body.quizz_id);
     user.viewed_videos.addToSet(req.body.video_id);
+    user.wins += 25;
     user.save(function (error) {
       if (error) {
         res.send(error);
@@ -489,6 +492,32 @@ myRouter.route('/userreceivequizz/:user_id').put(function (req, res) {
 myRouter.route('/').get(function (req, res) {
   res.sendFile(path.join(`${__dirname}/Profil.jsx`));
 });
+
+myRouter.route('/attributs/:user_id')
+  .put(function (req, res) {
+    User.findById(req.params.user_id, function (err, user) {
+      if (err) {
+        res.send(err);
+      }
+      user.attributs = req.body.attributs;
+      user.save(function (error) {
+        if (error) {
+          res.send(error);
+        } else {
+          res.json({ status: 'ok', MODIF: req.body });
+        }
+      });
+    });
+  })
+  .get(function (req, res) {
+    User.findById(req.params.user_id, function (err, user) {
+      if (err) {
+        res.send(err);
+      } else if (user) {
+        res.json(user.attributs);
+      }
+    });
+  });
 
 myRouter.route('/sendFile').put(function (req, res) {
   upload.single('myFile');
