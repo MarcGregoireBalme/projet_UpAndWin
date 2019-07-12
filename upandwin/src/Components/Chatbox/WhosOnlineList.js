@@ -5,24 +5,30 @@ import React, { Component } from 'react';
 class WhosOnlineList extends Component {
   renderUsers() {
     return (
-      <ul>
+      <div className="WinWhosOnlineList">
         {this.props.users.map((user, index) => {
           if (user.id === this.props.currentUser.id) {
             return (
-              <WhosOnlineListItem key={index.id} presenceState="online">
-                {user.name}
-                {' '}
-                (You)
-              </WhosOnlineListItem>
+              <div>
+                <div className="WinProfil" />
+                <WhosOnlineListItem key={index.id} presenceState="online">
+                  {user.name}
+                  {' '}
+                  (You)
+                </WhosOnlineListItem>
+              </div>
             );
           }
           return (
-            <WhosOnlineListItem key={index.id} presenceState={user.presence.state}>
-              {user.name}
-            </WhosOnlineListItem>
+            <div>
+              <div className="WinProfil" />
+              <WhosOnlineListItem key={index.id} presenceState={user.presence.state}>
+                {user.name}
+              </WhosOnlineListItem>
+            </div>
           );
         })}
-      </ul>
+      </div>
     );
   }
 
@@ -58,7 +64,7 @@ class WhosOnlineListItem extends Component {
       },
     };
     return (
-      <li style={styles.li}>
+      <div style={styles.li}>
         <div
           style={{
             ...styles.div,
@@ -67,7 +73,7 @@ class WhosOnlineListItem extends Component {
           }}
         />
         {this.props.children}
-      </li>
+      </div>
     );
   }
 }

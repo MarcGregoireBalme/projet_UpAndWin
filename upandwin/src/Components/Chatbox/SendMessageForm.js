@@ -27,13 +27,6 @@ class SendMessageForm extends Component {
 
   render() {
     const styles = {
-      container: {
-        width: '80%',
-        bottom: 60,
-        position: 'fixed',
-        padding: 20,
-        borderTop: '1px #4C758F solid',
-      },
       form: {
         display: 'flex',
       },
@@ -47,7 +40,7 @@ class SendMessageForm extends Component {
       },
     };
     return (
-      <div style={styles.container}>
+      <div className="WinSendMessageForm">
         <div>
           <form onSubmit={this.onSubmit} style={styles.form}>
             <input

@@ -9,31 +9,6 @@ import TypingIndicator from './TypingIndicator';
 import WhosOnlineList from './WhosOnlineList';
 import './Index.css';
 
-const styles = {
-  container: {
-    height: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  chatContainer: {
-    display: 'flex',
-    flex: 1,
-  },
-  whosOnlineListContainer: {
-    width: '300px',
-    flex: 'none',
-    padding: 20,
-    backgroundColor: '#2c303b',
-    color: 'white',
-  },
-  chatListContainer: {
-    padding: 20,
-    width: '85%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-};
-
 class ChatBox extends Component {
   constructor(props) {
     super(props);
@@ -129,7 +104,7 @@ class ChatBox extends Component {
         />
         <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
         <div>
-          <div style={styles.chatListContainer}>
+          <div>
             <MessageList
               messages={messages}
             />

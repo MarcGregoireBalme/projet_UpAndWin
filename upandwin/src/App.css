@@ -6,10 +6,6 @@ a {
   color: #EB220F !important;
 }
 
-p {
-  margin: none !important;
-}
-
 h1 {
   text-align: left;
   font-size: 1.4em !important;
@@ -144,3 +140,4 @@ input {
 .Info {
   margin-left: 12px;
 }
+
