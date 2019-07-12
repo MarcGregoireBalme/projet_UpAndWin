@@ -36,7 +36,7 @@ class ConnexionForm extends Component {
     const { alias, password } = this.state;
     // eslint-disable-next-line no-shadow
     axios
-      .get(`/users/${alias}`)
+      .get(`http://localhost:3005/users/${alias}`)
       .then((res) => {
         if (res.data[0].alias === alias && res.data[0].password === password) {
           this.setState({ redirect: true });

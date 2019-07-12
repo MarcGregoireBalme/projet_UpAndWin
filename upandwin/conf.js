@@ -23,6 +23,7 @@ const fs = require('fs');
 const path = require('path');
 
 const hostname = 'localhost';
+const port = 3005;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -46,7 +47,7 @@ const options = {
   server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
   replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
 };
-const urlmongo = 'mongodb+srv://projet3:DUvCXkR3nkGnitF3@upandwin-fx8ww.mongodb.net/upandwin';
+const urlmongo =  'mongodb+srv://projet3:DUvCXkR3nkGnitF3@upandwin-fx8ww.mongodb.net/upandwin';
 mongoose.connect(urlmongo, options);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur lors de la connexion'));
@@ -57,10 +58,6 @@ db.once('open', function () {
 // Body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static('build'));
-app.use((req) => {
-  console.log(`${req.method} ${req.originalUrl}`);
-});
 
 // Schema collection quizzs
 const quizzesSchema = mongoose.Schema({
@@ -611,7 +608,6 @@ myRouter.route('/givefavs').post(function (req, res) {
 });
 
 app.use(myRouter);
-const port = 80; // process.env.PORT ||3005;
-app.listen(port, function () {
-  console.log(`Mon serveur fonctionne sur ${hostname}:${port}`);
+app.listen(port, hostname, function () {
+  console.log('Mon serveur fonctionne');
 });

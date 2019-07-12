@@ -232,14 +232,14 @@ class Create extends Component {
     const { quiz, titleQuiz } = this.state;
     const { videoId } = this.props;
     axios
-      .post('/save-quiz', {
+      .post('http://localhost:3005/save-quiz', {
         title: titleQuiz,
         qa: quiz,
         video_id: videoId,
         score: 10,
       })
       .then(res => axios
-        .put(`/addQuizzId/${videoId}`, {
+        .put(`http://localhost:3005/addQuizzId/${videoId}`, {
           quizz_id: res.data,
         }),
       this.setState({

@@ -17,7 +17,7 @@ class Fav extends Component {
 
   componentWillMount() {
     const userId = sessionStorage.getItem('user_id');
-    return axios.post('/givefavs', {
+    return axios.post('http://localhost:3005/givefavs', {
       userId,
     }).then((res) => {
       this.setState({ videos: res.data });

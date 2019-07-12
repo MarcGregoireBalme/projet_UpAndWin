@@ -48,7 +48,7 @@ class RegisterForm extends Component {
       user: this.state,
     });
     axios
-      .post('/users', {
+      .post('http://localhost:3005/users', {
         alias,
         email,
         password,

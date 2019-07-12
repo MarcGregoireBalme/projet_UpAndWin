@@ -19,10 +19,10 @@ export default function DisplayQuizz() {
     const userId = sessionStorage.getItem('user_id');
     const fetchData = async () => {
       const res = await axios.get(
-        `/quizzes/${quizzId}`,
+        `http://localhost:3005/quizzes/${quizzId}`,
       );
       const resTodo = await axios.get(
-        `/usersquizztodo/${userId}`,
+        `http://localhost:3005/usersquizztodo/${userId}`,
       );
       setquizzes(res.data);
       setquizzesTodo(resTodo.data);
@@ -38,7 +38,7 @@ export default function DisplayQuizz() {
     e.preventDefault();
     const userId = sessionStorage.getItem('user_id');
     axios
-      .put(`/usersubmitquizz/${userId}`, {
+      .put(`http://localhost:3005/usersubmitquizz/${userId}`, {
         quizzAnswer: localStorage,
         quizz_id: quizzes[0]._id,
         quizz_idTodo: quizzesTodo && arrayRemove(quizzesTodo, sessionStorage.getItem('quizz_id')),
