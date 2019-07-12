@@ -23,7 +23,6 @@ const fs = require('fs');
 const path = require('path');
 
 const hostname = 'localhost';
-const port = 3005;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -58,6 +57,10 @@ db.once('open', function () {
 // Body parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static('build'));
+app.use((req) => {
+  console.log(`${req.method  } ${  req.originalUrl}`);
+});
 
 // Schema collection quizzs
 const quizzesSchema = mongoose.Schema({
@@ -370,32 +373,10 @@ myRouter
     });
   });
 
-// chatbox routes
-
-/* myRouter.route('/users/userschatbox')
-  .post(function (req, res) {
-    const { username } = req.body;
-    chatkit
-      .createUser({
-        id: username,
-        name: username,
-      })
-      .then(() => res.sendStatus(201))
-      .catch((error) => {
-        if (error.error === 'services/chatkit/user_already_exists') {
-          res.sendStatus(200);
-        } else {
-          res.status(error.status).json(error);
-        }
-      });
-  }); */
-
 myRouter.route('/authenticate').post(function (req, res) {
   const authData = chatkit.authenticate({ userId: req.query.user_id });
   res.status(authData.status).send(authData.body);
 });
-
-// fin chatbox routes
 
 myRouter.route('/users/:alias').get(function (req, res) {
   User.find({ alias: req.params.alias }, function (err, users) {
@@ -608,6 +589,8 @@ myRouter.route('/givefavs').post(function (req, res) {
 });
 
 app.use(myRouter);
-app.listen(port, hostname, function () {
-  console.log('Mon serveur fonctionne');
+
+const port = 80; // process.env.PORT ||3005;
+app.listen(port,  function () {
+  console.log(`Mon serveur fonctionne sur ${hostname}:${port}`);
 });

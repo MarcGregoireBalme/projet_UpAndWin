@@ -35,7 +35,7 @@ class StarRating extends React.Component {
     } = this.state;
     const { vId } = this.state;
     axios
-      .put(`http://localhost:3005/videosnotes/${vId}`, {
+      .put(`/videosnotes/${vId}`, {
         note: rating,
       });
   };

@@ -34,11 +34,11 @@ const Video = ({ video }) => {
     const userId = sessionStorage.getItem('user_id');
     const fetchData = async () => {
       const res = await axios.get(
-        `http://localhost:3005/usersquizztodo/${userId}`,
+        `/usersquizztodo/${userId}`,
       );
       setQuizzExists(res.data);
       const result = await axios.get(
-        `http://localhost:3005/nbvues/${video._id}`,
+        `/nbvues/${video._id}`,
       );
       setNbVues(result.data);
     };
@@ -67,11 +67,11 @@ const Video = ({ video }) => {
         setInDB(1);
         setNbVues(nbVues + 1);
         setQuizzButton('inline');
-        axios.put(`http://localhost:3005/userreceivequizz/${userId}`, {
+        axios.put(`/userreceivequizz/${userId}`, {
           video_id: video._id,
           quizz_id: video.quizz_id,
         });
-        axios.put(`http://localhost:3005/nbvues/${video._id}`, {});
+        axios.put(`/nbvues/${video._id}`, {});
       }
     }
   };
@@ -81,11 +81,11 @@ const Video = ({ video }) => {
     const userId = sessionStorage.getItem('user_id');
     if (sessionStorage.getItem('user_id') !== null) {
       if (!quizzExists.includes(video.quizz_id) && !inDB) {
-        axios.put(`http://localhost:3005/userreceivequizz/${userId}`, {
+        axios.put(`/userreceivequizz/${userId}`, {
           video_id: video._id,
           quizz_id: video.quizz_id,
         });
-        axios.put(`http://localhost:3005/nbvues/${video._id}`, {});
+        axios.put(`/nbvues/${video._id}`, {});
         showQuizzButton();
         setNbVues(nbVues + 1);
       }
