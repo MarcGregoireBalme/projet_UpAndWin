@@ -72,6 +72,7 @@ const quizzesSchema = mongoose.Schema({
 const Quizze = mongoose.model('Quizzes', quizzesSchema);
 // Route /
 
+
 myRouter.route('/save-quiz').post(function (req, res) {
   const quizzes = new Quizze();
   quizzes.title = req.body.title;
@@ -187,7 +188,6 @@ myRouter
     videos.nbVues = 0;
     videos.notes = [];
     videos.jeu = req.body.jeu;
-    videos.quizz_id = req.body.quizz_id;
     videos.difficulte = req.body.difficulte;
     videos.commentaires = [];
     videos.objectifs = [req.body.objectifs];
