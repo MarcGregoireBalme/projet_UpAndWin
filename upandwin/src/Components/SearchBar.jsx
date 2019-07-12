@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import './SearchBar.css';
 import axios from 'axios';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import RatingStar from './StarRating';
+import Video from './Video';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -15,9 +13,8 @@ class SearchBar extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-
   componentDidMount() {
-    axios.get('http://localhost:3005/videos')
+    axios.get('/videos')
       .then((res) => {
         this.setState({ videos: res.data });
       });
@@ -33,7 +30,7 @@ class SearchBar extends Component {
     return (
       <div>
         <div>
-          <div className="WinInputContainer">
+          <div>
             <input
               onChange={e => this.handleChange(e)}
               className="WinInput"

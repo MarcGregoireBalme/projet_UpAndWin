@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Button, FormGroup, Input, Label, Form,
+  FormGroup,
+  Input,
+  Label,
+  Form,
 } from 'reactstrap';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
@@ -33,18 +36,18 @@ class ConnexionForm extends Component {
     const { alias, password } = this.state;
     // eslint-disable-next-line no-shadow
     axios
-      .get(`http://localhost:3005/users/${alias}`)
+      .get(`/users/${alias}`)
       .then((res) => {
         if (res.data[0].alias === alias && res.data[0].password === password) {
           this.setState({ redirect: true });
           sessionStorage.setItem('user_id', res.data[0]._id);
+          sessionStorage.setItem('alias', res.data[0].alias);
           login({ ...this.state, user_id: res.data[0]._id });
         } else {
           this.setState({ errmsg: 'Pseudo or password invalid' });
         }
       });
   }
-
 
   handleInputChange(event) {
     const { target } = event;
@@ -61,12 +64,11 @@ class ConnexionForm extends Component {
     return alias.length > 0 && password.length > 0;
   }
 
-
   render() {
     const {
       alias, password, redirect, errmsg,
     } = this.state;
-    if (redirect) return <Redirect to="/Profil" />;
+    if (redirect) return <Redirect to="/" />;
     return (
       <div className="wholeform">
         <Topnav />
@@ -112,7 +114,6 @@ class ConnexionForm extends Component {
             </button>
           </FormGroup>
         </Form>
-        <BottomNav />
       </div>
     );
   }

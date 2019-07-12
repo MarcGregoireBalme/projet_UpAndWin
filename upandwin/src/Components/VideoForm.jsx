@@ -27,7 +27,7 @@ export default class VideoForm extends React.Component {
     } = this.state;
 
     axios
-      .post('http://localhost:3005/videos', {
+      .post('/videos', {
         titre,
         auteur,
         lien,
@@ -53,8 +53,8 @@ export default class VideoForm extends React.Component {
     return (
       <div>
 
-        <div className="VideoFormContainer">
-          <h3 style={{ textAlign: 'left' }}>Ajouter une vidéo</h3>
+        <div>
+          <h1 style={{ textAlign: 'left' }}>Ajouter une vidéo</h1>
           <form onSubmit={this.handleSubmit}>
             <div className="Row">
               Titre

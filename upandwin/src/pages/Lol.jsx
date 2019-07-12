@@ -16,7 +16,7 @@ class Lol extends Component {
   }
 
   componentWillMount() {
-    axios.get('http://localhost:3005/videos/Lol')
+    axios.get('/videos/Lol')
       .then((res) => {
         this.setState({ videos: res.data });
       });
@@ -28,7 +28,7 @@ class Lol extends Component {
       <div>
         <Topnav />
         <LoLFilter videos={videos} />
-        <div style={{ paddingTop: '40vh' }} />
+        <div style={{ paddingTop: '168px' }} />
         <LolVideos videos={videos} />
         <BottomNav />
       </div>

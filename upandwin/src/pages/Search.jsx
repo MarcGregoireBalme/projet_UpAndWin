@@ -8,11 +8,9 @@ import SearchBar from '../Components/SearchBar';
 const Search = () => (
 
   <div>
-    <div>
-      <Topnav />
-    </div>
-    <div className="searchbar">
-      <SearchBar />
+    <Topnav />
+    <div className="Page">
+      <SearchBar className="searchbar" />
     </div>
     <BottomNav />
   </div>
