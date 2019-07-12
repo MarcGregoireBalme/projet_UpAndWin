@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import Video from './Video';
+import RatingStar from './StarRating';
 
 class LolVideosComponent extends Component {
   constructor(props) {
@@ -33,7 +33,23 @@ class LolVideosComponent extends Component {
           {this.filteredVideos(videos)
             .map(video => (
               <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
-                <Video video={video} />
+                <h3>{video.titre}</h3>
+                <div>
+                  <RatingStar />
+                  <span className="nbVote">
+                    votes :
+                    {video.notes.length - 1}
+                  </span>
+                </div>
+                <iframe
+                  title={video.titre}
+                  width="100%"
+                  height="250px"
+                  src={video.lien}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
             ))}
         </div>

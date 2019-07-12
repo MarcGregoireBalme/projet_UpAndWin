@@ -14,8 +14,7 @@ import Fav from './pages/Fav';
 import Admin from './pages/Admin';
 import ConnexionForm from './Components/ConnexionForm';
 import RegisterForm from './Components/RegisterForm';
-import DisplayQuizzcopy from './Components/DisplayQuizzcopy';
-import Chat from './pages/Chat';
+import DisplayQuizz from './Components/DisplayQuizz';
 
 function App() {
   return (
@@ -33,8 +32,7 @@ function App() {
           <Route path="/GamerStatistics" component={GamerStatistics} />
           <Route path="/Fav" component={Fav} />
           <Route path="/Admin" component={Admin} />
-          <Route path="/quizz/:id" component={DisplayQuizzcopy} />
-          <Route path="/chat" component={Chat} />
+          <Route path="/quizz/:id" component={DisplayQuizz} />
         </Provider>
       </Switch>
     </div>

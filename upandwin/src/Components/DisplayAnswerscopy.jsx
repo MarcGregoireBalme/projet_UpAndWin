@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 
 export default function Displayquestions({ ans, ind }) {
   const [value, setValue] = useState('');
+
+  console.log(ans);
+
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -11,20 +18,20 @@ export default function Displayquestions({ ans, ind }) {
   return (
     <div>
       {(ans.answers)
-        .map(answer => (
-          <div>
-            <label htmlFor={answer} value={value} className="container">
-              {answer}
-              <input
-                id={answer}
-                type="checkbox"
+        .map((answer, id) => (
+          <RadioGroup aria-label="position" name="position" value={value} onChange={handleChange}>
+            <div>
+              <FormControlLabel
+                style={{ color: 'white' }}
+                key={answer}
                 value={`${ans.questionTitle}/${answer}`}
-                onChange={handleChange}
+                control={<Radio color="secondary" />}
+                label={answer}
+                labelPlacement="start"
               />
-              <span className="checkmark" />
-            </label>
-
-          </div>
+              {console.log(value)}
+            </div>
+          </RadioGroup>
         ))}
     </div>
   );
