@@ -41,6 +41,7 @@ class ConnexionForm extends Component {
         if (res.data[0].alias === alias && res.data[0].password === password) {
           this.setState({ redirect: true });
           sessionStorage.setItem('user_id', res.data[0]._id);
+          sessionStorage.setItem('alias', res.data[0].alias);
           login({ ...this.state, user_id: res.data[0]._id });
         } else {
           this.setState({ errmsg: 'Pseudo or password invalid' });

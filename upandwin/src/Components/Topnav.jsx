@@ -79,34 +79,36 @@ class Topnav extends Component {
           }
         </div>
         {
-          !userId ? (
+          sessionStorage.getItem('user_id') !== null ? (
+            (
+              <div className="Top-nav-right">
+                <Link to="/GamerStatistics">
+                  {users
+                    .filter(user => (
+                      user._id === sessionStorage.getItem('user_id')
+                    ))
+                    .map(user => (
+                      <div>
+                        <div>
+                          <span className="Bold">
+                            {user.wins}
+                          </span>
+                          {' '}
+                          wins
+                        </div>
+                      </div>
+                    ))}
+                </Link>
+              </div>
+            )
+          ) : (
             <div className="Top-nav-right">
               <Link to="/Connexion">
                 <div className="connexionbutton">
                   <button type="button" className="Button">
-                    Connexion
+                      Connexion
                   </button>
                 </div>
-              </Link>
-            </div>
-          ) : (
-            <div className="Top-nav-right">
-              <Link to="/GamerStatistics">
-                {users
-                  .filter(user => (
-                    user._id === sessionStorage.getItem('user_id')
-                  ))
-                  .map(user => (
-                    <div>
-                      <div>
-                        <span className="Bold">
-                          {user.wins}
-                        </span>
-                        {' '}
-                        wins
-                      </div>
-                    </div>
-                  ))}
               </Link>
             </div>
           )

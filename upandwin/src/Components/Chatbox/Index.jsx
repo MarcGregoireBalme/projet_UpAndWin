@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Chatkit from '@pusher/chatkit-client';
 import MessageList from './MessageList';
 import SendMessageForm from './SendMessageForm';
-import TypingIndicator from './TypingIndicator';
 import WhosOnlineList from './WhosOnlineList';
 import './Index.css';
 
@@ -23,9 +22,8 @@ class ChatBox extends Component {
   }
 
   componentWillMount() {
-    const { userAlias } = this.props;
     this.setState({
-      currentUser: userAlias,
+      currentUser: sessionStorage.getItem('alias'),
     });
   }
 
@@ -56,18 +54,6 @@ class ChatBox extends Component {
                 messages: [...this.state.messages, message],
               });
             },
-          },
-          onUserStartedTyping: (user) => {
-            this.setState({
-              usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name],
-            });
-          },
-          onUserStoppedTyping: (user) => {
-            this.setState({
-              usersWhoAreTyping: this.state.usersWhoAreTyping.filter(
-                username => username !== user.name,
-              ),
-            });
           },
           onPresenceChange: () => this.forceUpdate(),
         });
@@ -102,7 +88,6 @@ class ChatBox extends Component {
           currentUser={this.state.currentUser}
           users={this.state.currentRoom.users}
         />
-        <TypingIndicator usersWhoAreTyping={this.state.usersWhoAreTyping} />
         <div>
           <div>
             <MessageList
