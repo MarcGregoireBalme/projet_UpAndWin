@@ -9,8 +9,6 @@ import { NavLink } from 'react-router-dom';
 import StarRating from './StarRating';
 import AddToFav from './AddToFav';
 
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
 const opts = {
   height: 250,
   width: '100%',
