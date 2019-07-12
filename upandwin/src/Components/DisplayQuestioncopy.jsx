@@ -15,15 +15,12 @@ export default function Displayquestions({ quizz }) {
             {ques.questions
               .map((question, ind) => (
                 <div>
-                  <div className="Divider" />
                   <FormLabel
                     component="legend"
-                    style={{
-                      color: 'white',
-                      marginTop: '24px',
-                    }}
+                    style={{ color: 'white' }}
                   >
                     <h2>{question.questionTitle}</h2>
+
                   </FormLabel>
                   <DisplayAnswerscopy ans={question} ind={ind} />
                 </div>

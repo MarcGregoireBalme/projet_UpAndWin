@@ -10,6 +10,15 @@
   padding: 0 !important;
 }
 
+h4 {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  margin: 40px !important;
+}
+
 .videoDisplay {
   padding-bottom: 58px;
 }
@@ -20,3 +29,18 @@
   display: flex;
   overflow-x: scroll;
 }
+
+.overflow-clip {
+  text-overflow: ellipsis;
+  white-space: pre-wrap; /*ou pre-line ?*/
+  overflow: hidden;
+  max-width: 300px;
+  height: 55px;
+}
+
+.marginVideo{
+  margin-bottom: 50px;
+}
+
+/*.carousel {
+}*/

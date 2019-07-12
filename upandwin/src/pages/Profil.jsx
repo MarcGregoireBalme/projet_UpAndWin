@@ -1,145 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import axios from 'axios';
+import React, { Component } from 'react';
 import '../App.css';
-import RadarChart from 'react-svg-radar-chart';
+import './Profil.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import { connect } from 'react-redux';
+// import axios from 'axios';
 import BottomNav from '../Components/BottomNav';
-import ProfilNav from '../Components/ProfilNav';
 import Topnav from '../Components/Topnav';
-import 'react-svg-radar-chart/build/css/index.css';
 
-
-function Profil({ dispatch }) {
-  const [users, setUsers] = useState({ users: [] });
-  const [quizz, setQuizz] = useState({ quizz: [] });
-
-  function clearSessionStorageLogOut() {
-    sessionStorage.clear();
-    dispatch({ type: 'LOGOUT', user_id: null });
+class Profil extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // profils: {},
+      // alias: '',
+    };
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios(
-        '/users',
-      );
-      setUsers(result.data);
-      const quizzResult = await axios(
-        '/quizzes',
-      );
-      setQuizz(quizzResult.data);
-    }
-    fetchData();
-  }, []);
+  /* componentWillMount() {
+    const { alias } = this.state;
+    axios
+      .get(`http://localhost:3005/users/${alias}`)
+      .then((res) => {
+        console.log(res.data);
+          this.setState({
+          profils: res.data.users,
+        });
+      });
+  } */
 
-  return (
-    <div>
-      <Topnav />
-      {users[0] ? users
-        .filter(user => (
-          user._id === sessionStorage.getItem('user_id')
-        ))
-        .map(user => (
-          <div key={user._id}>
-            {
-              user.admin === true ? (
-                null
-              ) : (
-                <div>
-                  <div style={{ paddingTop: '72px' }} />
-                  <ProfilNav />
-                </div>
-              )
-            }
-
-          </div>
-        ))
-        : null
-      }
+  render() {
+    // const { users } = this.props;
+    // const { profils } = this.state;
+    return (
       <div className="Page">
-        {users[0] && quizz[0] ? users
-          .filter(user => (
-            user._id === sessionStorage.getItem('user_id')
-          ))
-          .map(user => (
-            <div key={user._id}>
-              <div className="Row36">
-                <p className="Orange">Alias</p>
-                <h1>{user.alias}</h1>
-                <div className="Divider" />
-              </div>
-              <div className="Row36">
-                <p className="Orange">E-mail</p>
-                <h1>{user.email}</h1>
-                <div className="Divider" />
-              </div>
-
-              {
-                user.quizz_idTodo.length > 0 ? (
-                  <div className="Row36">
-                    <p className="Orange">{`(${user.quizz_idTodo.length}) quizz disponible(s)`}</p>
-                    <div>
-                      {
-                        user.quizz_idTodo
-                          .map(quizzID => (
-                            <div className="Row" key={quizzID}>
-
-                              <h2>
-                                {(quizz
-                                  .filter(obj => (obj._id === `${quizzID}`))
-                                  .map(obj => obj.title))}
-                              </h2>
-
-                              <Link to={`/quizz/${quizzID}`}>
-                                <button
-                                  type="button"
-                                  className="QuizButton"
-                                >
-                                  Faire le quiz
-                                </button>
-                              </Link>
-                            </div>
-                          ))
-                      }
-                    </div>
-                    <div className="Divider" />
-                  </div>
-                ) : (
-                  null
-                )
-              }
-
-            </div>
-          ))
-          : null}
-        {/* <Link to="/Admin">Admin</Link> */}
-        {
-          sessionStorage.getItem('user_id') !== null ? (
-            <Link to="/">
-              <button
-                type="button"
-                onClick={clearSessionStorageLogOut}
-                className="SecondButton"
-              >
-                Déconnexion
-              </button>
-            </Link>
-          ) : (
-            null
-          )
-        }
+        <Topnav />
+        <h1>Mon profil</h1>
+        <BottomNav />
       </div>
-      <BottomNav />
-    </div>
-  );
+    );
+  }
 }
 
 function mstp(state) {
-  return {
-    ...state,
-    userId: state.users.user_id,
-  };
+  return { ...state };
 }
 
 export default connect(mstp)(Profil);
