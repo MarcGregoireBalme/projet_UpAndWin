@@ -233,13 +233,17 @@ class Create extends Component {
     const { quiz, titleQuiz } = this.state;
     const { videoId } = this.props;
     axios
-      .post('http://localhost:3005/save-quiz', {
+      .post('/save-quiz', {
         title: titleQuiz,
         qa: quiz,
         video_id: videoId,
         score: 10,
       })
-      .then(this.setState({
+      .then(res => axios
+        .put(`/addQuizzId/${videoId}`, {
+          quizz_id: res.data,
+        }),
+      this.setState({
         review: false,
         submission: true,
       }));
@@ -277,7 +281,7 @@ class Create extends Component {
         {!title && !review
           && (
             <div>
-              <h3>Ajouter un quizz à cette vidéo</h3>
+              <h1>Ajouter un quizz à cette vidéo</h1>
               <div className="Row">
                 Titre
                 <input

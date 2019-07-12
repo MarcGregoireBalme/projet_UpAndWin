@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './Topnav.css';
 import { Link, NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import './Topnav.css';
 
 class Topnav extends Component {
   constructor(props) {
@@ -9,7 +10,15 @@ class Topnav extends Component {
     this.state = {
       prevScrollpos: window.pageYOffset,
       game: '',
+      users: [],
     };
+  }
+
+  componentWillMount() {
+    axios.get('/3005/users')
+      .then((res) => {
+        this.setState({ users: res.data });
+      });
   }
 
   componentDidMount() {
@@ -40,7 +49,7 @@ class Topnav extends Component {
   }
 
   render() {
-    const { game } = this.state;
+    const { game, users } = this.state;
     const { userId } = this.props;
     if (game) {
       return <Redirect to={game} />;
@@ -52,30 +61,56 @@ class Topnav extends Component {
           <NavLink to="/">
             <div className="Logo" />
           </NavLink>
-          <div className="Game-selection">
-            <select
-              id="pet-select"
-              onChange={e => this.handleGameChange(e.target.value)}
-            >
-              <option value="">Jeux</option>
-              <option value="/Lol">League of Legends</option>
-              <option value="/Wow">World of Warcraft</option>
-            </select>
-          </div>
+          {
+            sessionStorage.getItem('user_id') !== null ? (
+              <div className="Game-selection">
+                <select
+                  id="pet-select"
+                  onChange={e => this.handleGameChange(e.target.value)}
+                >
+                  <option value="">Jeux</option>
+                  <option value="/Lol">League of Legends</option>
+                  <option value="/Wow">World of Warcraft</option>
+                </select>
+              </div>
+            ) : (
+              <div style={{ backgroundColor: '#272727', height: '80px' }} />
+            )
+          }
         </div>
         {
-          !userId ? (
+          sessionStorage.getItem('user_id') !== null ? (
+            (
+              <div className="Top-nav-right">
+                <Link to="/GamerStatistics">
+                  {users
+                    .filter(user => (
+                      user._id === sessionStorage.getItem('user_id')
+                    ))
+                    .map(user => (
+                      <div>
+                        <div>
+                          <span className="Bold">
+                            {user.wins}
+                          </span>
+                          {' '}
+                          wins
+                        </div>
+                      </div>
+                    ))}
+                </Link>
+              </div>
+            )
+          ) : (
             <div className="Top-nav-right">
               <Link to="/Connexion">
                 <div className="connexionbutton">
                   <button type="button" className="Button">
-                    Connexion
+                      Connexion
                   </button>
                 </div>
               </Link>
             </div>
-          ) : (
-            null
           )
         }
       </div>

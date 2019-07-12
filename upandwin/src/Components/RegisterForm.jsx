@@ -48,7 +48,7 @@ class RegisterForm extends Component {
       user: this.state,
     });
     axios
-      .post('http://localhost:3005/users', {
+      .post('/users', {
         alias,
         email,
         password,
@@ -111,7 +111,6 @@ class RegisterForm extends Component {
             </div>
           </Modal.Body>
         </Modal>
-        <BottomNav />
       </div>
     );
   }

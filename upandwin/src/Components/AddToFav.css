@@ -1,0 +1,9 @@
+.FavOn {
+  color: #eb1a0f !important;
+  width: 24px !important;
+}
+
+.FavOff {
+  color: white !important;
+  width: 24px !important;
+}
