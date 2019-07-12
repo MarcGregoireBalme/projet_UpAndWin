@@ -47,9 +47,8 @@ class ChatBox extends Component {
   }
 
   componentWillMount() {
-    const { userAlias } = this.props;
     this.setState({
-      currentUser: userAlias,
+      currentUser: sessionStorage.getItem('alias'),
     });
   }
 
