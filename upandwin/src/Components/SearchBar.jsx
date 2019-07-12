@@ -30,7 +30,7 @@ class SearchBar extends Component {
     return (
       <div>
         <div>
-          <div className="WinInputContainer">
+          <div>
             <input
               onChange={e => this.handleChange(e)}
               className="WinInput"

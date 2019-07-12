@@ -49,25 +49,42 @@ class StarRating extends React.Component {
     const { rating } = this.state;
     const { video, vue } = this.props;
     return (
-      <div>
-        <StarRatingComponent
-          className="Stars"
-          name="rate1"
-          starCount={5}
-          value={rating}
-          onStarHover={this.onStarHover}
-          onStarClick={this.onClick}
-        />
-        <span style={{ marginBottom: '30px' }}>
-          (
-          {video.notes.length}
+      <div className="VideoInfos">
+        <div className="VideoInfos">
+          <StarRatingComponent
+            className="Stars"
+            name="rate1"
+            starCount={5}
+            value={rating}
+            onStarHover={this.onStarHover}
+            onStarClick={this.onClick}
+          />
+          <div className="Info">
+            (
+            {video.notes.length}
+            )
+          </div>
+        </div>
+        <div className="Info">
+          |
+        </div>
+        {
+          vue > 1 ? (
+            <div className="Info">
+              {vue}
+              {' '}
+              vues
+            </div>
+          ) : (
+            <div className="Info">
+              {vue}
+              {' '}
+              vue
+            </div>
           )
-        </span>
-        <div>
-          {vue}
-          {' '}
-          Vues
-          {' '}
+        }
+        <div className="Info">
+          |
         </div>
       </div>
     );

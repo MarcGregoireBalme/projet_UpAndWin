@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../App.css';
-import './Profil.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
 import BottomNav from '../Components/BottomNav';

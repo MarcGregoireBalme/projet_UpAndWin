@@ -85,18 +85,18 @@ function Profil({ dispatch }) {
                           .map(quizzID => (
                             <div className="Row" key={quizzID}>
 
-                              <h1>
+                              <h2>
                                 {(quizz
                                   .filter(obj => (obj._id === `${quizzID}`))
                                   .map(obj => obj.title))}
-                              </h1>
+                              </h2>
 
                               <Link to={`/quizz/${quizzID}`}>
                                 <button
                                   type="button"
-                                  className="Button"
+                                  className="QuizButton"
                                 >
-                                  Faire le quizz
+                                  Faire le quiz
                                 </button>
                               </Link>
                             </div>
@@ -116,13 +116,15 @@ function Profil({ dispatch }) {
         {/* <Link to="/Admin">Admin</Link> */}
         {
           sessionStorage.getItem('user_id') !== null ? (
-            <button
-              type="button"
-              onClick={clearSessionStorageLogOut}
-              className="SecondButton"
-            >
-              Déconnexion
-            </button>
+            <Link to="/">
+              <button
+                type="button"
+                onClick={clearSessionStorageLogOut}
+                className="SecondButton"
+              >
+                Déconnexion
+              </button>
+            </Link>
           ) : (
             null
           )
