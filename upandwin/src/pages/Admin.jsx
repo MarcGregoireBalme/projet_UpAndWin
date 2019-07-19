@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import '../App.css';
-// import './Admin.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import VideoForm from '../Components/VideoForm';
+import BottomNav from '../Components/BottomNav';
+import Topnav from '../Components/Topnav';
+
 
 class Admin extends Component {
   constructor(props) {
@@ -11,11 +12,17 @@ class Admin extends Component {
     };
   }
 
+
   render() {
     return (
-      <div className="Admin">
-        <h1>Admin page</h1>
-        <VideoForm />
+      <div>
+        <Topnav />
+        <div className="Page">
+          <div>
+            <VideoForm />
+          </div>
+        </div>
+        <BottomNav />
       </div>
     );
   }

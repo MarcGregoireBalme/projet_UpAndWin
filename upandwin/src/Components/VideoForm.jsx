@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
-import './videoForm.scss';
+import './videoForm.css';
+import Create from '../containers/Create';
 
 export default class VideoForm extends React.Component {
   state = {
@@ -12,6 +13,8 @@ export default class VideoForm extends React.Component {
     categorie: '',
     jeu: '',
     show: false,
+    newVidId: '',
+    quizz_id: '5d08ef30e3dfb9241fb360f7',
   };
 
   handleChange = (e) => {
@@ -21,23 +24,25 @@ export default class VideoForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const {
-      titre, auteur, lien, duree, categorie, jeu,
+      titre, auteur, lien, duree, categorie, jeu, quizz_id,
     } = this.state;
 
     axios
-      .post('/videos', {
+      .post('http://localhost:3005/videos', {
         titre,
         auteur,
         lien,
         duree,
         categorie,
         jeu,
-      });
-
-    this.setState({
-      show: true,
-    });
+        quizz_id,
+      })
+      .then(res => this.setState({
+        newVidId: res.data,
+        show: true,
+      }));
   };
+
 
   handleClose = () => {
     this.setState({ show: false });
@@ -45,81 +50,103 @@ export default class VideoForm extends React.Component {
 
   render() {
     const {
-      titre, auteur, lien, duree, categorie, jeu, show,
+      titre, auteur, lien, duree, categorie, jeu, show, newVidId,
     } = this.state;
     return (
       <div>
-        <h3 style={{ textAlign: 'left' }}>Ajouter une vidéo</h3>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            Titre :
-            <input
-              type="text"
-              name="titre"
-              value={titre}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            Auteur :
-            <input
-              type="text"
-              name="auteur"
-              value={auteur}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            Lien (embed) :
-            <input
-              type="text"
-              name="lien"
-              value={lien}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            Durée :
-            <input
-              type="text"
-              name="duree"
-              value={duree}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            Catégorie :
-            <input
-              type="text"
-              name="categorie"
-              value={categorie}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            Jeu :
-            <input
-              type="text"
-              name="jeu"
-              value={jeu}
-              onChange={this.handleChange}
-            />
-          </div>
-          <button type="submit">Add</button>
-        </form>
+
+        <div>
+          <h1 style={{ textAlign: 'left' }}>Ajouter une vidéo</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div className="Row">
+              Titre
+              <input
+                placeholder="Titre"
+                type="text"
+                id="titre"
+                name="titre"
+                value={titre}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="Row">
+              Auteur
+              <input
+                placeholder="Auteur"
+                type="text"
+                name="auteur"
+                value={auteur}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="Row">
+              Lien YouTube
+              <input
+                placeholder="Lien YouTube"
+                type="text"
+                name="lien"
+                value={lien}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="Row">
+              Durée
+              <input
+                placeholder="Durée"
+                type="text"
+                name="duree"
+                value={duree}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="Row">
+              Jeu
+              <input
+                placeholder="Jeu"
+                type="text"
+                name="jeu"
+                value={jeu}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="Row">
+              Catégorie
+              <input
+                placeholder="Catégorie"
+                type="text"
+                name="categorie"
+                value={categorie}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="RowButton">
+              <button type="submit" className="Button">Ajouter</button>
+            </div>
+          </form>
+        </div>
+
+        <div className="Divider" />
+
         <div>
           <Modal id="modalAlerte" show={show} onHide={this.handleClose}>
-            <Modal.Header closeButton />
+            <Modal.Header closeButton style={{ borderBottom: 0 }} />
             <Modal.Body id="modalBody">
-              <div>
-                <h4>
-A video was submitted:
+              <div className="Row">
+                <h4 style={{ margin: '4vh 6vw' }}>
+                    La vidéo
+                  {' '}
                   {titre}
+                  {' '}
+                     a été ajoutée avec succès !
                 </h4>
               </div>
             </Modal.Body>
+            <Modal.Footer closeButton />
           </Modal>
         </div>
+
+        <Create videoId={newVidId} />
+
       </div>
     );
   }

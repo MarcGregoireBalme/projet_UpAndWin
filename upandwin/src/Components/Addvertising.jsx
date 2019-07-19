@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Addvertising.css';
 import LogoJeu from '../Images/League_of_Legends_Logo.png';
 
@@ -12,10 +13,10 @@ class Addvertising extends Component {
   render() {
     return (
       <div>
-        <div className="Addvertising-img">
-          <div className="Addvertising">
+        <div className="Add-img">
+          <div className="Add">
             <img src={LogoJeu} className="Logo-jeu" alt="" />
-            <p className="AddvertisingTitle">
+            <p className="Add-title">
               <span className="Text-background">
                 Les tutos
                 {' '}
@@ -24,9 +25,11 @@ class Addvertising extends Component {
                 sont maintenant disponibles sur Up&Win !
               </span>
             </p>
-            <button type="button" className="Button">
-              Go !
-            </button>
+            <Link to="/Lol">
+              <button type="button" className="Button">
+                Go !
+              </button>
+            </Link>
           </div>
         </div>
       </div>

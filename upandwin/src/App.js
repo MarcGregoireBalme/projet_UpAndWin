@@ -12,10 +12,10 @@ import Profil from './pages/Profil';
 import GamerStatistics from './pages/GamerStatistics';
 import Fav from './pages/Fav';
 import Admin from './pages/Admin';
-import ModalSuccess from './Components/ModalSuccess';
 import ConnexionForm from './Components/ConnexionForm';
 import RegisterForm from './Components/RegisterForm';
-
+import DisplayQuizzcopy from './Components/DisplayQuizzcopy';
+import Chat from './pages/Chat';
 
 function App() {
   return (
@@ -33,7 +33,8 @@ function App() {
           <Route path="/GamerStatistics" component={GamerStatistics} />
           <Route path="/Fav" component={Fav} />
           <Route path="/Admin" component={Admin} />
-          <ModalSuccess />
+          <Route path="/quizz/:id" component={DisplayQuizzcopy} />
+          <Route path="/chat" component={Chat} />
         </Provider>
       </Switch>
     </div>

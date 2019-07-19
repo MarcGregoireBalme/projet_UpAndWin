@@ -1,18 +1,20 @@
-const users = (state = {}, action) => {
+const users = (state = { user_id: null }, action) => {
   switch (action.type) {
     case 'CREATE_USER':
       return {
         ...state,
-        pseudo: action.pseudo,
+        alias: action.alias,
         email: action.email,
         password: action.password,
-        confpassword: action.password,
       };
-    case 'CHECK_USER':
+    case 'LOGIN':
       return {
         ...state,
-        pseudo: action.pseudo,
-        password: action.password,
+        ...action.payload,
+      };
+    case 'LOGOUT':
+      return {
+        user_id: null,
       };
     default:
       return state;

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import '../App.css';
-import '../pages/Home.css';
+import axios from 'axios';
 import {
   Button, Form, FormGroup, Label, Input,
 } from 'reactstrap';
+import Modal from 'react-bootstrap/Modal';
 import { connect } from 'react-redux';
 import Topnav from './Topnav';
 import BottomNav from './BottomNav';
@@ -13,14 +14,19 @@ class RegisterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pseudo: '',
+      alias: '',
       email: '',
       password: '',
       confpassword: '',
+      show: false,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleClose = () => {
+    this.setState({ show: false });
   }
 
   handleInputChange(event) {
@@ -34,19 +40,29 @@ class RegisterForm extends Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     const { dispatch } = this.props;
+    const { alias, email, password } = this.state;
     dispatch({
       type: 'CREATE_USER',
       user: this.state,
     });
-    event.preventDefault();
+    axios
+      .post('http://localhost:3005/users', {
+        alias,
+        email,
+        password,
+      });
+    this.setState({
+      show: true,
+    });
   }
 
   validateForm() {
     const {
-      pseudo, email, password, confpassword,
+      alias, email, password, confpassword,
     } = this.state;
-    return pseudo.length > 0
+    return alias.length > 0
       && email.length > 0
       && password.length > 0
       && password === confpassword;
@@ -54,16 +70,16 @@ class RegisterForm extends Component {
 
   render() {
     const {
-      pseudo, email, password, confpassword,
+      alias, email, password, confpassword, show,
     } = this.state;
     return (
       <div className="wholeform">
         <Topnav />
         <Form onSubmit={this.handleSubmit} className="formcontainer">
           <FormGroup>
-            <Label for="pseudo" className="fieldtitle">Pseudo</Label>
+            <Label for="alias" className="fieldtitle">Pseudo</Label>
             {' '}
-            <Input name="pseudo" type="pseudo" checked={pseudo} onChange={this.handleInputChange} placeholder="Pseudo" />
+            <Input name="alias" type="alias" checked={alias} onChange={this.handleInputChange} placeholder="Pseudo" />
           </FormGroup>
           <FormGroup>
             <Label for="email" className="fieldtitle">Email</Label>
@@ -84,7 +100,17 @@ class RegisterForm extends Component {
             <Button type="submit" value="Submit" disabled={!this.validateForm()}>Register</Button>
           </FormGroup>
         </Form>
-        <BottomNav />
+        <Modal id="modalAlerte" show={show} onHide={this.handleClose}>
+          <Modal.Header closeButton />
+          <Modal.Body id="modalBody">
+            <div>
+              <h4>
+                A user was submitted:
+                {alias}
+              </h4>
+            </div>
+          </Modal.Body>
+        </Modal>
       </div>
     );
   }

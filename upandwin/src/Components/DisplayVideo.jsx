@@ -1,32 +1,19 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import RatingStar from './StarRating';
-
+import Video from './Video';
 
 const DisplayVideo = ({ videos }) => (
-
   <div className="container-fluid">
     <div className="row videoDisplay">
-      {videos.map(video => (
-        <div key={video.titre} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
-          <h3>{video.titre}</h3>
-          <RatingStar />
-          <iframe
-            title={video.titre}
-            width="100%"
-            height="250px"
-            src={video.lien}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+      {videos/* .filter((x, id) => id < 4) */.map(video => (
+        <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
+          <Video video={video} videosFav={videos} />
         </div>
       ))}
     </div>
   </div>
-
-
 );
 
 
