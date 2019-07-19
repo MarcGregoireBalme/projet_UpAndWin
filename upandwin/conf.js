@@ -47,7 +47,7 @@ const options = {
   server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
   replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
 };
-const urlmongo =  'mongodb+srv://projet3:DUvCXkR3nkGnitF3@upandwin-fx8ww.mongodb.net/upandwin';
+const urlmongo = 'mongodb+srv://projet3:DUvCXkR3nkGnitF3@upandwin-fx8ww.mongodb.net/upandwin';
 mongoose.connect(urlmongo, options);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erreur lors de la connexion'));
@@ -102,8 +102,9 @@ myRouter.route('/quizzes/:quizz_id').get(function (req, res) {
   Quizze.find({ _id: req.params.quizz_id }, function (err, quizzes) {
     if (err) {
       res.send(err);
+    } else if (quizzes) {
+      res.json(quizzes);
     }
-    res.json(quizzes);
   });
 });
 

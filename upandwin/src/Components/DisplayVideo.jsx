@@ -7,9 +7,9 @@ import Video from './Video';
 const DisplayVideo = ({ videos }) => (
   <div className="container-fluid">
     <div className="row videoDisplay">
-      {videos/* .filter((x, id) => id < 4) */.map(video => (
+      {videos/* .filter((x, id) => id < 4) */.map((video, id) => (
         <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
-          <Video video={video} videosFav={videos} />
+          <Video video={video} id={id} videosFav={videos} />
         </div>
       ))}
     </div>

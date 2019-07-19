@@ -84,21 +84,17 @@ function Profil({ dispatch }) {
                         user.quizz_idTodo
                           .map(quizzID => (
                             <div className="Row" key={quizzID}>
-
-                              <h2>
-                                {(quizz
-                                  .filter(obj => (obj._id === `${quizzID}`))
-                                  .map(obj => obj.title))}
-                              </h2>
-
                               <Link to={`/quizz/${quizzID}`}>
                                 <button
                                   type="button"
                                   className="QuizButton"
                                 >
-                                  Faire le quiz
+                                  {(quizz
+                                    .filter(obj => (obj._id === `${quizzID}`))
+                                    .map(obj => obj.title))}
                                 </button>
                               </Link>
+
                             </div>
                           ))
                       }

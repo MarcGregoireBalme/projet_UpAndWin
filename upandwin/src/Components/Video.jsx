@@ -18,7 +18,7 @@ const opts = {
   },
 };
 
-const Video = ({ video }) => {
+const Video = ({ video, id }) => {
   const [inDB, setInDB] = useState(null);
   const [quizzExists, setQuizzExists] = useState(['unEmpty']);
   const [quizzButton, setQuizzButton] = useState('none');
@@ -26,6 +26,7 @@ const Video = ({ video }) => {
 
   const onPlayerReady = (event) => {
     event.target.pauseVideo();
+    console.log('loaded', id);
   };
 
   // console.log(sessionStorage.getItem('user_id'), 'userID');
