@@ -204,3 +204,6 @@ input {
   margin-left: 12px;
 }
 
+.container-fluid {
+  margin-bottom: 0px !important;
+}
