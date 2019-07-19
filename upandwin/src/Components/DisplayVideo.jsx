@@ -8,7 +8,7 @@ class DisplayVideos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      range: 10,
+      range: 5,
     };
     this.showMore = this.showMore.bind(this);
   }
@@ -39,7 +39,7 @@ class DisplayVideos extends Component {
       <div className="container-fluid">
         <div className="row videoDisplay">
           {this.loopVideos()}
-          <button type="button" onClick={() => this.showMore()} className="Showmorebutton">Voir plus</button>
+          <button type="button" onClick={() => this.showMore()} className="Showmorebuttonlol">Voir plus</button>
         </div>
       </div>
     );

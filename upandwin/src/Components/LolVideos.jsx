@@ -47,7 +47,7 @@ class LolVideosComponent extends Component {
                 <Video video={video} />
               </div>
             ))}
-          <button type="button" onClick={() => this.showMore()} className="Showmorebutton">Voir plus</button>
+          <button type="button" onClick={() => this.showMore()} className="Showmorebuttonlol">Voir plus</button>
         </div>
       </div>
     );
