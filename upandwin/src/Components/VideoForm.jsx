@@ -54,7 +54,6 @@ export default class VideoForm extends React.Component {
     } = this.state;
     return (
       <div>
-
         <div>
           <h1 style={{ textAlign: 'left' }}>Ajouter une vidéo</h1>
           <form onSubmit={this.handleSubmit}>

@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import './displayVideo.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import YouTube from 'react-youtube';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -23,12 +22,21 @@ const Video = ({ video }) => {
   const [quizzExists, setQuizzExists] = useState(['unEmpty']);
   const [quizzButton, setQuizzButton] = useState('none');
   const [nbVues, setNbVues] = useState(0);
+  const [users, setUsers] = useState({ users: [] });
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios(
+        'http://localhost:3005/users',
+      );
+      setUsers(result.data);
+    }
+    fetchData();
+  }, []);
 
   const onPlayerReady = (event) => {
     event.target.pauseVideo();
   };
-
-  // console.log(sessionStorage.getItem('user_id'), 'userID');
 
   useEffect(() => {
     const userId = sessionStorage.getItem('user_id');
@@ -120,8 +128,27 @@ const Video = ({ video }) => {
         {sessionStorage.getItem('user_id') !== null ? (
           <>
             <div className="VideoInfos">
+
               <StarRating video={video} vue={nbVues} />
-              <AddToFav vId={video._id} />
+
+              {users[0] ? users
+                .filter(user => (
+                  user._id === sessionStorage.getItem('user_id')
+                ))
+                .map(user => (
+                  <div key={user._id}>
+                    {
+                      user.admin === true ? (
+                        null
+                      ) : (
+                        <AddToFav vId={video._id} />
+                      )
+                    }
+                  </div>
+                ))
+                : null
+              }
+
             </div>
             <div>
               <NavLink to={`/quizz/${video.quizz_id}`}>

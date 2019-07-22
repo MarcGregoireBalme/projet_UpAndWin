@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import '../App.css';
 import './Wow.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 import Topnav from '../Components/Topnav';
 import Addvertising from '../Components/Addvertising';
@@ -28,9 +26,9 @@ class Wow extends Component {
     return (
       <div>
         <Topnav />
-        <h1 style={{ paddingTop: '10vh' }}>World of Warcraft</h1>
-        <Addvertising />
-        <DisplayVideo videos={videos} />
+        <div className="Page">
+          <DisplayVideo videos={videos} />
+        </div>
         <BottomNav />
       </div>
     );

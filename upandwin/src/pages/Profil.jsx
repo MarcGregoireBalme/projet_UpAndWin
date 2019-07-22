@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import '../App.css';
-import RadarChart from 'react-svg-radar-chart';
 import BottomNav from '../Components/BottomNav';
 import ProfilNav from '../Components/ProfilNav';
 import Topnav from '../Components/Topnav';
@@ -120,7 +118,7 @@ function Profil({ dispatch }) {
               <button
                 type="button"
                 onClick={clearSessionStorageLogOut}
-                className="SecondButton"
+                className="SecondaryButton"
               >
                 Déconnexion
               </button>

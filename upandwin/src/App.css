@@ -1,5 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap);
 
+:focus {
+  outline: none !important;
+}
+
 a {
   color: #FFF !important;
 } a:hover {
@@ -61,9 +65,6 @@ h4 {
   transition: 0.5s;
 }
 
-button:focus {
-  outline: none !important;
-}
 
 /* Show More Button */
 
@@ -86,10 +87,6 @@ button:focus {
   transition: 0.5s;
 }
 
-button:focus {
-  outline: none !important;
-}
-
 /* Showmorebuttonlol */
 
 .Showmorebuttonlol {
@@ -110,10 +107,6 @@ button:focus {
   transition: 0.5s;
 }
 
-button:focus {
-  outline: none !important;
-}
-
 .ButtonPress {
   min-width: 100%;
   background-image: linear-gradient(45deg, #eb1a0f, #eb4d0f);
@@ -127,7 +120,7 @@ button:focus {
   transition: 0.5s;
 }
 
-.SecondButton {
+.SecondaryButton {
   min-width: 100%;
   background-color: rgb(99, 26, 6);
   border-style: none;
@@ -137,6 +130,19 @@ button:focus {
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
   font-size: 1em;
+}
+
+.TertiaryButton {
+  min-width: 100%;
+  background-color: black;
+  border: solid #eb1a0f 3px;
+  border-radius: 50px;
+  padding: 12px 24px 12px;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  transition:0.5s;
 }
 
 .QuizButton {
@@ -160,6 +166,11 @@ button:focus {
 .Orange {
   font-weight: bold;
   color: #EB1A0F;
+}
+
+.Blue {
+  font-weight: bold;
+  color: #3F51B5;
 }
 
 .Divider {
@@ -202,6 +213,208 @@ input {
 
 .Info {
   margin-left: 12px;
+}
+
+/*////////////////////////        GamerStatistics        ////////////////////////*/
+
+.WinPaper {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  text-align: center;
+  background-color: #444 !important;
+  color: white;
+}
+
+.Number {
+  color: white;
+  font-size: 3em;
+}
+
+.WhiteText {
+  color: white;
+}
+
+/*////////////////////////        LoLFilter        ////////////////////////*/
+
+#Filter-nav {
+  background-image: linear-gradient(180deg, rgba(0,0,0,1), rgba(0,0,0,0));
+  position: fixed;
+  top: 84px;
+  width: 100vw;
+  height: 84px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: top 0.6s;
+}
+
+.Filter-button-on {
+  margin: 12px 24px 24px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  background-image: url("./Images/filter.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  transition: 0.6s;
+}
+.Filter-button-off {
+  margin: 12px 24px 24px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  background-image: url("./Images/left-arrow.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  transition: 0.6s;
+}
+
+.Filter-list-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7)
+}
+
+.Filter-list {
+  padding: 12px 24px 24px 0px;
+  position: fixed;
+  left: 96px;
+  width: 100%;
+}
+
+.Filter-row {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 66vw;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.Filter-check {
+  min-width: auto !important;
+} 
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #666;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #fff;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%
+}
+
+input:checked + .slider {
+  background-image: linear-gradient(45deg, #eb1a0f, #eb4d0f);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+
+/*////////////////////////        ProfilNav        ////////////////////////*/
+
+#ProfilNav {
+  background-image: linear-gradient(180deg, rgba(0,0,0,1), rgba(0,0,0,0));
+  position: fixed;
+  padding-left: 24px;
+  padding-right: 24px;
+  top: 84px;
+  width: 100vw;
+  height: 84px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: top 0.6s;
+}
+
+.ProfilNavButton {
+  margin-top: 12px;
+  width: 48%;
+}
+
+.WinRoot {
+  flex-grow: 1;
+}
+
+/*////////////////////////        Search        ////////////////////////*/
+
+.WinRoot {
+  align-items: 'center';
+  width: 100;
+  display: flex;
+}
+
+.SearchBarContainer {
+  padding: 12px 24px 24px 24px;
+  min-width: 100%;
+}
+
+.SearchBar {
+  min-width: 100%;
+  background-color: white;
+  border-style: none;
+  border-radius: 50px;
+  padding: 12px 24px 12px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+}
+
+.searchbar {
+  padding-top: 5em;
 }
 
 .container-fluid {
