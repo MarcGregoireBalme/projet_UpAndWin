@@ -55,7 +55,7 @@ export default function DisplayQuizz() {
         <div>
           {redirect ? <Redirect to="/Fav" /> : redirect}
           <FormControl component="fieldset">
-            {quizzes && quizzes.map(quizz => (
+            {quizzes[0] && quizzes.map(quizz => (
               <div key={quizz._id}>
                 <h1>{quizz.title}</h1>
                 <Displayquestioncopy quizz={quizz} />
