@@ -304,11 +304,11 @@ const userSchema = mongoose.Schema({
   age: Number,
   registration_date: Date,
   games: Array,
-  viewed_videos: [mongoose.Schema.Types.ObjectId],
+  viewed_videos: Array,
   fav_videos: Array,
   badges: Array,
-  quizz_idTodo: [mongoose.Schema.Types.ObjectId],
-  quizz_id: [mongoose.Schema.Types.ObjectId],
+  quizz_idTodo: Array,
+  quizz_id: Array,
   quizzAnswers: Array,
   friends: Array,
   wins: Number,
@@ -339,18 +339,10 @@ myRouter
     users.avatar = req.body.avatar;
     users.age = req.body.age;
     users.registration_date = req.body.registration_date;
-    users.games = [req.body.games];
     users.score = req.body.score;
-    users.viewed_videos = [req.body.viewed_videos];
-    users.video_favs = [req.body.video_favs];
-    users.badges = [req.body.badges];
-    users.quizz_idTodo = [req.body.quizz_idTodo];
-    users.quizz_id = [req.body.quizz_id];
-    users.quizzAnswers = [];
-    users.friends = [req.body.friends];
-    users.wins = req.body.wins;
-    users.attributs = [req.body.attributs];
-    users.save()
+    users.wins = 200;
+    users
+      .save()
       .then(() => {
         chatkit.createUser({
           id: users.alias,
