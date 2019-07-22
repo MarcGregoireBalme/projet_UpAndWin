@@ -50,6 +50,12 @@ h4 {
   font-weight: 800;
 }
 
+.ImageContainer {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
 .Button {
   min-width: 100%;
   background-image: linear-gradient(45deg, #eb1a0f, #eb4d0f);
