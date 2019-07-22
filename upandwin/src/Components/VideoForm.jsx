@@ -128,20 +128,21 @@ export default class VideoForm extends React.Component {
         <div className="Divider" />
 
         <div>
-          <div className="Row">
-            <Modal id="modalAlerte" show={show} onHide={this.handleClose}>
-              <Modal.Header closeButton />
-              <Modal.Body id="modalBody">
-                <div className="Row">
-                  <h4>
+          <Modal id="modalAlerte" show={show} onHide={this.handleClose}>
+            <Modal.Header closeButton style={{ borderBottom: 0 }} />
+            <Modal.Body id="modalBody">
+              <div className="Row">
+                <h4 style={{ margin: '4vh 6vw' }}>
                     La vidéo
-                    {titre}
+                  {' '}
+                  {titre}
+                  {' '}
                      a été ajoutée avec succès !
-                  </h4>
-                </div>
-              </Modal.Body>
-            </Modal>
-          </div>
+                </h4>
+              </div>
+            </Modal.Body>
+            <Modal.Footer closeButton />
+          </Modal>
         </div>
 
         <Create videoId={newVidId} />

@@ -7,7 +7,10 @@ import Video from './Video';
 class LolVideosComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      range: 5,
+    };
+    this.showMore = this.showMore.bind(this);
   }
 
   filteredVideos = (videos) => {
@@ -24,18 +27,27 @@ class LolVideosComponent extends Component {
     return filtered;
   };
 
+  showMore() {
+    const { range } = this.state;
+    this.setState({
+      range: range + 5,
+    });
+  }
+
   render() {
     const { videos } = this.props;
+    const { range } = this.state;
     console.log(this.filteredVideos(videos));
     return (
       <div className="container-fluid">
         <div className="row videoDisplay">
-          {this.filteredVideos(videos)
+          {this.filteredVideos(videos).filter((video, id) => id < range)
             .map(video => (
               <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12">
                 <Video video={video} />
               </div>
             ))}
+          <button type="button" onClick={() => this.showMore()} className="Showmorebuttonlol">Voir plus</button>
         </div>
       </div>
     );
