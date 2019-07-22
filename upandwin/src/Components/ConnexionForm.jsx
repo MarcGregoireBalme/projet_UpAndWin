@@ -98,7 +98,7 @@ class ConnexionForm extends Component {
             <div className="pititephrase">
               Je n’ai pas de compte, je souhaite
               {' '}
-              <Link to="/Register">m’inscrire</Link>
+              <Link to="/Register" className="inscrire">m’inscrire</Link>
             </div>
             {errmsg}
           </FormGroup>

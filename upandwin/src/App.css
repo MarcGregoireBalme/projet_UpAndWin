@@ -65,6 +65,48 @@ h4 {
   transition: 0.5s;
 }
 
+
+/* Show More Button */
+
+.Showmorebutton {
+  min-width: 50%;
+  background-image: linear-gradient(45deg, #eb1a0f, #eb4d0f);
+  border-style: none;
+  border-radius: 50px;
+  padding: 12px 24px 12px;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  transition:0.5s;
+  height: 20%;
+  align-self: center;
+} .Showmorebutton:hover {
+  cursor: pointer;
+  background-image: linear-gradient(45deg, #eb1a0f, #eb1a0f);
+  transition: 0.5s;
+}
+
+/* Showmorebuttonlol */
+
+.Showmorebuttonlol {
+  min-width: 100%;
+  background-image: linear-gradient(45deg, #eb1a0f, #eb4d0f);
+  border-style: none;
+  border-radius: 50px;
+  padding: 12px 24px 12px;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  transition:0.5s;
+  align-self: center;
+} .Showmorebuttonlol:hover {
+  cursor: pointer;
+  background-image: linear-gradient(45deg, #eb1a0f, #eb1a0f);
+  transition: 0.5s;
+}
+
 .ButtonPress {
   min-width: 100%;
   background-image: linear-gradient(45deg, #eb1a0f, #eb4d0f);
@@ -373,4 +415,8 @@ input:checked + .slider:before {
 
 .searchbar {
   padding-top: 5em;
+}
+
+.container-fluid {
+  margin-bottom: 0px !important;
 }
