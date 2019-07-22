@@ -12,7 +12,7 @@ class MessagesList extends Component {
     const styles = {
       ul: {
         listStyle: 'none',
-        height: '80vw',
+        height: '110vw',
         overflow: 'scroll',
       },
       li: {
