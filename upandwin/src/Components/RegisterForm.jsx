@@ -105,8 +105,8 @@ class RegisterForm extends Component {
           <Modal.Body id="modalBody">
             <div>
               <h4>
-                A user was submitted:
                 {alias}
+                , votre compte a été créé !
               </h4>
             </div>
           </Modal.Body>
