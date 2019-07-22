@@ -8,11 +8,15 @@ import RadarChart from 'react-svg-radar-chart';
 import 'react-svg-radar-chart/build/css/index.css';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles({
-  root: {
+const useStyles = makeStyles(theme => ({
+  typography: {
+    margin: theme.spacing(2),
   },
-});
+}));
 
 const Graph = () => {
   const classes = useStyles();
@@ -23,6 +27,7 @@ const Graph = () => {
   const [Communication, setCommunication] = useState(50);
   const [Initiative, setInitiative] = useState(50);
   const [buttonType, setButtonType] = useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   useEffect(() => {
     const userId = sessionStorage.getItem('user_id');
@@ -88,6 +93,8 @@ const Graph = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setAnchorEl(e.currentTarget);
+    setTimeout(setAnchorEl(null), 1000);
     setButtonType(!buttonType);
     const userId = sessionStorage.getItem('user_id');
     axios
@@ -95,6 +102,17 @@ const Graph = () => {
         attributs,
       });
   };
+
+  function handleClick(event) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleClose() {
+    setAnchorEl(null);
+  }
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   const buttonStatus = buttonType ? 'Button' : 'ButtonPress';
 
@@ -156,6 +174,25 @@ const Graph = () => {
           </Grid>
           {Initiative}
         </Grid>
+      </div>
+
+      <div>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+        >
+          <Typography className={classes.typography}>Statistiques enregitrées</Typography>
+        </Popover>
       </div>
 
       <div className="RowButton">
