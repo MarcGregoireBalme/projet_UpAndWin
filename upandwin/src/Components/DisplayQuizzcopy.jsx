@@ -15,6 +15,7 @@ export default function DisplayQuizz() {
     localStorage.removeItem('q0');
     localStorage.removeItem('q1');
     localStorage.removeItem('q2');
+    localStorage.removeItem('q3');
     const quizzId = sessionStorage.getItem('quizz_id');
     const userId = sessionStorage.getItem('user_id');
     const fetchData = async () => {

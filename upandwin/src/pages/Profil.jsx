@@ -7,6 +7,7 @@ import RadarChart from 'react-svg-radar-chart';
 import BottomNav from '../Components/BottomNav';
 import ProfilNav from '../Components/ProfilNav';
 import Topnav from '../Components/Topnav';
+import ButtonQ from '../Components/ButtonQ';
 import 'react-svg-radar-chart/build/css/index.css';
 
 
@@ -81,24 +82,10 @@ function Profil({ dispatch }) {
                     <p className="Orange">{`(${user.quizz_idTodo.length}) quizz disponible(s)`}</p>
                     <div>
                       {
-                        user.quizz_idTodo
+                        user.quizz_idTodo && user.quizz_idTodo
                           .map(quizzID => (
                             <div className="Row" key={quizzID}>
-
-                              <h2>
-                                {(quizz
-                                  .filter(obj => (obj._id === `${quizzID}`))
-                                  .map(obj => obj.title))}
-                              </h2>
-
-                              <Link to={`/quizz/${quizzID}`}>
-                                <button
-                                  type="button"
-                                  className="QuizButton"
-                                >
-                                  Faire le quiz
-                                </button>
-                              </Link>
+                              <ButtonQ quizzID={quizzID} quizz={quizz} />
                             </div>
                           ))
                       }
