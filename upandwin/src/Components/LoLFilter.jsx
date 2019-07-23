@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './LoLFilter.css';
 
 class LoLFilterComponent extends Component {
   constructor(props) {
@@ -85,7 +84,7 @@ class LoLFilterComponent extends Component {
         ShowFilters && (
           <div className="Filter-list-container">
             <div className="Filter-list">
-              <h2>Filtrer par</h2>
+              <h1 style={{ paddingTop: '12px' }}>Filtrer par</h1>
               {filters.map(filter => (
                 <div className="Filter-row" key={filter}>
                   <div>

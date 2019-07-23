@@ -2,9 +2,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-
 
 class Create extends Component {
   constructor(props) {
@@ -161,7 +159,7 @@ class Create extends Component {
         quiz,
         questionTitle: '',
         answers: [''],
-        message: 'Question Added!',
+        message: 'Question ajoutée !',
       });
       setTimeout(() => { this.setState({ message: '' }); }, 3000);
     }
@@ -178,7 +176,6 @@ class Create extends Component {
       this.addAnswerOption();
     }
   }
-
 
   handleOptionEdit(questionIdx, answerIdx, event) {
     const editQuestionID = `editQuestion${questionIdx}`;
@@ -261,7 +258,7 @@ class Create extends Component {
           type="text"
           // eslint-disable-next-line no-sequences
           name={'answer_', { ans }}
-          placeholder="Enter an Answer and Press Tab to Add Another"
+          placeholder="Réponse"
           value={answers[idx]}
           onChange={this.handleOption.bind(this, idx)}
           className="answerInput"
@@ -274,13 +271,11 @@ class Create extends Component {
       </div>
     ));
     return (
-
       <div className="createComponent">
-
         {!title && !review
           && (
             <div>
-              <h1>Ajouter un quizz à cette vidéo</h1>
+              <h1>Ajouter un quiz à cette vidéo</h1>
               <div className="Row">
                 Titre
                 <input
@@ -326,7 +321,7 @@ class Create extends Component {
               <div className="RowButton">
                 <button
                   type="submit"
-                  className="Button"
+                  className="TertiaryButton"
                   onClick={this.addAnswerOption}
                 >
                   Ajouter une réponse
@@ -335,7 +330,7 @@ class Create extends Component {
               <div className="RowButton">
                 <button
                   type="submit"
-                  className="Button"
+                  className="TertiaryButton"
                   onClick={this.submitAndContinue}
                 >
                   Ajouter une question
@@ -347,7 +342,7 @@ class Create extends Component {
                   className="Button"
                   onClick={this.submitAndReview}
                 >
-                  Valider le quizz
+                  Valider le quiz
                 </button>
               </div>
             </div>
@@ -360,24 +355,19 @@ class Create extends Component {
           && (
             <div>
 
-              <h1 className="review">Review Your Quizz</h1>
+              <h1 className="review">Review du quiz</h1>
 
               {!editQuizTitleState
-
                 ? (
-                  <h2 className="quizTitleReview">
+                  <h2 className="Orange">
                     <i
                       onClick={this.handleEditQuizTitle}
                       className="fa fa-pencil-square-o fa-editQuestion"
                       aria-hidden="true"
                     />
-                    Quiz Title:
-                    {' '}
                     {quizTitle}
                   </h2>
-                )
-
-                : (
+                ) : (
                   <div>
                     <h2>Edit Quiz Title:</h2>
                     <input
@@ -437,13 +427,11 @@ class Create extends Component {
                 }
                 return (
                   <div key={idx}>
-                    <p className="inputTitles">
-                      Question
-                      {' '}
-                      {idx + 1}
-                      :
-                    </p>
                     <h2 className="questionTitleReview">
+                      <span className="Orange">
+                        {idx + 1}
+                        {' '}
+                      </span>
                       <i
                         onClick={this.editQuestion.bind(this, idx)}
                         className="fa fa-pencil-square-o fa-editQuestion"
@@ -456,7 +444,6 @@ class Create extends Component {
                       />
                       {question.questionTitle}
                     </h2>
-                    <p className="inputTitles">Answers:</p>
                     {question.answers.map((answer, index) => {
                       const style = {
                         background: 'rgba(225,225,225,0.5)',
@@ -471,7 +458,7 @@ class Create extends Component {
                 );
               })}
 
-              {quiz.questions.length === 0 && <h2 className="errorMsg">You have to enter some questions to submit a new quiz!</h2>}
+              {quiz.questions.length === 0 && <h1 className="errorMsg">Votre quiz ne comporte aucune question !</h1>}
 
               <div className="reviewBtnControl">
                 <button
@@ -479,37 +466,27 @@ class Create extends Component {
                   className="Button"
                   onClick={this.saveQuiz}
                 >
-                  Ajouter le quizz
+                  Valider le quiz
                 </button>
                 <button
                   type="submit"
-                  className="SecondButton"
+                  className="SecondaryButton"
                   onClick={this.reviewAddQuestion}
                 >
-                  Modifier le quizz
+                  Modifier le quiz
                 </button>
               </div>
 
             </div>
           )
-
         }
 
         {submission
-
           && (
             <div className="submissionSuccess">
-              <h1>Your quiz was submitted successfully!</h1>
-              <h2>
-                Return to the
-                {' '}
-                <Link to="quiz">Quizzes Page</Link>
-                {' '}
-                to view it and start studying.
-              </h2>
+              <h1>Quiz ajouté avec succès !</h1>
             </div>
           )
-
         }
 
       </div>
