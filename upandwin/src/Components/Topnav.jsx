@@ -51,12 +51,9 @@ class Topnav extends Component {
   render() {
     const { game, users } = this.state;
     const { userId } = this.props;
-    if (game) {
-      return <Redirect to={game} />;
-    }
     return (
       <div id="Top-nav">
-
+        { game && <Redirect to={game} /> }
         <div className="Top-nav-left">
           <NavLink to="/">
             <div className="Logo" />
