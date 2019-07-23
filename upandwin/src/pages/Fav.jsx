@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import '../App.css';
-
 import axios from 'axios';
-import DisplayVideo from '../Components/DisplayVideo';
-import 'bootstrap/dist/css/bootstrap.css';
-import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
+import DisplayVideo from '../Components/DisplayVideo';
+import BottomNav from '../Components/BottomNav';
+import Bad from '../Images/bad.png';
 
 class Fav extends Component {
   constructor(props) {
@@ -31,7 +29,19 @@ class Fav extends Component {
         <Topnav />
         <div className="Page">
           <h1>Vidéos favorites</h1>
-          <DisplayVideo videos={videos} />
+          {videos.length < 1 ? (
+            <div>
+              <div className="ImageContainer">
+                <img src={Bad} alt="" />
+              </div>
+              <div className="Add-title">
+                Vous n’avez aucune vidéo favorite...
+              </div>
+            </div>
+          ) : (
+            <DisplayVideo videos={videos} />
+          )
+          }
         </div>
         <BottomNav />
       </div>

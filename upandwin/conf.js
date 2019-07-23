@@ -100,6 +100,7 @@ myRouter.route('/quizzes').get(function (req, res) {
 
 myRouter.route('/quizzes/:quizz_id').get(function (req, res) {
   Quizze.find({ _id: req.params.quizz_id }, function (err, quizzes) {
+    console.log('1');
     if (err) {
       res.send(err);
     } else if (quizzes) {
@@ -305,11 +306,11 @@ const userSchema = mongoose.Schema({
   age: Number,
   registration_date: Date,
   games: Array,
-  viewed_videos: [mongoose.Schema.Types.ObjectId],
+  viewed_videos: Array,
   fav_videos: Array,
   badges: Array,
-  quizz_idTodo: [mongoose.Schema.Types.ObjectId],
-  quizz_id: [mongoose.Schema.Types.ObjectId],
+  quizz_idTodo: Array,
+  quizz_id: Array,
   quizzAnswers: Array,
   friends: Array,
   wins: Number,
@@ -340,18 +341,10 @@ myRouter
     users.avatar = req.body.avatar;
     users.age = req.body.age;
     users.registration_date = req.body.registration_date;
-    users.games = [req.body.games];
     users.score = req.body.score;
-    users.viewed_videos = [req.body.viewed_videos];
-    users.video_favs = [req.body.video_favs];
-    users.badges = [req.body.badges];
-    users.quizz_idTodo = [req.body.quizz_idTodo];
-    users.quizz_id = [req.body.quizz_id];
-    users.quizzAnswers = [];
-    users.friends = [req.body.friends];
-    users.wins = req.body.wins;
-    users.attributs = [req.body.attributs];
-    users.save()
+    users.wins = 200;
+    users
+      .save()
       .then(() => {
         chatkit.createUser({
           id: users.alias,
@@ -440,6 +433,8 @@ myRouter.route('/usersquizztodo/:id').get(function (req, res) {
       res.send(err);
     } else if (users) {
       res.json(users[0].quizz_idTodo);
+    } else {
+      res.status(500).end();
     }
   });
 });
@@ -455,9 +450,11 @@ myRouter.route('/user/:userId').put(function (req, res) {
 
 myRouter.route('/usersubmitquizz/:user_id').put(function (req, res) {
   User.findById(req.params.user_id, function (err, user) {
+    console.log('totoo');
     if (err) {
       res.send(err);
     }
+    console.log('toto');
     user.quizzAnswers.addToSet(req.body.quizzAnswer);
     user.quizz_id.addToSet(req.body.quizz_id);
     user.quizz_idTodo = req.body.quizz_idTodo;

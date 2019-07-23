@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../App.css';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {
   Button, Form, FormGroup, Label, Input,
@@ -7,7 +7,7 @@ import {
 import Modal from 'react-bootstrap/Modal';
 import { connect } from 'react-redux';
 import Topnav from './Topnav';
-import BottomNav from './BottomNav';
+import Good from '../Images/good.png';
 import './Form.css';
 
 class RegisterForm extends Component {
@@ -101,12 +101,17 @@ class RegisterForm extends Component {
           </FormGroup>
         </Form>
         <Modal id="modalAlerte" show={show} onHide={this.handleClose}>
-          <Modal.Header closeButton />
+          <Link to="/Connexion">
+            <Modal.Header closeButton />
+          </Link>
           <Modal.Body id="modalBody">
             <div>
+              <div className="ImageContainer">
+                <img src={Good} alt="" />
+              </div>
               <h4>
-                A user was submitted:
                 {alias}
+                , votre compte a été créé !
               </h4>
             </div>
           </Modal.Body>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import FormControl from '@material-ui/core/FormControl'; import axios from 'axios';
+import FormControl from '@material-ui/core/FormControl';
 import { Redirect } from 'react-router-dom';
-import Displayquestioncopy from './DisplayQuestioncopy';
+import axios from 'axios';
 import Topnav from './Topnav';
+import Displayquestioncopy from './DisplayQuestioncopy';
 import BottomNav from './BottomNav';
 import './DisplayQuizz.css';
 

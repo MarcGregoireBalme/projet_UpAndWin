@@ -51,12 +51,9 @@ class Topnav extends Component {
   render() {
     const { game, users } = this.state;
     const { userId } = this.props;
-    if (game) {
-      return <Redirect to={game} />;
-    }
     return (
       <div id="Top-nav">
-
+        { game && <Redirect to={game} /> }
         <div className="Top-nav-left">
           <NavLink to="/">
             <div className="Logo" />
@@ -65,7 +62,6 @@ class Topnav extends Component {
             sessionStorage.getItem('user_id') !== null ? (
               <div className="Game-selection">
                 <select
-                  id="pet-select"
                   onChange={e => this.handleGameChange(e.target.value)}
                 >
                   <option value="">Jeux</option>
@@ -82,23 +78,35 @@ class Topnav extends Component {
           sessionStorage.getItem('user_id') !== null ? (
             (
               <div className="Top-nav-right">
-                <Link to="/GamerStatistics">
-                  {users
-                    .filter(user => (
-                      user._id === sessionStorage.getItem('user_id')
-                    ))
-                    .map(user => (
-                      <div>
-                        <div>
-                          <span className="Bold">
-                            {user.wins}
-                          </span>
-                          {' '}
-                          wins
-                        </div>
-                      </div>
-                    ))}
-                </Link>
+                {users[0] ? users
+                  .filter(user => (
+                    user._id === sessionStorage.getItem('user_id')
+                  ))
+                  .map(user => (
+                    <div key={user._id}>
+                      {
+                        user.admin === true ? (
+                          <Link to="/Profil">
+                            <div className="Blue">
+                              Admin
+                            </div>
+                          </Link>
+                        ) : (
+                          <Link to="/GamerStatistics">
+                            <div>
+                              <span className="Bold">
+                                {user.wins}
+                              </span>
+                              {' '}
+                                wins
+                            </div>
+                          </Link>
+                        )
+                      }
+                    </div>
+                  ))
+                  : null
+                }
               </div>
             )
           ) : (
