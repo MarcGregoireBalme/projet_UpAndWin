@@ -128,7 +128,6 @@ const Video = ({ video }) => {
         {sessionStorage.getItem('user_id') !== null ? (
           <>
             <div className="VideoInfos">
-
               <StarRating video={video} vue={nbVues} />
 
               {users[0] ? users

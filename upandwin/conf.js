@@ -100,10 +100,14 @@ myRouter.route('/quizzes').get(function (req, res) {
 
 myRouter.route('/quizzes/:quizz_id').get(function (req, res) {
   Quizze.find({ _id: req.params.quizz_id }, function (err, quizzes) {
+    console.log('1');
     if (err) {
-      res.send(err);
+      console.log('3');
+      res.status(500).send(err);
+    } else {
+      console.log('2');
+      res.json(quizzes);
     }
-    res.json(quizzes);
   });
 });
 
@@ -431,6 +435,8 @@ myRouter.route('/usersquizztodo/:id').get(function (req, res) {
       res.send(err);
     } else if (users) {
       res.json(users[0].quizz_idTodo);
+    } else {
+      res.status(500).end();
     }
   });
 });
@@ -446,9 +452,11 @@ myRouter.route('/user/:userId').put(function (req, res) {
 
 myRouter.route('/usersubmitquizz/:user_id').put(function (req, res) {
   User.findById(req.params.user_id, function (err, user) {
+    console.log('totoo');
     if (err) {
       res.send(err);
     }
+    console.log('toto');
     user.quizzAnswers.addToSet(req.body.quizzAnswer);
     user.quizz_id.addToSet(req.body.quizz_id);
     user.quizz_idTodo = req.body.quizz_idTodo;

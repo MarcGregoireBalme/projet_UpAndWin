@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import './Wow.css';
 import axios from 'axios';
 import Topnav from '../Components/Topnav';
-import Addvertising from '../Components/Addvertising';
 import DisplayVideo from '../Components/DisplayVideo';
 import BottomNav from '../Components/BottomNav';
 
