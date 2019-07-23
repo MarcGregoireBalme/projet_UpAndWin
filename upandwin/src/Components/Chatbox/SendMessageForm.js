@@ -50,6 +50,7 @@ class SendMessageForm extends Component {
               value={this.state.text}
               style={styles.input}
             />
+            <button type="button" onClick={this.onSubmit} />
           </form>
         </div>
       </div>
