@@ -94,7 +94,7 @@ class ChatBox extends Component {
               messages={messages}
             />
           </div>
-          <div>
+          <div className="WinSendMessageFormContainer">
             <SendMessageForm onSubmit={this.sendMessage} onChange={this.sendTypingEvent} />
           </div>
         </div>

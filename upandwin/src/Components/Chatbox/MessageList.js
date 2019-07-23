@@ -21,8 +21,8 @@ class MessagesList extends Component {
     const styles = {
       ul: {
         listStyle: 'none',
-        height: '110vw',
         overflow: 'scroll',
+        marginBottom: '48px',
       },
       li: {
         marginTop: 13,

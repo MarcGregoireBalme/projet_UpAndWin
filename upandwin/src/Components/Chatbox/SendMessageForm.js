@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 
 import React, { Component } from 'react';
+import { Send } from '@material-ui/icons';
 
 class SendMessageForm extends Component {
   constructor(props) {
@@ -40,8 +41,8 @@ class SendMessageForm extends Component {
       },
     };
     return (
-      <div className="WinSendMessageForm">
-        <div>
+      <div>
+        <div className="WinSendMessageForm">
           <form onSubmit={this.onSubmit} style={styles.form}>
             <input
               type="text"
@@ -50,7 +51,9 @@ class SendMessageForm extends Component {
               value={this.state.text}
               style={styles.input}
             />
-            <button type="button" onClick={this.onSubmit} />
+            <button type="button" onClick={this.onSubmit} className="SendButton">
+              <Send />
+            </button>
           </form>
         </div>
       </div>
