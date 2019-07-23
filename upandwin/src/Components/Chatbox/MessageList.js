@@ -1,4 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
+/* eslint-disable no-unused-expressions */
 
 import React, { Component } from 'react';
 
@@ -8,11 +9,19 @@ class MessagesList extends Component {
     this.state = {};
   }
 
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd && this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+  }
+
   render() {
     const styles = {
       ul: {
         listStyle: 'none',
-        height: '80vw',
+        height: '110vw',
         overflow: 'scroll',
       },
       li: {
@@ -33,9 +42,11 @@ class MessagesList extends Component {
           ...styles.container,
         }}
       >
-        <ul style={styles.ul}>
+        <ul
+          style={styles.ul}
+        >
           {this.props.messages.map((message, index) => (
-            <li key={index.id} style={styles.li}>
+            <li key={index.id} style={styles.li} ref={(el) => { this.messagesEnd = el; }}>
               <div>
                 <span style={styles.senderUsername}>
                   {' '}

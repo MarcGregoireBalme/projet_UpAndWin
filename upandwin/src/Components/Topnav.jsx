@@ -101,7 +101,7 @@ class Topnav extends Component {
                                 {user.wins}
                               </span>
                               {' '}
-                              wins
+                                wins
                             </div>
                           </Link>
                         )
