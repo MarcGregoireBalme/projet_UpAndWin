@@ -23,7 +23,7 @@ class DisplayVideos extends Component {
   loopVideos() {
     const { range } = this.state;
     const { videos } = this.props;
-    for (let i = 0; i < range; i++) {
+    for (let i = 0; i < range; i += 1) {
       return (
         videos.filter((video, id) => id < range).map(video => (
           <div key={video._id} className="col-xl-3 col-lg-4 col-sm-6 col-xs-12" style={{ minWidth: '320px' }}>
@@ -35,11 +35,17 @@ class DisplayVideos extends Component {
   }
 
   render() {
+    const { videos } = this.props;
     return (
       <div className="container-fluid">
         <div className="row videoDisplay">
           {this.loopVideos()}
-          <button type="button" onClick={() => this.showMore()} className="Showmorebuttonlol">Voir plus</button>
+          {videos.length < 5 ? (
+            null
+          ) : (
+            <button type="button" onClick={() => this.showMore()} className="Showmorebuttonlol">Voir plus</button>
+          )
+          }
         </div>
       </div>
     );
