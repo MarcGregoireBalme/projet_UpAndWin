@@ -22,6 +22,12 @@ mongodb<br>
 Router<br>
 Axios<br>
 ReactStap<br>
+MaterialUI<br>
+React-star-rating-component<br>
+Radar chart<br>
+Chatkit<br>
+Redux<br>
+
 
 ## version:
 
