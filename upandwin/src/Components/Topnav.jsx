@@ -56,7 +56,7 @@ class Topnav extends Component {
     }
     return (
       <div id="Top-nav">
-
+        { game && <Redirect to={game} /> }
         <div className="Top-nav-left">
           <NavLink to="/">
             <div className="Logo" />
