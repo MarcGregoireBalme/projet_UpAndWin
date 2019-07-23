@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './ProfilNav.css';
 
 class ProfilNav extends Component {
   constructor(props) {
@@ -45,7 +44,7 @@ class ProfilNav extends Component {
         <Link className="ProfilNavButton" to="/GamerStatistics">
           <button
             type="button"
-            className="SecondButton"
+            className="SecondaryButton"
           >
             Mes stat.
           </button>

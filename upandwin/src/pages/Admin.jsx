@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
 import VideoForm from '../Components/VideoForm';
 import BottomNav from '../Components/BottomNav';
 import Topnav from '../Components/Topnav';
-
 
 class Admin extends Component {
   constructor(props) {
@@ -11,7 +9,6 @@ class Admin extends Component {
     this.state = {
     };
   }
-
 
   render() {
     return (

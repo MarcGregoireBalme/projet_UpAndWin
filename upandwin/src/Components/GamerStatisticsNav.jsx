@@ -37,7 +37,7 @@ class ProfilNav extends Component {
         <Link className="ProfilNavButton" to="/Profil">
           <button
             type="button"
-            className="SecondButton"
+            className="SecondaryButton"
           >
             Mon profil
           </button>

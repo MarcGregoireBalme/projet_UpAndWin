@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../App.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import Topnav from '../Components/Topnav';
@@ -28,8 +27,9 @@ class Lol extends Component {
       <div>
         <Topnav />
         <LoLFilter videos={videos} />
-        <div style={{ paddingTop: '168px' }} />
-        <LolVideos videos={videos} />
+        <div className="Page">
+          <LolVideos videos={videos} />
+        </div>
         <BottomNav />
       </div>
     );
