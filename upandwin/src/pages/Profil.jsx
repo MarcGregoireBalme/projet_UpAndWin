@@ -7,7 +7,6 @@ import ProfilNav from '../Components/ProfilNav';
 import Topnav from '../Components/Topnav';
 import 'react-svg-radar-chart/build/css/index.css';
 
-
 function Profil({ dispatch }) {
   const [users, setUsers] = useState({ users: [] });
   const [quizz, setQuizz] = useState({ quizz: [] });
@@ -31,6 +30,10 @@ function Profil({ dispatch }) {
     fetchData();
   }, []);
 
+  function handleClick(id) {
+    sessionStorage.setItem('quizz_id', id);
+  }
+
   return (
     <div>
       <Topnav />
@@ -50,7 +53,6 @@ function Profil({ dispatch }) {
                 </div>
               )
             }
-
           </div>
         ))
         : null
@@ -76,25 +78,21 @@ function Profil({ dispatch }) {
               {
                 user.quizz_idTodo.length > 0 ? (
                   <div className="Row36">
-                    <p className="Orange">{`(${user.quizz_idTodo.length}) quizz disponible(s)`}</p>
+                    <p className="Orange">{`(${user.quizz_idTodo.length}) quiz disponible(s)`}</p>
                     <div>
                       {
                         user.quizz_idTodo
                           .map(quizzID => (
                             <div className="Row" key={quizzID}>
-
-                              <h2>
-                                {(quizz
-                                  .filter(obj => (obj._id === `${quizzID}`))
-                                  .map(obj => obj.title))}
-                              </h2>
-
                               <Link to={`/quizz/${quizzID}`}>
                                 <button
                                   type="button"
                                   className="QuizButton"
+                                  onClick={() => handleClick(quizzID)}
                                 >
-                                  Faire le quiz
+                                  {(quizz
+                                    .filter(obj => (obj._id === `${quizzID}`))
+                                    .map(obj => obj.title))}
                                 </button>
                               </Link>
                             </div>
