@@ -16,13 +16,9 @@ class StarRating extends React.Component {
       rating: moyenne,
       // eslint-disable-next-line no-underscore-dangle
       vId: video._id,
+      videoNotees: [],
     };
-    this.onStarClick = this.onStarClick.bind(this);
     this.onStarHover = this.onStarHover.bind(this);
-  }
-
-  onStarClick(nextValue) {
-    this.setState({ rating: nextValue });
   }
 
   onStarHover(nextValue) {
@@ -30,19 +26,20 @@ class StarRating extends React.Component {
   }
 
   handleSubmit = () => {
-    const {
-      rating,
-    } = this.state;
-    const { vId } = this.state;
+    const { rating, vId, videoNotees } = this.state;
     axios
       .put(`http://localhost:3005/videosnotes/${vId}`, {
         note: rating,
       });
+    videoNotees.push(vId);
   };
 
-  onClick = () => {
-    this.onStarClick();
-    this.handleSubmit();
+  onClick = (nextValue) => {
+    const { videoNotees, vId } = this.state;
+    if (!videoNotees.includes(vId)) {
+      this.handleSubmit();
+      this.setState({ rating: nextValue });
+    }
   }
 
   render() {
@@ -79,7 +76,7 @@ class StarRating extends React.Component {
             <div className="Info">
               {vue}
               {' '}
-              vue
+                vue
             </div>
           )
         }

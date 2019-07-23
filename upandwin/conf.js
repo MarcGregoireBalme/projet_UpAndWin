@@ -267,11 +267,11 @@ myRouter
         res.send(err);
       }
       video.notes.push(req.body.note);
-      video.save(async function (error) {
+      video.save(function (error) {
         if (error) {
           res.send(error);
         } else {
-          await res.json({ status: 'ok', finalNotes: video.notes });
+          res.json({ status: 'ok', finalNotes: video.notes });
         }
       });
     });

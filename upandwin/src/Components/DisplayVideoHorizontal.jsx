@@ -3,10 +3,8 @@
 import React from 'react';
 import './displayVideo.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import StarRating from './StarRating';
 import Video from './Video';
 
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const DisplayVideoHorizontal = ({ videos }) => (
 
   <div className="container-fluid">
