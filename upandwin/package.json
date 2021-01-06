@@ -10,7 +10,7 @@
     "async-waterfall": "^0.1.5",
     "@pusher/chatkit-client": "^1.9.1",
     "@pusher/chatkit-server": "^2.0.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "blueprint": "^2.1.5",
     "blueprint-css": "^3.0.0-beta.0",
     "body-parser": "^1.19.0",
